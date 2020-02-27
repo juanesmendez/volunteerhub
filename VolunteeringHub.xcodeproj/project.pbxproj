@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D2231E1240862EC0052D33C /* ActivitiesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2231E0240862EC0052D33C /* ActivitiesList.swift */; };
+		1D2231E3240866F70052D33C /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2231E2240866F70052D33C /* MapView.swift */; };
+		1D42E084240855D80049BF06 /* ActivityCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D42E083240855D80049BF06 /* ActivityCard.swift */; };
 		1DD11D4D24082E03002A9541 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD11D4C24082E03002A9541 /* AppDelegate.swift */; };
 		1DD11D4F24082E03002A9541 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD11D4E24082E03002A9541 /* SceneDelegate.swift */; };
 		1DD11D5124082E03002A9541 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD11D5024082E03002A9541 /* ContentView.swift */; };
@@ -17,6 +20,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1D2231E0240862EC0052D33C /* ActivitiesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesList.swift; sourceTree = "<group>"; };
+		1D2231E2240866F70052D33C /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		1D42E083240855D80049BF06 /* ActivityCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCard.swift; sourceTree = "<group>"; };
 		1DD11D4924082E03002A9541 /* VolunteeringHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VolunteeringHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DD11D4C24082E03002A9541 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1DD11D4E24082E03002A9541 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +72,8 @@
 				1DD11D5724082E08002A9541 /* LaunchScreen.storyboard */,
 				1DD11D5A24082E08002A9541 /* Info.plist */,
 				1DD11D5424082E08002A9541 /* Preview Content */,
+				1D42E083240855D80049BF06 /* ActivityCard.swift */,
+				1D2231E0240862EC0052D33C /* ActivitiesList.swift */,
 			);
 			path = VolunteeringHub;
 			sourceTree = "<group>";
@@ -82,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				1DD11D6124082FAE002A9541 /* ActivityCircleImage.swift */,
+				1D2231E2240866F70052D33C /* MapView.swift */,
 			);
 			path = SupportingViews;
 			sourceTree = "<group>";
@@ -157,10 +166,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D2231E3240866F70052D33C /* MapView.swift in Sources */,
 				1DD11D4D24082E03002A9541 /* AppDelegate.swift in Sources */,
 				1DD11D4F24082E03002A9541 /* SceneDelegate.swift in Sources */,
+				1D2231E1240862EC0052D33C /* ActivitiesList.swift in Sources */,
 				1DD11D6224082FAE002A9541 /* ActivityCircleImage.swift in Sources */,
 				1DD11D5124082E03002A9541 /* ContentView.swift in Sources */,
+				1D42E084240855D80049BF06 /* ActivityCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

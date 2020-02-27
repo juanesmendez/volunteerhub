@@ -10,7 +10,13 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, World!")
+        TabView {
+            ActivitiesList()
+                .tabItem {
+                    Image(systemName: "house.fill")
+                    Text("First Tab")
+                }
+        }.edgesIgnoringSafeArea(.top)
     }
 }
 
