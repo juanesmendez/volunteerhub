@@ -13,6 +13,7 @@
 		1DD11D5324082E08002A9541 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DD11D5224082E08002A9541 /* Assets.xcassets */; };
 		1DD11D5624082E08002A9541 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DD11D5524082E08002A9541 /* Preview Assets.xcassets */; };
 		1DD11D5924082E08002A9541 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DD11D5724082E08002A9541 /* LaunchScreen.storyboard */; };
+		1DD11D6224082FAE002A9541 /* ActivityCircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD11D6124082FAE002A9541 /* ActivityCircleImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		1DD11D5524082E08002A9541 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1DD11D5824082E08002A9541 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1DD11D5A24082E08002A9541 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1DD11D6124082FAE002A9541 /* ActivityCircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCircleImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 		1DD11D4B24082E03002A9541 /* VolunteeringHub */ = {
 			isa = PBXGroup;
 			children = (
+				1DD11D6024082F22002A9541 /* SupportingViews */,
 				1DD11D4C24082E03002A9541 /* AppDelegate.swift */,
 				1DD11D4E24082E03002A9541 /* SceneDelegate.swift */,
 				1DD11D5024082E03002A9541 /* ContentView.swift */,
@@ -73,6 +76,14 @@
 				1DD11D5524082E08002A9541 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		1DD11D6024082F22002A9541 /* SupportingViews */ = {
+			isa = PBXGroup;
+			children = (
+				1DD11D6124082FAE002A9541 /* ActivityCircleImage.swift */,
+			);
+			path = SupportingViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,6 +159,7 @@
 			files = (
 				1DD11D4D24082E03002A9541 /* AppDelegate.swift in Sources */,
 				1DD11D4F24082E03002A9541 /* SceneDelegate.swift in Sources */,
+				1DD11D6224082FAE002A9541 /* ActivityCircleImage.swift in Sources */,
 				1DD11D5124082E03002A9541 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
