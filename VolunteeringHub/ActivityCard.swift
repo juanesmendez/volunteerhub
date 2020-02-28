@@ -9,6 +9,9 @@
 import SwiftUI
 
 struct ActivityCard: View {
+    
+    //@State var selection: Int? = nil
+    
     var body: some View {
         VStack {
             HStack {
@@ -32,16 +35,12 @@ struct ActivityCard: View {
                 
                 Spacer()
                 
-                Button(action: {
-                    
-                }) {
-                    Text("Learn more")
-                        .padding(.all, 8.0)
-                        .background(Color.green)
-                        .foregroundColor(Color.black)
-                    .cornerRadius(20)
-                    
-                    
+                NavigationLink(destination: ActivityDetail()) {
+                        Text("Learn more")
+                            .padding(.all, 8.0)
+                            .background(Color.green)
+                            .foregroundColor(Color.black)
+                        .cornerRadius(20)
                 }
             }.padding(.all, 10.0)
         }

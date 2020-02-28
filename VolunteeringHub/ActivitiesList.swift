@@ -35,10 +35,15 @@ struct ActivitiesList: View {
                 }
                 .padding(.leading, 18)
                 
-                List() {
-                    ActivityCard()
-                    ActivityCard()
+                ScrollView{
+                    ForEach(0..<2) { i in
+                        ActivityCard()
+                            .padding(.top, 5)
+                            .padding(.horizontal, 10)
+                    }
                 }
+                .padding(.top, 2)
+                
                 Spacer()
                 
                 
