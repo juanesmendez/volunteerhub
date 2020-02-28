@@ -11,42 +11,40 @@ import MapKit
 
 struct ActivitiesList: View {
     
+    @State private var searchText : String = ""
+    
     init() {
         // To remove all separators including the actual ones:
         UITableView.appearance().separatorStyle = .none
     }
     
     var body: some View {
-        VStack {
-            HStack() {
-                Text("Activities")
-                    .font(.largeTitle)
-                    .bold()
+        NavigationView {
+            VStack {
                 
+                SearchBar(text: $searchText)
+                
+                MapView(coordinate: CLLocationCoordinate2D(latitude: 4.6527513, longitude: -74.0597535))
+                    .frame(height: 150)
+                HStack() {
+                    Image(systemName: "location.fill")
+                        .foregroundColor(Color.purple)
+                    Text("Current location: Chapinero, Bogota")
+                        .font(.headline)
+                    Spacer()
+                }
+                .padding(.leading, 18)
+                
+                List() {
+                    ActivityCard()
+                    ActivityCard()
+                }
                 Spacer()
-            }
-            .padding(.leading, 18)
-            .padding(.bottom, -20)
-            
-            MapView(coordinate: CLLocationCoordinate2D(latitude: 4.6527513, longitude: -74.0597535))
-                .frame(height: 150)
-            HStack() {
-                Image(systemName: "location.fill")
-                    .foregroundColor(Color.purple)
-                Text("Current location: Chapinero, Bogota")
-                    .font(.headline)
-                Spacer()
-            }
-            .padding(.leading, 18)
-            
-            List() {
-                ActivityCard()
-                ActivityCard()
-            }
-            Spacer()
-            
-            
+                
+                
+            }.navigationBarTitle("Activities")
         }
+        
         
     }
 }

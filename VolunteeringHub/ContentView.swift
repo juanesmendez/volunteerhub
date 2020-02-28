@@ -10,13 +10,21 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
+        
         TabView {
             ActivitiesList()
-                .tabItem {
+                .tabItem() {
                     Image(systemName: "house.fill")
-                    Text("First Tab")
-                }
-        }.edgesIgnoringSafeArea(.top)
+                    Text("Home")
+            }
+            
+            ProfileView()
+                .tabItem() {
+                    Image(systemName: "person.crop.circle.fill")
+                    Text("Profile")
+            }
+        }
+        
     }
 }
 
