@@ -19,7 +19,7 @@ struct ActivitiesList: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationView{
             VStack {
                 
                 SearchBar(text: $searchText)

@@ -16,14 +16,18 @@ struct ContentView: View {
                 .tabItem() {
                     Image(systemName: "house.fill")
                     Text("Home")
-            }
+                }
+                //.navigationBarTitle("Activities")
             
             ProfileView()
                 .tabItem() {
                     Image(systemName: "person.crop.circle.fill")
                     Text("Profile")
-            }
+                }
+                //.navigationBarTitle("Your profile")
         }
+        //.navigationBarTitle("Home")
+        //.navigationBarBackButtonHidden(true)
         
     }
 }
