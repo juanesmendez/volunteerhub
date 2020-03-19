@@ -24,7 +24,7 @@ struct ActivityCard: View {
             }.padding(.leading, 10.0)
             
             HStack {
-                ActivityCircleImage(image: Image("puppie"))
+                ActivityCircleImage(image: Image("volunteer"))
                 Text(activity.description)
                 .allowsTightening(true)
             }.padding(.all, 10.0)
