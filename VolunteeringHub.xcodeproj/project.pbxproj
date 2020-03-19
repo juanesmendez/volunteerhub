@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -23,6 +23,8 @@
 		1D7087FF242290FF0019C3AD /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7087FE242290FF0019C3AD /* Activity.swift */; };
 		1D7088022422A08B0019C3AD /* ActivitiesWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7088012422A08B0019C3AD /* ActivitiesWebService.swift */; };
 		1D7088052422A65C0019C3AD /* ActivitiesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7088042422A65C0019C3AD /* ActivitiesListViewModel.swift */; };
+		1D7990232423437400D715C4 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7990222423437400D715C4 /* ImageLoader.swift */; };
+		1D799026242357CE00D715C4 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 1D799025242357CE00D715C4 /* URLImage */; };
 		1DC4FB012409881D008AF46C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC4FB002409881D008AF46C /* LoginView.swift */; };
 		1DC4FB032409890B008AF46C /* SignInRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC4FB022409890B008AF46C /* SignInRectangle.swift */; };
 		1DD11D4D24082E03002A9541 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD11D4C24082E03002A9541 /* AppDelegate.swift */; };
@@ -53,6 +55,7 @@
 		1D7087FE242290FF0019C3AD /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		1D7088012422A08B0019C3AD /* ActivitiesWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesWebService.swift; sourceTree = "<group>"; };
 		1D7088042422A65C0019C3AD /* ActivitiesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesListViewModel.swift; sourceTree = "<group>"; };
+		1D7990222423437400D715C4 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		1DC4FB002409881D008AF46C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		1DC4FB022409890B008AF46C /* SignInRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInRectangle.swift; sourceTree = "<group>"; };
 		1DD11D4924082E03002A9541 /* VolunteeringHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VolunteeringHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D799026242357CE00D715C4 /* URLImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				1D7088012422A08B0019C3AD /* ActivitiesWebService.swift */,
+				1D7990222423437400D715C4 /* ImageLoader.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -186,6 +191,9 @@
 			dependencies = (
 			);
 			name = VolunteeringHub;
+			packageProductDependencies = (
+				1D799025242357CE00D715C4 /* URLImage */,
+			);
 			productName = VolunteeringHub;
 			productReference = 1DD11D4924082E03002A9541 /* VolunteeringHub.app */;
 			productType = "com.apple.product-type.application";
@@ -214,6 +222,9 @@
 				Base,
 			);
 			mainGroup = 1DD11D4024082E03002A9541;
+			packageReferences = (
+				1D799024242357CD00D715C4 /* XCRemoteSwiftPackageReference "url-image" */,
+			);
 			productRefGroup = 1DD11D4A24082E03002A9541 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -258,6 +269,7 @@
 				1DD11D6224082FAE002A9541 /* ActivityCircleImage.swift in Sources */,
 				1D2231F12408A3A10052D33C /* ProfileInfo.swift in Sources */,
 				1D2231E5240878700052D33C /* SearchBar.swift in Sources */,
+				1D7990232423437400D715C4 /* ImageLoader.swift in Sources */,
 				1D2231E9240893DE0052D33C /* MedalsList.swift in Sources */,
 				1DD11D5124082E03002A9541 /* ContentView.swift in Sources */,
 				1D2231EF240899370052D33C /* InterestsList.swift in Sources */,
@@ -402,6 +414,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"VolunteeringHub/Preview Content\"";
+				DEVELOPMENT_TEAM = FNRAS3NY28;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = VolunteeringHub/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -421,6 +434,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"VolunteeringHub/Preview Content\"";
+				DEVELOPMENT_TEAM = FNRAS3NY28;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = VolunteeringHub/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -456,6 +470,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1D799024242357CD00D715C4 /* XCRemoteSwiftPackageReference "url-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dmytro-anokhin/url-image.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.12;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1D799025242357CE00D715C4 /* URLImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1D799024242357CD00D715C4 /* XCRemoteSwiftPackageReference "url-image" */;
+			productName = URLImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1DD11D4124082E03002A9541 /* Project object */;
 }

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ActivityCard: View {
     
-    var activity: ActivityViewModel
+    var activity: Activity
     //@State var selection: Int? = nil
     
     var body: some View {

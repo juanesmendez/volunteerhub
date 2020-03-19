@@ -8,10 +8,24 @@
 
 import SwiftUI
 import MapKit
+import URLImage
 
 struct ActivityDetail: View {
     
-    var activity: ActivityViewModel
+    var activity: Activity
+    @ObservedObject var imageLoader = ImageLoader()
+    @State var image:UIImage = UIImage()
+    private var url = ""
+    
+    init(activity:Activity) {
+        self.activity = activity
+        if(activity.images.count > 0) {
+            // Always getting the first image in the array
+            self.url = "http://localhost:3000/photos/image/" + activity.images[0].fileName
+            print(self.url)
+        }
+        
+    }
     
     var body: some View {
         ScrollView {
@@ -24,8 +38,18 @@ struct ActivityDetail: View {
                 }
                 .padding(.leading)
                 
-                Image("puppie2")
-                .resizable()
+                if(activity.images.count == 0) {
+                    Text("No photos of the activity have been added.")
+                } else{
+                    if(imageLoader.data.isEmpty){
+                        Text("Loading image...")
+                    } else {
+                        Image(uiImage: (imageLoader.data.isEmpty) ? UIImage(imageLiteralResourceName: "Event image") : UIImage(data: imageLoader.data)!)
+                        .resizable()
+                    }
+                    //Image("puppie2")
+                    //.resizable()
+                }
                 
                 VStack {
                     HStack {
@@ -84,7 +108,7 @@ struct ActivityDetail: View {
                         }
                         Spacer()
                         VStack {
-                            Text("19")
+                            Text(String(activity.volunteersNeeded - (activity.volunteersAttending ?? 0)))
                                 .bold()
                                 .foregroundColor(Color.red)
                                 .padding()
@@ -93,7 +117,7 @@ struct ActivityDetail: View {
                                     .stroke(Color.gray, lineWidth: 1)
                                 )
                                 .shadow(radius: 5)
-                            Text("Volunteers\nneeded")
+                            Text("Spots\nleft")
                             .multilineTextAlignment(.center)
                         }
                         Spacer()
@@ -104,6 +128,11 @@ struct ActivityDetail: View {
                 
             }
             .navigationBarTitle(Text("Activity Information"), displayMode: .inline)
+            .onAppear(perform: {
+                if(self.activity.images.count > 0) {
+                    self.imageLoader.loadImage(urlString: self.url)
+                }
+            })
         }
         .padding(.top, 52)
     }

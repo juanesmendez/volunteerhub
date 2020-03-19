@@ -41,12 +41,9 @@ struct ActivitiesList: View {
                     
                     //ScrollView{
                     ForEach(self.model.activities, id: \.id) { activity in
-                        
                         ActivityCard(activity: activity)
                             .padding(.top, 5)
-                            .padding(.horizontal, 10)
- 
-                        //Text(activity.name)
+                            .padding(.horizontal, 20)
                     }
                     //}
                     //.padding(.top, 2)
@@ -54,6 +51,7 @@ struct ActivitiesList: View {
                 }
                 .navigationBarTitle("Activities")
                 .accentColor(Color.green)
+                .onAppear(perform: model.loadActivities) // refreshes the activities everytime the view looses focus and appears again
                 //.onAppear(perform: getActivities)
                 //.onAppear(perform: model.loadActivities)
                 /*
@@ -66,6 +64,11 @@ struct ActivitiesList: View {
                  */
             }
         }
+        /*
+        .onAppear {
+            UINavigationBar.appearance().backgroundColor = UIColor(red: 188/255, green: 217/255, blue: 121/255, alpha: 1)
+        }
+        */
         
         
     }

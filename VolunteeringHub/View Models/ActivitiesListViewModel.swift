@@ -14,7 +14,7 @@ import Combine
 class ActivitiesListViewModel: ObservableObject {
     
     //@Published var activities = [ActivityViewModel]()
-    var activities = [ActivityViewModel](){
+    var activities = [Activity](){
         willSet{
             print("Activities list changed!!!!!")
             print(activities, "will set modifier")
@@ -32,8 +32,9 @@ class ActivitiesListViewModel: ObservableObject {
         ActivitiesWebService().getActivities { actvs in
             //print($0)
             if let actvs = actvs {
-                let aux = actvs.map(ActivityViewModel.init)
-                self.activities = aux
+                //let aux = actvs.map(ActivityViewModel.init)
+                //self.activities = aux
+                self.activities = actvs
                 print(self.activities)
                 //self.objectWillChange.send()
             }

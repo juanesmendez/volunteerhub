@@ -34,6 +34,7 @@ struct SearchBar: UIViewRepresentable {
         searchBar.delegate = context.coordinator
         searchBar.searchBarStyle = .minimal
         searchBar.placeholder = "Search"
+        //searchBar.backgroundColor = UIColor(red: 188/255, green: 217/255, blue: 121/255, alpha: 1)
         return searchBar
     }
 

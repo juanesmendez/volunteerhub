@@ -16,10 +16,11 @@ struct Activity: Codable, Identifiable {
     var name: String
     var description: String
     var volunteersNeeded: Int
+    var volunteersAttending: Int?
     // Check the date type. Date type throws an error, that is why we are using String
     var date: String
     
-    var images: [ImageInfo]?
+    var images: [ImageInfo]
     
     struct ImageInfo: Codable {
         var fileName: String
@@ -28,6 +29,6 @@ struct Activity: Codable, Identifiable {
     // For readind _id key and changing it to id
     private enum CodingKeys: String, CodingKey {
         case id = "_id"
-        case name, description, volunteersNeeded, date, images
+        case name, description, volunteersNeeded, volunteersAttending, date, images
     }
 }
