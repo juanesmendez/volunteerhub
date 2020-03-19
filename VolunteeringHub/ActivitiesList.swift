@@ -12,46 +12,69 @@ import MapKit
 struct ActivitiesList: View {
     
     @State private var searchText : String = ""
+    @ObservedObject var model = ActivitiesListViewModel()
+    //@State private var activities = [ActivityViewModel]()
+    //@State var model = ActivitiesListViewModel()
     
     init() {
+        print("Initializing ActivitiesList View")
         // To remove all separators including the actual ones:
         UITableView.appearance().separatorStyle = .none
+        
     }
     
     var body: some View {
         NavigationView{
-            VStack {
-                
-                SearchBar(text: $searchText)
-                
-                MapView(coordinate: CLLocationCoordinate2D(latitude: 4.6527513, longitude: -74.0597535))
-                    .frame(height: 150)
-                HStack() {
-                    Image(systemName: "location.fill")
-                        .foregroundColor(Color.purple)
-                    Text("Current location: Chapinero, Bogota")
-                        .font(.headline)
-                    Spacer()
-                }
-                .padding(.leading, 18)
-                
-                ScrollView{
-                    ForEach(0..<2) { i in
-                        ActivityCard()
+            ScrollView{
+                VStack {
+                    SearchBar(text: $searchText)
+                    MapView(coordinate: CLLocationCoordinate2D(latitude: 4.6527513, longitude: -74.0597535))
+                        .frame(height: 150)
+                    HStack() {
+                        Image(systemName: "location.fill")
+                            .foregroundColor(Color.purple)
+                        Text("Current location: Chapinero, Bogota")
+                            .font(.headline)
+                        Spacer()
+                    }
+                    .padding(.leading, 18)
+                    
+                    //ScrollView{
+                    ForEach(self.model.activities, id: \.id) { activity in
+                        
+                        ActivityCard(activity: activity)
                             .padding(.top, 5)
                             .padding(.horizontal, 10)
+ 
+                        //Text(activity.name)
                     }
+                    //}
+                    //.padding(.top, 2)
+                    Spacer()
                 }
-                .padding(.top, 2)
-                
-                Spacer()
-                
-                
-            }.navigationBarTitle("Activities")
+                .navigationBarTitle("Activities")
+                .accentColor(Color.green)
+                //.onAppear(perform: getActivities)
+                //.onAppear(perform: model.loadActivities)
+                /*
+                .onReceive(model.objectWillChange, perform: { _ in
+                    //self.reload()
+                    print("Received list of activities")
+                    print(self.model.activities)
+                    //self.activities = self.model.activities
+                })
+                 */
+            }
         }
         
         
     }
+    
+    func getActivities(){
+        print("In get activities function...")
+        print(self.model.activities)
+    }
+ 
 }
 
 struct ActivitiesList_Previews: PreviewProvider {

@@ -10,12 +10,13 @@ import SwiftUI
 
 struct ActivityCard: View {
     
+    var activity: ActivityViewModel
     //@State var selection: Int? = nil
     
     var body: some View {
         VStack {
             HStack {
-                Text("Dog care for a day")
+                Text(activity.name)
                     .font(.title)
                     .bold()
                 
@@ -24,7 +25,7 @@ struct ActivityCard: View {
             
             HStack {
                 ActivityCircleImage(image: Image("puppie"))
-                Text("We are looking for dog loving volunteers, who have spare time on a Sunday morning. We have around 20 puppies looking for a new home that need to be supervised.")
+                Text(activity.description)
                 .allowsTightening(true)
             }.padding(.all, 10.0)
             
@@ -34,8 +35,8 @@ struct ActivityCard: View {
                 Text("Usaquen")
                 
                 Spacer()
-                
-                NavigationLink(destination: ActivityDetail()) {
+                // Use NavigationButton instead
+                NavigationLink(destination: ActivityDetail(activity: activity)) {
                         Text("Learn more")
                             .padding(.all, 8.0)
                             .background(Color.green)
@@ -52,9 +53,9 @@ struct ActivityCard: View {
         
     }
 }
-
+/*
 struct ActivityCard_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityCard()
+        ActivityCard(activity: Activity.all()[0])
     }
-}
+}*/

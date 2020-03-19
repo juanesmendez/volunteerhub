@@ -10,11 +10,14 @@ import SwiftUI
 import MapKit
 
 struct ActivityDetail: View {
+    
+    var activity: ActivityViewModel
+    
     var body: some View {
         ScrollView {
             VStack {
                 HStack {
-                    Text("Dog care for a day")
+                    Text(activity.name)
                         .font(.largeTitle)
                         .bold()
                     Spacer()
@@ -32,7 +35,7 @@ struct ActivityDetail: View {
                         Spacer()
                     }
                     .padding(.leading)
-                    Text("We are looking for dog loving volunteers, who have spare time on a Sunday morning. We have around 20 puppies looking for a new home that need to be supervised.")
+                    Text(activity.description)
                     .padding(.leading)
                 }
                 
@@ -68,7 +71,7 @@ struct ActivityDetail: View {
                     HStack {
                         Spacer()
                         VStack {
-                            Text("28")
+                            Text(String(activity.volunteersNeeded))
                                 .bold()
                                 .foregroundColor(Color.green)
                                 .padding()
@@ -106,8 +109,10 @@ struct ActivityDetail: View {
     }
 }
 
+/*
 struct ActivityDetail_Previews: PreviewProvider {
     static var previews: some View {
         ActivityDetail()
     }
 }
+ */

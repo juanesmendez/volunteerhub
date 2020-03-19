@@ -1,0 +1,33 @@
+//
+//  Activity.swift
+//  VolunteeringHub
+//
+//  Created by Juan Esteban Méndez Roys on 18/03/20.
+//  Copyright © 2020 Universidad de los Andes. All rights reserved.
+//
+
+import Foundation
+import SwiftUI
+
+struct Activity: Codable, Identifiable {
+    // I may have to add Hashable protocol
+    
+    var id: String
+    var name: String
+    var description: String
+    var volunteersNeeded: Int
+    // Check the date type. Date type throws an error, that is why we are using String
+    var date: String
+    
+    var images: [ImageInfo]?
+    
+    struct ImageInfo: Codable {
+        var fileName: String
+    }
+    
+    // For readind _id key and changing it to id
+    private enum CodingKeys: String, CodingKey {
+        case id = "_id"
+        case name, description, volunteersNeeded, date, images
+    }
+}

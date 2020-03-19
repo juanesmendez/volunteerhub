@@ -20,6 +20,9 @@
 		1D2CC8C72409D52E00741728 /* SubmitActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2CC8C62409D52E00741728 /* SubmitActivity.swift */; };
 		1D2CC8C92409E47400741728 /* RegistrationTopics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2CC8C82409E47400741728 /* RegistrationTopics.swift */; };
 		1D42E084240855D80049BF06 /* ActivityCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D42E083240855D80049BF06 /* ActivityCard.swift */; };
+		1D7087FF242290FF0019C3AD /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7087FE242290FF0019C3AD /* Activity.swift */; };
+		1D7088022422A08B0019C3AD /* ActivitiesWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7088012422A08B0019C3AD /* ActivitiesWebService.swift */; };
+		1D7088052422A65C0019C3AD /* ActivitiesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7088042422A65C0019C3AD /* ActivitiesListViewModel.swift */; };
 		1DC4FB012409881D008AF46C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC4FB002409881D008AF46C /* LoginView.swift */; };
 		1DC4FB032409890B008AF46C /* SignInRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC4FB022409890B008AF46C /* SignInRectangle.swift */; };
 		1DD11D4D24082E03002A9541 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD11D4C24082E03002A9541 /* AppDelegate.swift */; };
@@ -47,6 +50,9 @@
 		1D2CC8C62409D52E00741728 /* SubmitActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitActivity.swift; sourceTree = "<group>"; };
 		1D2CC8C82409E47400741728 /* RegistrationTopics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationTopics.swift; sourceTree = "<group>"; };
 		1D42E083240855D80049BF06 /* ActivityCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCard.swift; sourceTree = "<group>"; };
+		1D7087FE242290FF0019C3AD /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
+		1D7088012422A08B0019C3AD /* ActivitiesWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesWebService.swift; sourceTree = "<group>"; };
+		1D7088042422A65C0019C3AD /* ActivitiesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesListViewModel.swift; sourceTree = "<group>"; };
 		1DC4FB002409881D008AF46C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		1DC4FB022409890B008AF46C /* SignInRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInRectangle.swift; sourceTree = "<group>"; };
 		1DD11D4924082E03002A9541 /* VolunteeringHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VolunteeringHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,6 +79,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1D7087FD242290D50019C3AD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1D7087FE242290FF0019C3AD /* Activity.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1D7088002422A04C0019C3AD /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				1D7088012422A08B0019C3AD /* ActivitiesWebService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		1D7088032422A6330019C3AD /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				1D7088042422A65C0019C3AD /* ActivitiesListViewModel.swift */,
+			);
+			path = "View Models";
+			sourceTree = "<group>";
+		};
 		1DD11D4024082E03002A9541 = {
 			isa = PBXGroup;
 			children = (
@@ -92,6 +122,9 @@
 		1DD11D4B24082E03002A9541 /* VolunteeringHub */ = {
 			isa = PBXGroup;
 			children = (
+				1D7088032422A6330019C3AD /* View Models */,
+				1D7088002422A04C0019C3AD /* Services */,
+				1D7087FD242290D50019C3AD /* Models */,
 				1DD11D6024082F22002A9541 /* SupportingViews */,
 				1DD11D4C24082E03002A9541 /* AppDelegate.swift */,
 				1DD11D4E24082E03002A9541 /* SceneDelegate.swift */,
@@ -218,8 +251,10 @@
 				1D2231EB240894440052D33C /* MedalRow.swift in Sources */,
 				1D2CC8C72409D52E00741728 /* SubmitActivity.swift in Sources */,
 				1DD11D4F24082E03002A9541 /* SceneDelegate.swift in Sources */,
+				1D7088022422A08B0019C3AD /* ActivitiesWebService.swift in Sources */,
 				1DC4FB032409890B008AF46C /* SignInRectangle.swift in Sources */,
 				1D2231E1240862EC0052D33C /* ActivitiesList.swift in Sources */,
+				1D7088052422A65C0019C3AD /* ActivitiesListViewModel.swift in Sources */,
 				1DD11D6224082FAE002A9541 /* ActivityCircleImage.swift in Sources */,
 				1D2231F12408A3A10052D33C /* ProfileInfo.swift in Sources */,
 				1D2231E5240878700052D33C /* SearchBar.swift in Sources */,
@@ -228,6 +263,7 @@
 				1D2231EF240899370052D33C /* InterestsList.swift in Sources */,
 				1D42E084240855D80049BF06 /* ActivityCard.swift in Sources */,
 				1DC4FB012409881D008AF46C /* LoginView.swift in Sources */,
+				1D7087FF242290FF0019C3AD /* Activity.swift in Sources */,
 				1D2231ED2408977E0052D33C /* InterestCircleImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
