@@ -8,7 +8,6 @@
 
 import SwiftUI
 import MapKit
-import URLImage
 
 struct ActivityDetail: View {
     

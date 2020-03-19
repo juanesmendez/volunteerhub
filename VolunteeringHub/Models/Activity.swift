@@ -15,6 +15,7 @@ struct Activity: Codable, Identifiable {
     var id: String
     var name: String
     var description: String
+    var category: String
     var volunteersNeeded: Int
     var volunteersAttending: Int?
     // Check the date type. Date type throws an error, that is why we are using String
@@ -29,6 +30,6 @@ struct Activity: Codable, Identifiable {
     // For readind _id key and changing it to id
     private enum CodingKeys: String, CodingKey {
         case id = "_id"
-        case name, description, volunteersNeeded, volunteersAttending, date, images
+        case name, description, category, volunteersNeeded, volunteersAttending, date, images
     }
 }
