@@ -20,7 +20,6 @@ struct ActivitiesList: View {
         print("Initializing ActivitiesList View")
         // To remove all separators including the actual ones:
         UITableView.appearance().separatorStyle = .none
-        
     }
     
     var body: some View {

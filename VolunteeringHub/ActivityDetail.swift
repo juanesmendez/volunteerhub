@@ -22,6 +22,7 @@ struct ActivityDetail: View {
             // Always getting the first image in the array
             self.url = "http://localhost:3000/photos/image/" + activity.images[0].fileName
             print(self.url)
+            //self.imageLoader.loadImage(urlString: self.url)
         }
         
     }
@@ -45,6 +46,13 @@ struct ActivityDetail: View {
                     } else {
                         Image(uiImage: (imageLoader.data.isEmpty) ? UIImage(imageLiteralResourceName: "Event image") : UIImage(data: imageLoader.data)!)
                         .resizable()
+                        //.frame(height: 150)
+                        .cornerRadius(10)
+                        .overlay(RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.gray, lineWidth: 1)
+                        .shadow(radius: 15)
+                        )
+                        .padding(.horizontal, 40)
                     }
                     //Image("puppie2")
                     //.resizable()
@@ -73,8 +81,8 @@ struct ActivityDetail: View {
                     
                     MapView(coordinate: CLLocationCoordinate2D(latitude: 4.6527513, longitude: -74.0597535))
                         .frame(height: 150)
-                    .cornerRadius(10)
-                    .overlay(RoundedRectangle(cornerRadius: 10)
+                        .cornerRadius(10)
+                        .overlay(RoundedRectangle(cornerRadius: 10)
                         .stroke(Color.gray, lineWidth: 1)
                         .shadow(radius: 15)
                     )
@@ -128,6 +136,8 @@ struct ActivityDetail: View {
             }
             .navigationBarTitle(Text("Activity Information"), displayMode: .inline)
             .onAppear(perform: {
+                // For loading the image related to the activity. It is loaded only when the view appears, 
+                // or else it will load when the activity list shows (causing an overload in the back-end service)
                 if(self.activity.images.count > 0) {
                     self.imageLoader.loadImage(urlString: self.url)
                 }

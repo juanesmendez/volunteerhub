@@ -17,7 +17,7 @@ struct ActivityCard: View {
         VStack {
             HStack {
                 Text(activity.name)
-                    .font(.title)
+                    .font(.system(size: 22))
                     .bold()
                 
                 Spacer()
@@ -27,7 +27,7 @@ struct ActivityCard: View {
                 ActivityCircleImage(image: Image(activity.category))
                 Text(activity.description)
                 .allowsTightening(true)
-            }.padding(.all, 10.0)
+            }.padding(.all, 5.0)
             
             HStack {
                 Image(systemName: "location")
@@ -43,13 +43,15 @@ struct ActivityCard: View {
                             .foregroundColor(Color.black)
                         .cornerRadius(20)
                 }
-            }.padding(.all, 10.0)
+            }.padding(.all, 5.0)
         }
-        .cornerRadius(10)
-        .overlay(RoundedRectangle(cornerRadius: 10)
-        .stroke(Color.gray, lineWidth: 1)
-        .shadow(radius: 15)
+        .padding(.all, 10.0)
+        .overlay(RoundedRectangle(cornerRadius: 20)
+        .stroke(Color.gray, lineWidth: 0.3)
+        //.shadow(radius: 300)
         )
+        //.clipped()
+        //.shadow(radius: 80)
         
     }
 }

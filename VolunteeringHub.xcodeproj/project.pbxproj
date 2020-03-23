@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D13C90D2425716400C54C09 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1D13C90C2425716400C54C09 /* GoogleService-Info.plist */; };
 		1D2231E1240862EC0052D33C /* ActivitiesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2231E0240862EC0052D33C /* ActivitiesList.swift */; };
 		1D2231E3240866F70052D33C /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2231E2240866F70052D33C /* MapView.swift */; };
 		1D2231E5240878700052D33C /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2231E4240878700052D33C /* SearchBar.swift */; };
@@ -24,7 +25,7 @@
 		1D7088022422A08B0019C3AD /* ActivitiesWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7088012422A08B0019C3AD /* ActivitiesWebService.swift */; };
 		1D7088052422A65C0019C3AD /* ActivitiesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7088042422A65C0019C3AD /* ActivitiesListViewModel.swift */; };
 		1D7990232423437400D715C4 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7990222423437400D715C4 /* ImageLoader.swift */; };
-		1D799026242357CE00D715C4 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 1D799025242357CE00D715C4 /* URLImage */; };
+		1D799026242357CE00D715C4 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 1D799025242357CE00D715C4 /* SwiftPackageProductDependency */; };
 		1DC4FB012409881D008AF46C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC4FB002409881D008AF46C /* LoginView.swift */; };
 		1DC4FB032409890B008AF46C /* SignInRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC4FB022409890B008AF46C /* SignInRectangle.swift */; };
 		1DD11D4D24082E03002A9541 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD11D4C24082E03002A9541 /* AppDelegate.swift */; };
@@ -36,9 +37,12 @@
 		1DD11D6224082FAE002A9541 /* ActivityCircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD11D6124082FAE002A9541 /* ActivityCircleImage.swift */; };
 		1DD2FE5A2409B05400450BFC /* AppContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD2FE592409B05400450BFC /* AppContentView.swift */; };
 		1DD2FE5C2409B42400450BFC /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD2FE5B2409B42400450BFC /* UserData.swift */; };
+		ED34AD3DFAE45C9132EB7B04 /* Pods_VolunteeringHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F2D57E3CDA5CFFB0AA3F625 /* Pods_VolunteeringHub.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		014F4E739759EF25F13835CC /* Pods-VolunteeringHub.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VolunteeringHub.debug.xcconfig"; path = "Target Support Files/Pods-VolunteeringHub/Pods-VolunteeringHub.debug.xcconfig"; sourceTree = "<group>"; };
+		1D13C90C2425716400C54C09 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1D2231E0240862EC0052D33C /* ActivitiesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesList.swift; sourceTree = "<group>"; };
 		1D2231E2240866F70052D33C /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		1D2231E4240878700052D33C /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
@@ -69,6 +73,8 @@
 		1DD11D6124082FAE002A9541 /* ActivityCircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCircleImage.swift; sourceTree = "<group>"; };
 		1DD2FE592409B05400450BFC /* AppContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContentView.swift; sourceTree = "<group>"; };
 		1DD2FE5B2409B42400450BFC /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		5F2D57E3CDA5CFFB0AA3F625 /* Pods_VolunteeringHub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VolunteeringHub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0302C6DE3DE19C178B00B17 /* Pods-VolunteeringHub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VolunteeringHub.release.xcconfig"; path = "Target Support Files/Pods-VolunteeringHub/Pods-VolunteeringHub.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,7 +82,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D799026242357CE00D715C4 /* URLImage in Frameworks */,
+				1D799026242357CE00D715C4 /* BuildFile in Frameworks */,
+				ED34AD3DFAE45C9132EB7B04 /* Pods_VolunteeringHub.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,6 +120,8 @@
 			children = (
 				1DD11D4B24082E03002A9541 /* VolunteeringHub */,
 				1DD11D4A24082E03002A9541 /* Products */,
+				DE4048E65700451EFCF37703 /* Pods */,
+				64CC2DD451C5CCF0BBF9917D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -137,6 +146,7 @@
 				1DD11D5224082E08002A9541 /* Assets.xcassets */,
 				1DD11D5724082E08002A9541 /* LaunchScreen.storyboard */,
 				1DD11D5A24082E08002A9541 /* Info.plist */,
+				1D13C90C2425716400C54C09 /* GoogleService-Info.plist */,
 				1DD11D5424082E08002A9541 /* Preview Content */,
 				1D42E083240855D80049BF06 /* ActivityCard.swift */,
 				1D2231E0240862EC0052D33C /* ActivitiesList.swift */,
@@ -175,6 +185,24 @@
 			path = SupportingViews;
 			sourceTree = "<group>";
 		};
+		64CC2DD451C5CCF0BBF9917D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5F2D57E3CDA5CFFB0AA3F625 /* Pods_VolunteeringHub.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DE4048E65700451EFCF37703 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				014F4E739759EF25F13835CC /* Pods-VolunteeringHub.debug.xcconfig */,
+				B0302C6DE3DE19C178B00B17 /* Pods-VolunteeringHub.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -182,9 +210,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DD11D5D24082E08002A9541 /* Build configuration list for PBXNativeTarget "VolunteeringHub" */;
 			buildPhases = (
+				2BF43148EF68200B925E2906 /* [CP] Check Pods Manifest.lock */,
 				1DD11D4524082E03002A9541 /* Sources */,
 				1DD11D4624082E03002A9541 /* Frameworks */,
 				1DD11D4724082E03002A9541 /* Resources */,
+				8968FF4F73B4F187C783C598 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -192,7 +222,7 @@
 			);
 			name = VolunteeringHub;
 			packageProductDependencies = (
-				1D799025242357CE00D715C4 /* URLImage */,
+				1D799025242357CE00D715C4 /* SwiftPackageProductDependency */,
 			);
 			productName = VolunteeringHub;
 			productReference = 1DD11D4924082E03002A9541 /* VolunteeringHub.app */;
@@ -223,7 +253,7 @@
 			);
 			mainGroup = 1DD11D4024082E03002A9541;
 			packageReferences = (
-				1D799024242357CD00D715C4 /* XCRemoteSwiftPackageReference "url-image" */,
+				1D799024242357CD00D715C4 /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = 1DD11D4A24082E03002A9541 /* Products */;
 			projectDirPath = "";
@@ -240,12 +270,55 @@
 			buildActionMask = 2147483647;
 			files = (
 				1DD11D5924082E08002A9541 /* LaunchScreen.storyboard in Resources */,
+				1D13C90D2425716400C54C09 /* GoogleService-Info.plist in Resources */,
 				1DD11D5624082E08002A9541 /* Preview Assets.xcassets in Resources */,
 				1DD11D5324082E08002A9541 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2BF43148EF68200B925E2906 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VolunteeringHub-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8968FF4F73B4F187C783C598 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VolunteeringHub/Pods-VolunteeringHub-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VolunteeringHub/Pods-VolunteeringHub-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VolunteeringHub/Pods-VolunteeringHub-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1DD11D4524082E03002A9541 /* Sources */ = {
@@ -410,6 +483,7 @@
 		};
 		1DD11D5E24082E08002A9541 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 014F4E739759EF25F13835CC /* Pods-VolunteeringHub.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -430,6 +504,7 @@
 		};
 		1DD11D5F24082E08002A9541 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B0302C6DE3DE19C178B00B17 /* Pods-VolunteeringHub.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -472,7 +547,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		1D799024242357CD00D715C4 /* XCRemoteSwiftPackageReference "url-image" */ = {
+		1D799024242357CD00D715C4 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dmytro-anokhin/url-image.git";
 			requirement = {
@@ -483,9 +558,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		1D799025242357CE00D715C4 /* URLImage */ = {
+		1D799025242357CE00D715C4 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1D799024242357CD00D715C4 /* XCRemoteSwiftPackageReference "url-image" */;
+			package = 1D799024242357CD00D715C4 /* RemoteSwiftPackageReference */;
 			productName = URLImage;
 		};
 /* End XCSwiftPackageProductDependency section */
