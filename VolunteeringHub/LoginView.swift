@@ -15,11 +15,17 @@ struct LoginView: View {
     
     //@Binding var signInSuccess: Bool
     @EnvironmentObject var userData: UserData
-    
+
     @State var email: String = ""
     @State var password: String = ""
     @State var shown:Bool = false
     @State var message:String = ""
+    
+    
+    
+    func grantAccess(){
+        self.userData.signInSuccess.toggle()
+    }
     
     var body: some View {
         
@@ -79,6 +85,8 @@ struct LoginView: View {
                     .buttonStyle(PlainButtonStyle())
                     */
                     
+                    Google().frame(width: 260, height: 50)
+                    
                     Button(action: {
                         self.userData.signInSuccess.toggle()
                     }){
@@ -132,10 +140,31 @@ struct LoginView: View {
                 self.shown.toggle()
                 return
             }
+            print(res?.user.uid)
+            print(type(of: res?.user))
+            self.userData.user = res?.user
             self.message = "Success"
             self.shown.toggle()
+            
+            //For the app delegate to know:
+            var appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.userId = res?.user.uid ?? ""
+            // self.userData.signInSuccess.toggle()
         }
         //self.userData.signInSuccess.toggle()
+    }
+}
+
+struct Google: UIViewRepresentable {
+    func makeUIView(context: UIViewRepresentableContext<Google>) -> GIDSignInButton {
+        let button = GIDSignInButton()
+        button.colorScheme = .dark
+        GIDSignIn.sharedInstance()?.presentingViewController = UIApplication.shared.windows.last?.rootViewController
+        return button
+    }
+    
+    func updateUIView(_ uiView: GIDSignInButton, context: UIViewRepresentableContext<Google>) {
+        
     }
 }
 

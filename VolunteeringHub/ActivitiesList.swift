@@ -8,6 +8,9 @@
 
 import SwiftUI
 import MapKit
+import Firebase
+import FirebaseUI
+import GoogleSignIn
 
 struct ActivitiesList: View {
     
@@ -18,6 +21,20 @@ struct ActivitiesList: View {
     
     init() {
         print("Initializing ActivitiesList View")
+        print("FROM ACTIVITIES LIST VIEW")
+        print("USER:")
+        //print(Auth.auth().currentUser?.uid)
+        var user = Auth.auth().currentUser
+        if (user != nil) {
+            print(user?.displayName);
+            print(user?.email);
+            print(user?.photoURL)
+            print(user?.isEmailVerified)
+            print(user?.uid)  // The user's ID, unique to the Firebase project. Do NOT use
+                           // this value to authenticate with your backend server, if
+                           // you have one. Use User.getToken() instead.
+        }
+        
         // To remove all separators including the actual ones:
         UITableView.appearance().separatorStyle = .none
     }

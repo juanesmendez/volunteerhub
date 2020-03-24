@@ -9,6 +9,9 @@
 import SwiftUI
 
 struct ProfileInfo: View {
+    
+    @EnvironmentObject var userData: UserData
+    
     var body: some View {
         HStack {
             VStack {

@@ -7,6 +7,9 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseUI
+import GoogleSignIn
 
 struct ProfileView: View {
     var body: some View {
@@ -59,8 +62,27 @@ struct ProfileView: View {
                                 Spacer()
                             }
                         }
-                        
-                        
+                        /*
+                        NavigationLink(destination: ActivityDetail(activity: activity)) {
+                                Text("Learn more")
+                                    .padding(.all, 8.0)
+                                    .background(Color.green)
+                                    .foregroundColor(Color.black)
+                                .cornerRadius(20)
+                        }*/
+                        NavigationLink(destination: AppContentView()) {
+                            Button(action: {
+                                do {
+                                    print(Auth.auth().currentUser?.uid)
+                                    try Auth.auth().signOut()
+                                    print(Auth.auth().currentUser?.uid)
+                                } catch let signOutError as NSError {
+                                    print ("Error signing out: %@", signOutError)
+                                }
+                            }){
+                                Text("Sign out")
+                            }
+                        }
                     }
             }
         .navigationBarTitle("Your profile")

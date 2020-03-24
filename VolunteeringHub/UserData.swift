@@ -10,7 +10,12 @@ import Foundation
 import SwiftUI
 import Combine
 
+import Firebase
+import GoogleSignIn
+
 final class UserData: ObservableObject {
+    @Published var user:User?
     @Published var signInSuccess = false
+    
 }
 
