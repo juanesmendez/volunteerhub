@@ -70,19 +70,29 @@ struct ProfileView: View {
                                     .foregroundColor(Color.black)
                                 .cornerRadius(20)
                         }*/
-                        NavigationLink(destination: AppContentView()) {
+                        VStack{
                             Button(action: {
                                 do {
                                     print(Auth.auth().currentUser?.uid)
                                     try Auth.auth().signOut()
                                     print(Auth.auth().currentUser?.uid)
+                                    //For the app delegate to know (It redirects to the login page):
+                                    var appDelegate = UIApplication.shared.delegate as! AppDelegate
+                                    appDelegate.userId = ""
                                 } catch let signOutError as NSError {
                                     print ("Error signing out: %@", signOutError)
                                 }
                             }){
                                 Text("Sign out")
+                                    .padding(.all, 8.0)
+                                    .background(Color.red)
+                                    .foregroundColor(Color.white)
+                                    .cornerRadius(20)
                             }
                         }
+                        .padding(.top, 20)
+                        
+                        
                     }
             }
         .navigationBarTitle("Your profile")
