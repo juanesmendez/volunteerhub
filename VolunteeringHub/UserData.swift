@@ -15,7 +15,6 @@ import GoogleSignIn
 
 final class UserData: ObservableObject {
     @Published var user:User?
-    @Published var signInSuccess = false
-    
+    //@Published var signInSuccess = false
 }
 

@@ -21,12 +21,6 @@ struct LoginView: View {
     @State var shown:Bool = false
     @State var message:String = ""
     
-    
-    
-    func grantAccess(){
-        self.userData.signInSuccess.toggle()
-    }
-    
     var body: some View {
         
         VStack {
@@ -78,17 +72,11 @@ struct LoginView: View {
                 .padding(.bottom, 50)
                         
                 VStack(alignment: .leading) {
-                    /*
-                    NavigationLink(destination: ContentView()) {
-                        SignInRectangle(image: Image("google-icon"), text: "Sign in with Google")
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    */
                     
                     Google().frame(width: 260, height: 50)
                     
                     Button(action: {
-                        self.userData.signInSuccess.toggle()
+                        //self.userData.signInSuccess.toggle()
                     }){
                         SignInRectangle(image: Image("google-icon"), text: "Sign in with Google")
                     }
@@ -140,18 +128,14 @@ struct LoginView: View {
                 self.shown.toggle()
                 return
             }
-            print(res?.user.uid)
-            print(type(of: res?.user))
             self.userData.user = res?.user
             self.message = "Success"
             self.shown.toggle()
             
             //For the app delegate to know:
-            var appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.userId = res?.user.uid ?? ""
-            // self.userData.signInSuccess.toggle()
         }
-        //self.userData.signInSuccess.toggle()
     }
 }
 

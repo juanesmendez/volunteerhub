@@ -62,22 +62,13 @@ struct ProfileView: View {
                                 Spacer()
                             }
                         }
-                        /*
-                        NavigationLink(destination: ActivityDetail(activity: activity)) {
-                                Text("Learn more")
-                                    .padding(.all, 8.0)
-                                    .background(Color.green)
-                                    .foregroundColor(Color.black)
-                                .cornerRadius(20)
-                        }*/
+                        
                         VStack{
                             Button(action: {
                                 do {
-                                    print(Auth.auth().currentUser?.uid)
                                     try Auth.auth().signOut()
-                                    print(Auth.auth().currentUser?.uid)
                                     //For the app delegate to know (It redirects to the login page):
-                                    var appDelegate = UIApplication.shared.delegate as! AppDelegate
+                                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
                                     appDelegate.userId = ""
                                 } catch let signOutError as NSError {
                                     print ("Error signing out: %@", signOutError)

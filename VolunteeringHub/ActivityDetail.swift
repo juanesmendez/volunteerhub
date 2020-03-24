@@ -54,8 +54,6 @@ struct ActivityDetail: View {
                         )
                         .padding(.horizontal, 40)
                     }
-                    //Image("puppie2")
-                    //.resizable()
                 }
                 
                 VStack {

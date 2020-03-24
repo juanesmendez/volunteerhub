@@ -17,13 +17,6 @@ struct SubmitActivity: View {
     @State var numberOfVolunteers: String
     @State var selection: String
     
-    /*
-    var dateClosedRange: ClosedRange<Date> {
-        let min = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
-        let max = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
-        return min...max
-    }*/
-    
     var body: some View {
         VStack {
             HStack {

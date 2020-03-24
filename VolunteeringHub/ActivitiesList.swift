@@ -20,10 +20,9 @@ struct ActivitiesList: View {
     //@State var model = ActivitiesListViewModel()
     
     init() {
-        print("Initializing ActivitiesList View")
-        print("FROM ACTIVITIES LIST VIEW")
-        print("USER:")
-        //print(Auth.auth().currentUser?.uid)
+        // To remove all separators including the actual ones:
+        UITableView.appearance().separatorStyle = .none
+        /*
         var user = Auth.auth().currentUser
         if (user != nil) {
             print(user?.displayName);
@@ -34,9 +33,7 @@ struct ActivitiesList: View {
                            // this value to authenticate with your backend server, if
                            // you have one. Use User.getToken() instead.
         }
-        
-        // To remove all separators including the actual ones:
-        UITableView.appearance().separatorStyle = .none
+        */
     }
     
     var body: some View {
@@ -70,22 +67,8 @@ struct ActivitiesList: View {
                 .onAppear(perform: model.loadActivities) // refreshes the activities everytime the view looses focus and appears again
                 //.onAppear(perform: getActivities)
                 //.onAppear(perform: model.loadActivities)
-                /*
-                .onReceive(model.objectWillChange, perform: { _ in
-                    //self.reload()
-                    print("Received list of activities")
-                    print(self.model.activities)
-                    //self.activities = self.model.activities
-                })
-                 */
             }
         }
-        /*
-        .onAppear {
-            UINavigationBar.appearance().backgroundColor = UIColor(red: 188/255, green: 217/255, blue: 121/255, alpha: 1)
-        }
-        */
-        
         
     }
     

@@ -11,7 +11,6 @@ import SwiftUI
 struct ActivityCard: View {
     
     var activity: Activity
-    //@State var selection: Int? = nil
     
     var body: some View {
         VStack {

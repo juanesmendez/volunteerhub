@@ -16,43 +16,28 @@ struct AppContentView: View {
     @EnvironmentObject var userData: UserData
     @ObservedObject var appDelegate = UIApplication.shared.delegate as! AppDelegate
     @State var user = Auth.auth().currentUser
-    /*
-    @State var handle = Auth.auth().addStateDidChangeListener { (auth, user) in
-      // ...
-        return user?.uid
-    }
-    */
     
     init() {
-        print("DESDE APP CONTENT IMPRIMIENDO USUARIO")
-        print(Auth.auth().currentUser?.uid)
+        print("Printing user from AppContentView:")
+        print(self.user)
     }
     
     var body: some View {
         return Group {
-            /*
-            if !self.userData.signInSuccess {
+            if Auth.auth().currentUser == nil {
                 LoginView()
                     .environmentObject(userData)
-            } else {
+            } else if Auth.auth().currentUser != nil || self.appDelegate.userId != "" {
                 ContentView()
             }
-             */
+            /*
             if appDelegate.userId == "" {
                 LoginView()
-                .environmentObject(userData)
+                    .environmentObject(userData)
             } else {
                 ContentView()
             }
-            /*
-            if user == nil {
-                LoginView()
-                    .environmentObject(userData)
-            } else {
-                //print("DESDE APP CONTENT IMPRIMIENDO USUARIO")
-                //print(Auth.auth().currentUser)
-                ContentView()
-            }*/
+            */
         }
     }
 }
