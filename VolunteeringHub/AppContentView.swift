@@ -17,11 +17,13 @@ struct AppContentView: View {
     @ObservedObject var appDelegate = UIApplication.shared.delegate as! AppDelegate
     @State var user = Auth.auth().currentUser
     
+    /*
     init() {
         print("Printing user from AppContentView:")
         print(self.user)
     }
-    
+    */
+ 
     var body: some View {
         return Group {
             if Auth.auth().currentUser == nil {
