@@ -12,4 +12,10 @@ target 'VolunteeringHub' do
   # Add the pods for any other Firebase products you want to use in your app
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
+  
+  pod 'FirebaseUI/Auth'
+
+  pod 'FirebaseUI/Google'
+  pod 'FirebaseUI/Facebook'
+  pod 'FirebaseUI/OAuth' # Used for Sign in with Apple, Twitter, etc
 end

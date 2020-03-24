@@ -7,14 +7,19 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseUI
+import GoogleSignIn
 
 struct LoginView: View {
     
     //@Binding var signInSuccess: Bool
     @EnvironmentObject var userData: UserData
     
-    @State var username: String = ""
+    @State var email: String = ""
     @State var password: String = ""
+    @State var shown:Bool = false
+    @State var message:String = ""
     
     var body: some View {
         
@@ -29,9 +34,8 @@ struct LoginView: View {
                     .padding()
                 
                 VStack {
-                    TextField("Username", text: $username)
+                    TextField("Email", text: $email)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                        
                         
                     
                     SecureField("Password", text: $password)
@@ -39,11 +43,27 @@ struct LoginView: View {
                         .cornerRadius(5.0)
                     
                     HStack {
-                        Text("Sign in")
-                            .padding(.horizontal, 10.0)
-                            .padding(.vertical, 9.0)
-                            .cornerRadius(10)
-                            .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 2))
+                        Button(action: {
+                            self.signUp()
+                        }){
+                            Text("Sign up")
+                                .padding(.horizontal, 10.0)
+                                .padding(.vertical, 9.0)
+                                .cornerRadius(10)
+                                .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 2))
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        
+                        Button(action: {
+                            self.signIn()
+                        }){
+                            Text("Sign in")
+                                .padding(.horizontal, 10.0)
+                                .padding(.vertical, 9.0)
+                                .cornerRadius(10)
+                                .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 2))
+                        }
+                        .buttonStyle(PlainButtonStyle())
                     }
                     
                         
@@ -73,6 +93,49 @@ struct LoginView: View {
                         
                 }
         }
+        .alert(isPresented: $shown, content: {
+            return Alert(title: Text(self.message))
+        })
+    }
+    
+    func signUp() {
+        if self.email == "" || self.password == "" {
+            self.message = "Please fill all of the fields"
+            self.shown.toggle()
+        }
+        
+        Auth.auth().createUser(withEmail: self.email, password: self.password) { (res, err) in
+            
+            if err != nil {
+                print((err!.localizedDescription))
+                self.message = err!.localizedDescription
+                self.shown.toggle()
+                return
+            }
+            self.message = "You signed up successfully! Welcome to VolunteerHub :)"
+            self.shown.toggle()
+        }
+        //self.userData.signInSuccess.toggle()
+    }
+    
+    func signIn() {
+        if self.email == "" || self.password == "" {
+            self.message = "Please fill all of the fields"
+            self.shown.toggle()
+        }
+        
+        Auth.auth().signIn(withEmail: self.email, password: self.password) { (res, err) in
+            
+            if err != nil {
+                print((err!.localizedDescription))
+                self.message = err!.localizedDescription
+                self.shown.toggle()
+                return
+            }
+            self.message = "Success"
+            self.shown.toggle()
+        }
+        //self.userData.signInSuccess.toggle()
     }
 }
 
