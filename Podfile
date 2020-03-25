@@ -18,4 +18,7 @@ target 'VolunteeringHub' do
   pod 'FirebaseUI/Google'
   pod 'FirebaseUI/Facebook'
   pod 'FirebaseUI/OAuth' # Used for Sign in with Apple, Twitter, etc
+
+  # Optionally, include the Swift extensions if you're using Swift.
+  pod 'FirebaseFirestoreSwift'
 end
