@@ -48,6 +48,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, Observ
                 print((err?.localizedDescription)!)
                 return
             }
+            // Check if user already signed in, if not, register ID in Firestore 'users' collection
+            let db = Firestore.firestore()
+            //var ref: DocumentReference? = nil
+            db.collection("users").whereField("userId", isEqualTo: (res?.user.uid)!)
+                .getDocuments() { (querySnapshot, err) in
+                    if let err = err {
+                        print("Error getting documents: \(err)")
+                    } else {
+                        print("Printing documents from Firestore...")
+                        for document in querySnapshot!.documents {
+                            print("\(document.documentID) => \(document.data())")
+                        }
+                        // If the user hasn't registered with Google before, the userId is added to the Firestore 'users' collection
+                        if querySnapshot!.documents.count == 0 {
+                            var ref: DocumentReference? = nil
+                            let userId:String = Auth.auth().currentUser!.uid
+                            ref = db.collection("users").addDocument(data: [
+                                "userId": userId
+                            ]) { err in
+                                if let err = err {
+                                    print("Error adding document: \(err)")
+                                } else {
+                                    print("Document added with ID: \(ref!.documentID)")
+                                }
+                            }
+                        }
+                    }
+            }
+            
             print("user=" + (res?.user.email)!)
             //print((res?.user.phoneNumber)!)
             print((res?.user.displayName)!)

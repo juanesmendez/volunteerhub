@@ -108,6 +108,20 @@ struct LoginView: View {
                 self.shown.toggle()
                 return
             }
+            // Insert document in Firestore database with the user ID
+            let db = Firestore.firestore()
+            var ref: DocumentReference? = nil
+            let userId:String = Auth.auth().currentUser!.uid
+            ref = db.collection("users").addDocument(data: [
+                "userId": userId
+            ]) { err in
+                if let err = err {
+                    print("Error adding document: \(err)")
+                } else {
+                    print("Document added with ID: \(ref!.documentID)")
+                }
+            }
+            
             self.message = "You signed up successfully! Welcome to VolunteerHub :)"
             self.shown.toggle()
         }
