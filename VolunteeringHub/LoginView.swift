@@ -110,8 +110,18 @@ struct LoginView: View {
             }
             // Insert document in Firestore database with the user ID
             let db = Firestore.firestore()
-            var ref: DocumentReference? = nil
+            //var ref: DocumentReference? = nil
             let userId:String = Auth.auth().currentUser!.uid
+            db.collection("users").document(userId).setData([
+                "name": ""
+            ]){ err in
+                if let err = err {
+                    print("Error adding document: \(err)")
+                } else {
+                    print("Document added")
+                }
+            }
+            /*
             ref = db.collection("users").addDocument(data: [
                 "userId": userId
             ]) { err in
@@ -121,7 +131,7 @@ struct LoginView: View {
                     print("Document added with ID: \(ref!.documentID)")
                 }
             }
-            
+            */
             self.message = "You signed up successfully! Welcome to VolunteerHub :)"
             self.shown.toggle()
         }

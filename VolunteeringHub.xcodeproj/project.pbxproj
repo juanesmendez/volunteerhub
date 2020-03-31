@@ -36,6 +36,8 @@
 		1DD11D6224082FAE002A9541 /* ActivityCircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD11D6124082FAE002A9541 /* ActivityCircleImage.swift */; };
 		1DD2FE5A2409B05400450BFC /* AppContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD2FE592409B05400450BFC /* AppContentView.swift */; };
 		1DD2FE5C2409B42400450BFC /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD2FE5B2409B42400450BFC /* UserData.swift */; };
+		1DE4DD952432C3DE00F96A89 /* ActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE4DD942432C3DE00F96A89 /* ActivityViewModel.swift */; };
+		1DE4DD972432E8B900F96A89 /* UsersDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE4DD962432E8B900F96A89 /* UsersDB.swift */; };
 		ED34AD3DFAE45C9132EB7B04 /* Pods_VolunteeringHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F2D57E3CDA5CFFB0AA3F625 /* Pods_VolunteeringHub.framework */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +74,8 @@
 		1DD11D6124082FAE002A9541 /* ActivityCircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCircleImage.swift; sourceTree = "<group>"; };
 		1DD2FE592409B05400450BFC /* AppContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContentView.swift; sourceTree = "<group>"; };
 		1DD2FE5B2409B42400450BFC /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		1DE4DD942432C3DE00F96A89 /* ActivityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewModel.swift; sourceTree = "<group>"; };
+		1DE4DD962432E8B900F96A89 /* UsersDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersDB.swift; sourceTree = "<group>"; };
 		5F2D57E3CDA5CFFB0AA3F625 /* Pods_VolunteeringHub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VolunteeringHub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0302C6DE3DE19C178B00B17 /* Pods-VolunteeringHub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VolunteeringHub.release.xcconfig"; path = "Target Support Files/Pods-VolunteeringHub/Pods-VolunteeringHub.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -101,6 +105,7 @@
 			children = (
 				1D7088012422A08B0019C3AD /* ActivitiesWebService.swift */,
 				1D7990222423437400D715C4 /* ImageLoader.swift */,
+				1DE4DD962432E8B900F96A89 /* UsersDB.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -109,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				1D7088042422A65C0019C3AD /* ActivitiesListViewModel.swift */,
+				1DE4DD942432C3DE00F96A89 /* ActivityViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -346,6 +352,7 @@
 				1D2231F32408B15E0052D33C /* ActivityDetail.swift in Sources */,
 				1DD11D4D24082E03002A9541 /* AppDelegate.swift in Sources */,
 				1D2231EB240894440052D33C /* MedalRow.swift in Sources */,
+				1DE4DD972432E8B900F96A89 /* UsersDB.swift in Sources */,
 				1D2CC8C72409D52E00741728 /* SubmitActivity.swift in Sources */,
 				1DD11D4F24082E03002A9541 /* SceneDelegate.swift in Sources */,
 				1D7088022422A08B0019C3AD /* ActivitiesWebService.swift in Sources */,
@@ -355,6 +362,7 @@
 				1DD11D6224082FAE002A9541 /* ActivityCircleImage.swift in Sources */,
 				1D2231F12408A3A10052D33C /* ProfileInfo.swift in Sources */,
 				1D2231E5240878700052D33C /* SearchBar.swift in Sources */,
+				1DE4DD952432C3DE00F96A89 /* ActivityViewModel.swift in Sources */,
 				1D7990232423437400D715C4 /* ImageLoader.swift in Sources */,
 				1D2231E9240893DE0052D33C /* MedalsList.swift in Sources */,
 				1DD11D5124082E03002A9541 /* ContentView.swift in Sources */,

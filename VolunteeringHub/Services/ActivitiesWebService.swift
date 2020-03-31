@@ -33,4 +33,76 @@ class ActivitiesWebService {
         }.resume()
     }
     
+    func getActivity(activityId:String, completion: @escaping (Activity?) -> ()) {
+        print("IN GET REQUEST ACTIVITY")
+        guard let url = URL(string: "http://localhost:3000/activities/\(activityId)")
+            else{
+               fatalError("Invalid URL")
+        }
+        print("URL for GET request: \(url)")
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else {
+                DispatchQueue.main.async {
+                    completion(nil)
+                }
+                return
+            }
+            
+            let activity = try? JSONDecoder().decode(Activity.self, from: data)
+            
+            //print("Printing activity from Web Service GET: \(activity)")
+            
+            DispatchQueue.main.async {
+                completion(activity)
+            }
+        }
+        .resume()
+    }
+    
+    func addVolunteerToActivity(activityId:String, volunteers: [String], completion: @escaping (Activity?) -> ()){
+        let url = URL(string: "http://localhost:3000/activities/" + activityId)!
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
+        request.allHTTPHeaderFields = [
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        ]
+        
+        let jsonDictionary: [String: [String]] = [
+            "volunteers": volunteers
+        ]
+
+        let data = try! JSONSerialization.data(withJSONObject: jsonDictionary, options: .prettyPrinted)
+        
+        URLSession.shared.uploadTask(with: request, from: data) { (responseData, response, error) in
+            if let error = error {
+                print("Error making PUT request: \(error.localizedDescription)")
+                return
+            }
+            
+            if let responseCode = (response as? HTTPURLResponse)?.statusCode, let responseData = responseData {
+                guard responseCode == 200 else {
+                    print("Invalid response code: \(responseCode)")
+                    return
+                }
+                print("Response data!!")
+                print(responseData)
+                // ESTO NO ME TRAE EL OBJETO!!! 
+                let activity = try? JSONDecoder().decode(Activity.self, from: responseData)
+                DispatchQueue.main.async {
+                    completion(activity)
+                }
+                /*
+                if let responseJSONData = try? JSONSerialization.jsonObject(with: responseData, options: .allowFragments) {
+                    print("Response JSON data = \(responseJSONData)")
+                    
+                    
+                }
+                */
+            }
+        }.resume()
+        
+    }
+    
 }

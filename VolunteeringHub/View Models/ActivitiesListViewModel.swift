@@ -43,7 +43,7 @@ class ActivitiesListViewModel: ObservableObject {
         print("Finished loading activities...")
     }
 }
-
+/*
 struct ActivityViewModel {
     var activity: Activity
     
@@ -74,4 +74,4 @@ struct ActivityViewModel {
     var images: [ImageInfo]? {
         return self.activity.images
     }*/
-}
+}*/

@@ -23,6 +23,8 @@ struct Activity: Codable, Identifiable {
     
     var images: [ImageInfo]
     
+    var volunteers: [String]
+    
     struct ImageInfo: Codable {
         var fileName: String
     }
@@ -30,6 +32,6 @@ struct Activity: Codable, Identifiable {
     // For readind _id key and changing it to id
     private enum CodingKeys: String, CodingKey {
         case id = "_id"
-        case name, description, category, volunteersNeeded, volunteersAttending, date, images
+        case name, description, category, volunteersNeeded, volunteersAttending, date, images, volunteers
     }
 }
