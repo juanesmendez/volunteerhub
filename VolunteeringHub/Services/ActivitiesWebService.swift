@@ -10,9 +10,11 @@ import Foundation
 
 class ActivitiesWebService {
     
+    let baseUrl: String  = "http://3.228.168.162:3000"
+    
     func getActivities(completion: @escaping ([Activity]?) -> ()){
         
-        guard let url = URL(string: "http://localhost:3000/activities")
+        guard let url = URL(string: "\(self.baseUrl)/activities")
             else{
                fatalError("Invalid URL")
         }
@@ -35,7 +37,7 @@ class ActivitiesWebService {
     
     func getActivity(activityId:String, completion: @escaping (Activity?) -> ()) {
         print("IN GET REQUEST ACTIVITY")
-        guard let url = URL(string: "http://localhost:3000/activities/\(activityId)")
+        guard let url = URL(string: "\(self.baseUrl)/activities/\(activityId)")
             else{
                fatalError("Invalid URL")
         }
@@ -59,8 +61,9 @@ class ActivitiesWebService {
         .resume()
     }
     
+    //func addVolunteerToActivity(activityId:String, volunteers: [String], completion: @escaping () -> ()){
     func addVolunteerToActivity(activityId:String, volunteers: [String], completion: @escaping (Activity?) -> ()){
-        let url = URL(string: "http://localhost:3000/activities/" + activityId)!
+        let url = URL(string: "\(self.baseUrl)/activities/" + activityId)!
 
         var request = URLRequest(url: url)
         request.httpMethod = "PUT"
@@ -69,6 +72,7 @@ class ActivitiesWebService {
             "Accept": "application/json"
         ]
         
+        // Check how i can send an array of object and not of Strings
         let jsonDictionary: [String: [String]] = [
             "volunteers": volunteers
         ]
@@ -88,18 +92,19 @@ class ActivitiesWebService {
                 }
                 print("Response data!!")
                 print(responseData)
-                // ESTO NO ME TRAE EL OBJETO!!! 
+                // This doesn't return an Activity object, it returns a response to the PUT request
+                // The following line needs to be changed
                 let activity = try? JSONDecoder().decode(Activity.self, from: responseData)
-                DispatchQueue.main.async {
-                    completion(activity)
-                }
+                // Uncomment the following line
                 /*
                 if let responseJSONData = try? JSONSerialization.jsonObject(with: responseData, options: .allowFragments) {
                     print("Response JSON data = \(responseJSONData)")
-                    
-                    
                 }
                 */
+                DispatchQueue.main.async {
+                    completion(activity)
+                    // completion()
+                }
             }
         }.resume()
         
