@@ -67,7 +67,9 @@ struct ProfileInfo: View {
             let imageUrl = photoUrl.absoluteString
             let url  = NSURL(string: imageUrl)! as URL
             let data = NSData(contentsOf: url)
-            self.profileImage = UIImage(data: data! as Data) ?? UIImage()
+            if data != nil {
+                self.profileImage = UIImage(data: data! as Data) ?? UIImage()
+            }
         })
     }
 }
