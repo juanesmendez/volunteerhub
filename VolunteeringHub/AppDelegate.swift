@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, Observ
     // For connecting to Firebase
     //var window: UIWindow?
     @Published var userId: String = ""
+    // Variable for knowing if its the first time a user signs in with Google
+    @Published var firstGoogleSignIn = false
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -49,46 +51,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, Observ
                 return
             }
             // Check if user already signed in, if not, register ID in Firestore 'users' collection
-            let db = Firestore.firestore()
-            //var ref: DocumentReference? = nil
-            //ref = db.collection("users").document((res?.user.uid)!)
             
-            db.collection("users").document((res?.user.uid)!).setData([
-                "name": (res?.user.displayName)!
-            ]){ err in
-                if let err = err {
-                    print("Error adding document: \(err)")
-                } else {
-                    print("Document added")
+            let newUser = res?.additionalUserInfo?.isNewUser
+            
+            if newUser == true {
+                self.firstGoogleSignIn = true
+                
+                print("New Google user.")
+                let db = Firestore.firestore()
+                //var ref: DocumentReference? = nil
+                //ref = db.collection("users").document((res?.user.uid)!)
+                
+                db.collection("users").document((res?.user.uid)!).setData([
+                    "name": (res?.user.displayName)!
+                ]){ err in
+                    if let err = err {
+                        print("Error adding document: \(err)")
+                    } else {
+                        print("Document added")
+                    }
                 }
             }
-            /*
-            db.collection("users").whereField("userId", isEqualTo: (res?.user.uid)!)
-                .getDocuments() { (querySnapshot, err) in
-                    if let err = err {
-                        print("Error getting documents: \(err)")
-                    } else {
-                        print("Printing documents from Firestore...")
-                        for document in querySnapshot!.documents {
-                            print("\(document.documentID) => \(document.data())")
-                        }
-                        // If the user hasn't registered with Google before, the userId is added to the Firestore 'users' collection
-                        if querySnapshot!.documents.count == 0 {
-                            var ref: DocumentReference? = nil
-                            let userId:String = Auth.auth().currentUser!.uid
-                            ref = db.collection("users").addDocument(data: [
-                                "userId": userId
-                            ]) { err in
-                                if let err = err {
-                                    print("Error adding document: \(err)")
-                                } else {
-                                    print("Document added with ID: \(ref!.documentID)")
-                                }
-                            }
-                        }
-                    }
-            }
-            */
             print("user=" + (res?.user.email)!)
             //print((res?.user.phoneNumber)!)
             print((res?.user.displayName)!)

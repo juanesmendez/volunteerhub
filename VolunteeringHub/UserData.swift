@@ -14,7 +14,9 @@ import Firebase
 import GoogleSignIn
 
 final class UserData: ObservableObject {
-    @Published var user:User?
+    //@Published var user:User?
     //@Published var signInSuccess = false
+    
+    @Published var register = false
 }
 

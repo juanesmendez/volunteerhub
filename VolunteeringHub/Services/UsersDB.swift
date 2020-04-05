@@ -23,17 +23,23 @@ class UsersDB {
                 print("Document updated")
             }
         }
-        /*
-        db.collection("users").document(userId).collection("activities").document(activity.id).setData([
-            "id": activity.id
-        ]){ err in
-            if let err = err {
-                print("Error adding document: \(err)")
+    }
+    
+    func getUserData(completion: @escaping (Dictionary<String, Any>?) -> ()) {
+        let db = Firestore.firestore()
+        let userId = Auth.auth().currentUser?.uid ?? ""
+        
+        let docRef = db.collection("users").document(userId)
+
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                DispatchQueue.main.async {
+                    completion(document.data())
+                }
             } else {
-                print("Document added")
+                print("Document does not exist")
             }
         }
-        */
     }
     
 }

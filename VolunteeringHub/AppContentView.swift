@@ -26,12 +26,18 @@ struct AppContentView: View {
  
     var body: some View {
         return Group {
-            if Auth.auth().currentUser == nil {
-                LoginView()
-                    .environmentObject(userData)
-            } else if Auth.auth().currentUser != nil || self.appDelegate.userId != "" {
-                ContentView()
+            
+            if self.userData.register == true || self.appDelegate.firstGoogleSignIn == true{
+                UserRegistration()
+            } else {
+                if Auth.auth().currentUser == nil {
+                    LoginView()
+                        .environmentObject(userData)
+                } else if Auth.auth().currentUser != nil || self.appDelegate.userId != "" {
+                    ContentView()
+                }
             }
+            
             /*
             if appDelegate.userId == "" {
                 LoginView()

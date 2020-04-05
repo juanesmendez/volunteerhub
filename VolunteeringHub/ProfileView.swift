@@ -12,84 +12,120 @@ import FirebaseUI
 import GoogleSignIn
 
 struct ProfileView: View {
+    
+    @ObservedObject var profileModel = ProfileViewModel()
+    
+    init() {
+        self.getProfileData()
+    }
+    
     var body: some View {
         NavigationView{
-            ScrollView {
-                    VStack {
-                        HStack {
-                            Spacer()
-                            VStack(alignment: .trailing) {
-                                Text("Hello ")
-                                    .font(.headline)
-                                Text("Juan Mendez")
-                                    .font(.title)
-                                
-                            }
-                            .padding(.horizontal, 10)
-                        }
+            if self.profileModel.userData != nil {
+                ScrollView {
                         
-                        ProfileInfo()
-                            .padding(.bottom, 10)
-                        
-                        VStack(alignment: .leading) {
-                            VStack {
-                                HStack {
-                                    Text("Your experience")
-                                        .font(.title)
-                                        .bold()
-                                    Spacer()
-                                }
-                                
-                                Text("Three years doing volunteer work. I have participated in more than 50 activities organized around Colombia. I am a truly empathetic person.")
-                                .lineLimit(4)
-                                
-                                
-                            }
-                            .padding(.horizontal, 10)
-                            .padding(.bottom, 10)
-                            
-                            MedalsList()
-                                
-                            Text("Interests")
-                                .font(.title)
-                                .bold()
-                                .padding(.horizontal, 10)
-                                    
-                                
+                        VStack {
                             HStack {
                                 Spacer()
-                                InterestsList()
-                                Spacer()
-                            }
-                        }
-                        
-                        VStack{
-                            Button(action: {
-                                do {
-                                    try Auth.auth().signOut()
-                                    //For the app delegate to know (It redirects to the login page):
-                                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                                    appDelegate.userId = ""
-                                } catch let signOutError as NSError {
-                                    print ("Error signing out: %@", signOutError)
+                                VStack(alignment: .trailing) {
+                                    Text("Hello ")
+                                        .font(.headline)
+                                    Text("\(self.profileModel.userData?["firstName"] as! String) \(self.profileModel.userData?["lastName"] as! String)")
+                                        .font(.title)
+                                    
                                 }
-                            }){
-                                Text("Sign out")
-                                    .padding(.all, 8.0)
-                                    .background(Color.red)
-                                    .foregroundColor(Color.white)
-                                    .cornerRadius(20)
+                                .padding(.horizontal, 10)
                             }
+                            
+                            ProfileInfo()
+                                .padding(.bottom, 10)
+                            
+                            VStack(alignment: .leading) {
+                                VStack(alignment: .leading) {
+                                    HStack {
+                                        Text("Basic information")
+                                            .font(.title)
+                                            .bold()
+                                        Spacer()
+                                    }
+                                    .padding(.bottom, 5)
+                                    Text("Username: \(self.profileModel.userData?["username"] as! String)")
+                                    Divider()
+                                    Text("Birth date: \(self.profileModel.userData?["birthDate"] as! String)")
+                                }
+                                .padding(.horizontal, 10)
+                                .padding(.bottom, 10)
+                                
+                                VStack(alignment: .leading) {
+                                    HStack {
+                                        Text("Your experience")
+                                            .font(.title)
+                                            .bold()
+                                        Spacer()
+                                    }
+                                    .padding(.bottom, 5)
+                                    Text(self.profileModel.userData?["description"] as! String)
+                                        .lineLimit(4)
+                                    
+                                }
+                                .padding(.horizontal, 10)
+                                .padding(.bottom, 10)
+                                
+                                MedalsList()
+                                    
+                                Text("Interests")
+                                    .font(.title)
+                                    .bold()
+                                    .padding(.horizontal, 10)
+                                        
+                                    
+                                HStack {
+                                    Spacer()
+                                    InterestsList()
+                                    Spacer()
+                                }
+                            }
+                            
+                            VStack{
+                                Button(action: {
+                                    do {
+                                        try Auth.auth().signOut()
+                                        //For the app delegate to know (It redirects to the login page):
+                                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                                        appDelegate.userId = ""
+                                    } catch let signOutError as NSError {
+                                        print ("Error signing out: %@", signOutError)
+                                    }
+                                }){
+                                    Text("Sign out")
+                                        .padding(.all, 8.0)
+                                        .background(Color.red)
+                                        .foregroundColor(Color.white)
+                                        .cornerRadius(20)
+                                }
+                            }
+                            .padding(.top, 20)
+                            
+                            
                         }
-                        .padding(.top, 20)
-                        
-                        
-                    }
+                }
+                .navigationBarTitle("Your profile")
+            } else {
+                Text("Loading profile data...")
+                    .navigationBarTitle("Your profile")
+                
             }
-        .navigationBarTitle("Your profile")
+            
+        
         }
             
     }
+    
+    func getProfileData() {
+        self.profileModel.getProfileData()
+    }
+     
+    
 }
 
 struct ProfileView_Previews: PreviewProvider {

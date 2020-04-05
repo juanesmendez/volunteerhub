@@ -43,6 +43,7 @@ struct LoginView: View {
                         .cornerRadius(5.0)
                     
                     HStack {
+                        /*
                         Button(action: {
                             self.signUp()
                         }){
@@ -53,7 +54,7 @@ struct LoginView: View {
                                 .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 2))
                         }
                         .buttonStyle(PlainButtonStyle())
-                        
+                        */
                         Button(action: {
                             self.signIn()
                         }){
@@ -65,8 +66,18 @@ struct LoginView: View {
                         }
                         .buttonStyle(PlainButtonStyle())
                     }
-                    
-                        
+                    Button(action: {
+                        self.userData.register = true
+                    }, label: {
+                        Text("Register with us")
+                    })
+                        .padding(.top, 10)
+                    /*
+                    NavigationLink(destination: UserRegistration(), isActive: $register){
+                        Text("Register with us")
+                    }
+                    .padding(.top, 10)
+                      */
                 }
                 .padding(.horizontal, 45)
                 .padding(.bottom, 50)
@@ -89,11 +100,42 @@ struct LoginView: View {
                         
                 }
         }
-        .alert(isPresented: $shown, content: {
-            return Alert(title: Text(self.message))
-        })
+            .alert(isPresented: $shown, content: {
+                return Alert(title: Text(self.message))
+            })
+            /*
+            .onAppear(perform: {
+                self.register = false
+            })
+             */
+        
     }
     
+    func signIn() {
+        if self.email == "" || self.password == "" {
+            self.message = "Please fill all of the fields"
+            self.shown.toggle()
+        }
+        
+        Auth.auth().signIn(withEmail: self.email, password: self.password) { (res, err) in
+            
+            if err != nil {
+                print((err!.localizedDescription))
+                self.message = err!.localizedDescription
+                self.shown.toggle()
+                return
+            }
+            //self.userData.user = res?.user
+            self.message = "Success"
+            self.shown.toggle()
+            
+            //For the app delegate to know:
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.userId = res?.user.uid ?? ""
+        }
+    }
+    
+    /*
     func signUp() {
         if self.email == "" || self.password == "" {
             self.message = "Please fill all of the fields"
@@ -137,30 +179,8 @@ struct LoginView: View {
         }
         //self.userData.signInSuccess.toggle()
     }
+    */
     
-    func signIn() {
-        if self.email == "" || self.password == "" {
-            self.message = "Please fill all of the fields"
-            self.shown.toggle()
-        }
-        
-        Auth.auth().signIn(withEmail: self.email, password: self.password) { (res, err) in
-            
-            if err != nil {
-                print((err!.localizedDescription))
-                self.message = err!.localizedDescription
-                self.shown.toggle()
-                return
-            }
-            self.userData.user = res?.user
-            self.message = "Success"
-            self.shown.toggle()
-            
-            //For the app delegate to know:
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.userId = res?.user.uid ?? ""
-        }
-    }
 }
 
 struct Google: UIViewRepresentable {
