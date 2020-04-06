@@ -33,6 +33,8 @@ class UsersDB {
 
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
+                let source = document.metadata.isFromCache ? "local cache" : "server"
+                print("Metadata: Data fetched from \(source)")
                 DispatchQueue.main.async {
                     completion(document.data())
                 }

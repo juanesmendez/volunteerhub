@@ -6,6 +6,7 @@
 //  Copyright © 2020 Universidad de los Andes. All rights reserved.
 //
 
+import SystemConfiguration
 import SwiftUI
 import Firebase
 import GoogleSignIn
@@ -66,11 +67,44 @@ struct ProfileInfo: View {
             
             let imageUrl = photoUrl.absoluteString
             let url  = NSURL(string: imageUrl)! as URL
-            let data = NSData(contentsOf: url)
-            if data != nil {
-                self.profileImage = UIImage(data: data! as Data) ?? UIImage()
+            if self.checkReachable(imageUrl: imageUrl) {
+                let data = NSData(contentsOf: url)
+                if data != nil {
+                    self.profileImage = UIImage(data: data! as Data) ?? UIImage()
+                }
             }
+            
         })
+    }
+    
+    // Function for checking internet connectivity
+    func checkReachable(imageUrl: String?) -> Bool {
+        guard let url = imageUrl else {
+            return false
+        }
+        let reachability = SCNetworkReachabilityCreateWithName(nil, url)
+        var flags = SCNetworkReachabilityFlags()
+        SCNetworkReachabilityGetFlags(reachability!, &flags)
+        
+        let isConnected = isNetworkReachable(with: flags)
+        
+        if isConnected {
+            print(flags)
+            print("You have internet connection")
+        } else if !isConnected {
+            print("Sorry no connection")
+            print(flags)
+        }
+        return isConnected
+    }
+    
+    // Helper function for checking internet connectivity
+    func isNetworkReachable(with flags: SCNetworkReachabilityFlags) -> Bool {
+        let isReachable = flags.contains(.reachable)
+        let needsConnection =  flags.contains(.connectionRequired)
+        let canConnectAutomatically = flags.contains(.connectionOnDemand) || flags.contains(.connectionOnTraffic)
+        let canConnectWithoutUserInteraction = canConnectAutomatically && !flags.contains(.interventionRequired)
+        return isReachable && (!needsConnection || canConnectWithoutUserInteraction)
     }
 }
 

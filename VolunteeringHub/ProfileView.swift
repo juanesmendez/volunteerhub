@@ -15,10 +15,6 @@ struct ProfileView: View {
     
     @ObservedObject var profileModel = ProfileViewModel()
     
-    init() {
-        self.getProfileData()
-    }
-    
     var body: some View {
         NavigationView{
             if self.profileModel.userData != nil {
@@ -118,6 +114,9 @@ struct ProfileView: View {
             
         
         }
+        .onAppear(perform: {
+            self.getProfileData()
+        })
             
     }
     
