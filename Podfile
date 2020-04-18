@@ -21,4 +21,7 @@ target 'VolunteeringHub' do
 
   # Optionally, include the Swift extensions if you're using Swift.
   pod 'FirebaseFirestoreSwift'
+  
+  # Library for checking internet connection
+  pod 'ReachabilitySwift'
 end

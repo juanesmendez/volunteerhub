@@ -13,7 +13,7 @@ import Firebase
 struct ActivityDetail: View {
     
     //var activity: Activity
-    @ObservedObject var imageLoader = ImageLoader()
+    @ObservedObject var model = ActivityDetailViewModel()
     @State var image:UIImage = UIImage()
     private var url = ""
     
@@ -33,7 +33,7 @@ struct ActivityDetail: View {
         */
         if(activity.images.count > 0) {
             // Always getting the first image in the array
-            self.url = "http://localhost:3000/photos/image/" + activity.images[0].fileName
+            self.url = activity.images[0].fileName
             print(self.url)
             //self.imageLoader.loadImage(urlString: self.url)
         }
@@ -54,10 +54,10 @@ struct ActivityDetail: View {
                 if(self.activityModel.activity.images.count == 0) {
                     Text("No photos of the activity have been added.")
                 } else{
-                    if(imageLoader.data.isEmpty){
+                    if(model.imageData.isEmpty){
                         Text("Loading image...")
                     } else {
-                        Image(uiImage: (imageLoader.data.isEmpty) ? UIImage(imageLiteralResourceName: "Event image") : UIImage(data: imageLoader.data)!)
+                        Image(uiImage: (model.imageData.isEmpty) ? UIImage(imageLiteralResourceName: "Event image") : UIImage(data: model.imageData)!)
                         .resizable()
                         //.frame(height: 150)
                         .cornerRadius(10)
@@ -228,7 +228,8 @@ struct ActivityDetail: View {
                 // For loading the image related to the activity. It is loaded only when the view appears, 
                 // or else it will load when the activity list shows (causing an overload in the back-end service)
                 if(self.activityModel.activity.images.count > 0) {
-                    self.imageLoader.loadImage(urlString: self.url)
+                    print("INSIDE onAppear for loading activity image")
+                    self.model.loadImage(urlString: self.url)
                 }
             })
         }

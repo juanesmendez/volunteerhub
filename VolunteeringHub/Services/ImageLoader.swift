@@ -9,8 +9,9 @@
 import Foundation
 import Combine
 
-class ImageLoader: ObservableObject {
-    @Published var data = Data()
+class ImageLoader {
+    //@Published var data = Data()
+    
     /*
     init(urlString:String) {
         guard let url = URL(string: urlString) else { return }
@@ -24,14 +25,14 @@ class ImageLoader: ObservableObject {
     }
      */
     
-    func loadImage(urlString:String) {
+    func loadImage(urlString:String, completion: @escaping (Data?) -> ()) {
         guard let url = URL(string: urlString) else { return }
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data else { return }
             DispatchQueue.main.async {
                 print("DATOS TRAIDOS DE LA IMAGEN")
                 print(data)
-                self.data = data
+                completion(data)
             }
         }
         task.resume()

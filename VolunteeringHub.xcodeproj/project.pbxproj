@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1D13C90D2425716400C54C09 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1D13C90C2425716400C54C09 /* GoogleService-Info.plist */; };
+		1D1A9D8C244AA8C600691346 /* ActivityDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1A9D8B244AA8C600691346 /* ActivityDetailViewModel.swift */; };
 		1D2231E1240862EC0052D33C /* ActivitiesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2231E0240862EC0052D33C /* ActivitiesList.swift */; };
 		1D2231E3240866F70052D33C /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2231E2240866F70052D33C /* MapView.swift */; };
 		1D2231E5240878700052D33C /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2231E4240878700052D33C /* SearchBar.swift */; };
@@ -46,6 +47,7 @@
 /* Begin PBXFileReference section */
 		014F4E739759EF25F13835CC /* Pods-VolunteeringHub.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VolunteeringHub.debug.xcconfig"; path = "Target Support Files/Pods-VolunteeringHub/Pods-VolunteeringHub.debug.xcconfig"; sourceTree = "<group>"; };
 		1D13C90C2425716400C54C09 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1D1A9D8B244AA8C600691346 /* ActivityDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailViewModel.swift; sourceTree = "<group>"; };
 		1D2231E0240862EC0052D33C /* ActivitiesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesList.swift; sourceTree = "<group>"; };
 		1D2231E2240866F70052D33C /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		1D2231E4240878700052D33C /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				1D7088042422A65C0019C3AD /* ActivitiesListViewModel.swift */,
 				1DE4DD942432C3DE00F96A89 /* ActivityViewModel.swift */,
 				1DE52E63243813AF007B087C /* ProfileViewModel.swift */,
+				1D1A9D8B244AA8C600691346 /* ActivityDetailViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 			files = (
 				1DD2FE5A2409B05400450BFC /* AppContentView.swift in Sources */,
 				1D2231E3240866F70052D33C /* MapView.swift in Sources */,
+				1D1A9D8C244AA8C600691346 /* ActivityDetailViewModel.swift in Sources */,
 				1DE52E64243813AF007B087C /* ProfileViewModel.swift in Sources */,
 				1D2231E724087C690052D33C /* ProfileView.swift in Sources */,
 				1DD2FE5C2409B42400450BFC /* UserData.swift in Sources */,
