@@ -48,7 +48,7 @@ struct ActivitiesList: View {
                         }
                     } else {
                         VStack {
-                            Text("It seems like you are not connected to the internet. Please try again.")
+                            Text("It seems like you are not connected to the internet 😢. Please try again.")
                                 .multilineTextAlignment(.center)
                                 .padding(.top, 40)
                                 .padding(.bottom, 20)
