@@ -42,6 +42,12 @@ class ActivitiesListViewModel: ObservableObject {
         }
         
     }
+    
+    func isActivitiesServiceReachable() -> Bool {
+        // Check connectivity
+        self.reachable = ActivitiesWebService().isReachable()
+        return self.reachable
+    }
 }
 /*
 struct ActivityViewModel {

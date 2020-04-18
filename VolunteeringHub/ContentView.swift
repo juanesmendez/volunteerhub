@@ -23,7 +23,11 @@ struct ContentView: View {
                     Text("Home")
                 }
                 //.navigationBarTitle("Activities")
-            
+            UserActivities()
+                .tabItem() {
+                    Image(systemName: "calendar")
+                    Text("Your activities")
+                }
             ProfileView()
                 .tabItem() {
                     Image(systemName: "person.crop.circle.fill")

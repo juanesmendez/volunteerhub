@@ -15,26 +15,13 @@ import GoogleSignIn
 struct ActivitiesList: View {
     
     @State private var searchText : String = ""
+    @State private var showingAlert = false
     @ObservedObject var model = ActivitiesListViewModel()
     var reachable = false
-    //@State private var activities = [ActivityViewModel]()
-    //@State var model = ActivitiesListViewModel()
     
     init() {
         // To remove all separators including the actual ones:
         UITableView.appearance().separatorStyle = .none
-        /*
-        var user = Auth.auth().currentUser
-        if (user != nil) {
-            print(user?.displayName);
-            print(user?.email);
-            print(user?.photoURL)
-            print(user?.isEmailVerified)
-            print(user?.uid)  // The user's ID, unique to the Firebase project. Do NOT use
-                           // this value to authenticate with your backend server, if
-                           // you have one. Use User.getToken() instead.
-        }
-        */
     }
     
     var body: some View {
@@ -67,7 +54,13 @@ struct ActivitiesList: View {
                                 .padding(.bottom, 20)
                                 
                             Button(action: {
-                                self.model.loadActivities()
+                                if self.model.isActivitiesServiceReachable() {
+                                    self.model.loadActivities()
+                                } else {
+                                    self.showingAlert = true
+                                    
+                                }
+                                
                             }) {
                                 Text("Refresh")
                                     .padding(.horizontal, 10.0)
@@ -83,8 +76,9 @@ struct ActivitiesList: View {
                 .navigationBarTitle("Activities")
                 .accentColor(Color.green)
                 .onAppear(perform: model.loadActivities) // refreshes the activities everytime the view looses focus and appears again
-                //.onAppear(perform: getActivities)
-                //.onAppear(perform: model.loadActivities)
+                .alert(isPresented: $showingAlert) {
+                    Alert(title: Text("Connection error"), message: Text("You don't have an active internet connection"), dismissButton: .default(Text("Ok")))
+                }
             }
         }
         

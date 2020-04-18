@@ -23,6 +23,8 @@
 		1D2CC8C72409D52E00741728 /* SubmitActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2CC8C62409D52E00741728 /* SubmitActivity.swift */; };
 		1D2CC8C92409E47400741728 /* RegistrationTopics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2CC8C82409E47400741728 /* RegistrationTopics.swift */; };
 		1D42E084240855D80049BF06 /* ActivityCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D42E083240855D80049BF06 /* ActivityCard.swift */; };
+		1D46FB8D244B72C900F8DEF4 /* UserActivities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D46FB8C244B72C900F8DEF4 /* UserActivities.swift */; };
+		1D46FB8F244B731F00F8DEF4 /* UserActivitiesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D46FB8E244B731F00F8DEF4 /* UserActivitiesViewModel.swift */; };
 		1D7087FF242290FF0019C3AD /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7087FE242290FF0019C3AD /* Activity.swift */; };
 		1D7088022422A08B0019C3AD /* ActivitiesWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7088012422A08B0019C3AD /* ActivitiesWebService.swift */; };
 		1D7088052422A65C0019C3AD /* ActivitiesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7088042422A65C0019C3AD /* ActivitiesListViewModel.swift */; };
@@ -63,6 +65,8 @@
 		1D2CC8C62409D52E00741728 /* SubmitActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitActivity.swift; sourceTree = "<group>"; };
 		1D2CC8C82409E47400741728 /* RegistrationTopics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationTopics.swift; sourceTree = "<group>"; };
 		1D42E083240855D80049BF06 /* ActivityCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCard.swift; sourceTree = "<group>"; };
+		1D46FB8C244B72C900F8DEF4 /* UserActivities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivities.swift; sourceTree = "<group>"; };
+		1D46FB8E244B731F00F8DEF4 /* UserActivitiesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivitiesViewModel.swift; sourceTree = "<group>"; };
 		1D7087FE242290FF0019C3AD /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		1D7088012422A08B0019C3AD /* ActivitiesWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesWebService.swift; sourceTree = "<group>"; };
 		1D7088042422A65C0019C3AD /* ActivitiesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesListViewModel.swift; sourceTree = "<group>"; };
@@ -126,6 +130,7 @@
 				1DE4DD942432C3DE00F96A89 /* ActivityViewModel.swift */,
 				1DE52E63243813AF007B087C /* ProfileViewModel.swift */,
 				1D1A9D8B244AA8C600691346 /* ActivityDetailViewModel.swift */,
+				1D46FB8E244B731F00F8DEF4 /* UserActivitiesViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -177,6 +182,7 @@
 				1DD2FE592409B05400450BFC /* AppContentView.swift */,
 				1DD2FE5B2409B42400450BFC /* UserData.swift */,
 				1D729F2A2437AE410054F503 /* UserRegistration.swift */,
+				1D46FB8C244B72C900F8DEF4 /* UserActivities.swift */,
 			);
 			path = VolunteeringHub;
 			sourceTree = "<group>";
@@ -359,6 +365,7 @@
 				1DD2FE5A2409B05400450BFC /* AppContentView.swift in Sources */,
 				1D2231E3240866F70052D33C /* MapView.swift in Sources */,
 				1D1A9D8C244AA8C600691346 /* ActivityDetailViewModel.swift in Sources */,
+				1D46FB8D244B72C900F8DEF4 /* UserActivities.swift in Sources */,
 				1DE52E64243813AF007B087C /* ProfileViewModel.swift in Sources */,
 				1D2231E724087C690052D33C /* ProfileView.swift in Sources */,
 				1DD2FE5C2409B42400450BFC /* UserData.swift in Sources */,
@@ -380,6 +387,7 @@
 				1D2231E5240878700052D33C /* SearchBar.swift in Sources */,
 				1DE4DD952432C3DE00F96A89 /* ActivityViewModel.swift in Sources */,
 				1D7990232423437400D715C4 /* ImageLoader.swift in Sources */,
+				1D46FB8F244B731F00F8DEF4 /* UserActivitiesViewModel.swift in Sources */,
 				1D2231E9240893DE0052D33C /* MedalsList.swift in Sources */,
 				1DD11D5124082E03002A9541 /* ContentView.swift in Sources */,
 				1D2231EF240899370052D33C /* InterestsList.swift in Sources */,
