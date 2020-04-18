@@ -14,33 +14,33 @@ import Combine
 class ActivitiesListViewModel: ObservableObject {
     
     //@Published var activities = [ActivityViewModel]()
-    var activities = [Activity](){
-        willSet{
-            print("Activities list changed!!!!!")
-            print(activities, "will set modifier")
-            print("Finished will set")
-            objectWillChange.send()
-        }
-    }
+    @Published var activities = [Activity]()
+    @Published var reachable = false
     
     init() {
         loadActivities()
     }
     
     func loadActivities() {
-        print("Starting to load activities...")
-        ActivitiesWebService().getActivities { actvs in
-            //print($0)
-            if let actvs = actvs {
-                //let aux = actvs.map(ActivityViewModel.init)
-                //self.activities = aux
-                self.activities = actvs
-                print(self.activities)
-                //self.objectWillChange.send()
+        // Check connectivity
+        self.reachable = ActivitiesWebService().isReachable()
+        
+        if self.reachable {
+            print("Starting to load activities...")
+            ActivitiesWebService().getActivities { actvs in
+                //print($0)
+                if let actvs = actvs {
+                    //let aux = actvs.map(ActivityViewModel.init)
+                    //self.activities = aux
+                    self.activities = actvs
+                    print(self.activities)
+                    //self.objectWillChange.send()
+                }
             }
+            print(self.activities)
+            print("Finished loading activities...")
         }
-        print(self.activities)
-        print("Finished loading activities...")
+        
     }
 }
 /*

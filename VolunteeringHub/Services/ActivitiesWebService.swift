@@ -12,6 +12,10 @@ class ActivitiesWebService {
     
     let baseUrl: String  = "http://3.228.168.162:3000"
     
+    func isReachable() -> Bool {
+        return Reachable.checkReachable(url: self.baseUrl)
+    }
+    
     func getActivities(completion: @escaping ([Activity]?) -> ()){
         
         guard let url = URL(string: "\(self.baseUrl)/activities")

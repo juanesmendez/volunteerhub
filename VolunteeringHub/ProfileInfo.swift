@@ -67,7 +67,7 @@ struct ProfileInfo: View {
             
             let imageUrl = photoUrl.absoluteString
             let url  = NSURL(string: imageUrl)! as URL
-            if self.checkReachable(imageUrl: imageUrl) {
+            if Reachable.checkReachable(url: imageUrl) {
                 let data = NSData(contentsOf: url)
                 if data != nil {
                     self.profileImage = UIImage(data: data! as Data) ?? UIImage()
@@ -77,35 +77,6 @@ struct ProfileInfo: View {
         })
     }
     
-    // Function for checking internet connectivity
-    func checkReachable(imageUrl: String?) -> Bool {
-        guard let url = imageUrl else {
-            return false
-        }
-        let reachability = SCNetworkReachabilityCreateWithName(nil, url)
-        var flags = SCNetworkReachabilityFlags()
-        SCNetworkReachabilityGetFlags(reachability!, &flags)
-        
-        let isConnected = isNetworkReachable(with: flags)
-        
-        if isConnected {
-            print(flags)
-            print("You have internet connection")
-        } else if !isConnected {
-            print("Sorry no connection")
-            print(flags)
-        }
-        return isConnected
-    }
-    
-    // Helper function for checking internet connectivity
-    func isNetworkReachable(with flags: SCNetworkReachabilityFlags) -> Bool {
-        let isReachable = flags.contains(.reachable)
-        let needsConnection =  flags.contains(.connectionRequired)
-        let canConnectAutomatically = flags.contains(.connectionOnDemand) || flags.contains(.connectionOnTraffic)
-        let canConnectWithoutUserInteraction = canConnectAutomatically && !flags.contains(.interventionRequired)
-        return isReachable && (!needsConnection || canConnectWithoutUserInteraction)
-    }
 }
 
 struct ProfileInfo_Previews: PreviewProvider {

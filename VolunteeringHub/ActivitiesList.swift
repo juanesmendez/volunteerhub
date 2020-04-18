@@ -16,6 +16,7 @@ struct ActivitiesList: View {
     
     @State private var searchText : String = ""
     @ObservedObject var model = ActivitiesListViewModel()
+    var reachable = false
     //@State private var activities = [ActivityViewModel]()
     //@State var model = ActivitiesListViewModel()
     
@@ -52,15 +53,32 @@ struct ActivitiesList: View {
                     }
                     .padding(.leading, 18)
                     
-                    //ScrollView{
-                    ForEach(self.model.activities, id: \.id) { activity in
-                        ActivityCard(activity: activity)
-                            .padding(.top, 5)
-                            .padding(.horizontal, 20)
+                    if self.model.reachable {
+                        ForEach(self.model.activities, id: \.id) { activity in
+                            ActivityCard(activity: activity)
+                                .padding(.top, 5)
+                                .padding(.horizontal, 20)
+                        }
+                    } else {
+                        VStack {
+                            Text("It seems like you are not connected to the internet. Please try again.")
+                                .multilineTextAlignment(.center)
+                                .padding(.top, 40)
+                                .padding(.bottom, 20)
+                                
+                            Button(action: {
+                                self.model.loadActivities()
+                            }) {
+                                Text("Refresh")
+                                    .padding(.horizontal, 10.0)
+                                    .padding(.vertical, 9.0)
+                                    .cornerRadius(10)
+                                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 2))
+                            }
+                             .buttonStyle(PlainButtonStyle())
+                        }
+                        
                     }
-                    //}
-                    //.padding(.top, 2)
-                    Spacer()
                 }
                 .navigationBarTitle("Activities")
                 .accentColor(Color.green)
