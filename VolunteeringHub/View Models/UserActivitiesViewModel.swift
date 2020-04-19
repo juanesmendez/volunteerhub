@@ -16,6 +16,7 @@ class UserActivitiesViewModel: ObservableObject {
     //@Published var activities = [ActivityViewModel]()
     @Published var userActivities = [Activity]()
     @Published var reachable = false
+    @Published var hasActivities = false
     
     func loadUserActivities() {
         // Check connectivity
@@ -23,30 +24,38 @@ class UserActivitiesViewModel: ObservableObject {
         
         if self.reachable {
             print("Starting to load user's activities...")
-            ActivitiesWebService().getActivities { actvs in
-                if let actvs = actvs {
-                    // Filter the array by the activities the user is attending
-                    UsersDB().getUserData() { data in
-                        if let userData = data {
-                            if userData["activities"] != nil {
-                                let activitiesToFind = userData["activities"] as! [String]
-                                
-                                // Instantiate a new empty userActivities array
-                                self.userActivities = [Activity]()
-                                
-                                for activityId in activitiesToFind {
-                                    for activity in actvs {
-                                        if activity.id == activityId {
-                                            self.userActivities.append(activity)
-                                            continue
+            
+            UsersDB().getUserData() { data in
+                if let userData = data {
+                    if userData["activities"] != nil {
+                        let activitiesToFind = userData["activities"] as! [String]
+                        // Instantiate a new empty userActivities array
+                        var userActivities = [Activity]()
+                        // If the user has activities
+                        if activitiesToFind.count > 0{
+                            self.hasActivities = true
+                            
+                            ActivitiesWebService().getActivities { actvs in
+                                if let actvs = actvs {
+                                    for activityId in activitiesToFind {
+                                        for activity in actvs {
+                                            if activity.id == activityId {
+                                                userActivities.append(activity)
+                                                continue
+                                            }
                                         }
                                     }
+                                    self.userActivities = userActivities
+                                    // Cache array of activities in Users Default
+                                    self.saveUserActivities()
                                 }
-                                // Cache array of activities in Users Default
-                                self.saveUserActivities()
                             }
+                            
                         }
+                        
                     }
+                    
+                    
                 }
             }
         }else {

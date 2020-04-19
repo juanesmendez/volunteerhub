@@ -40,13 +40,18 @@ struct UserActivities: View {
                 .listStyle(GroupedListStyle())
                 .navigationBarTitle("Your activities")
             } else {
-                if model.reachable {
+                if !model.hasActivities {
                     Text("You haven't hit attend to any activity 🗺 yet. Please go to your home screen 🏠 and search for an activity you would like to join! 😉")
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 20)
                         .navigationBarTitle("Your activities")
+                
                 } else {
+                    // The case when the user does have attending activities but there occurred an error while retrieving from server when the user just logged in
                     Text("We are having trouble showing your activities 😢. You may not be connected to the internet. Please try again.")
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 20)
+                        .navigationBarTitle("Your activities")
                     Button(action: {
                         if self.model.isActivitiesServiceReachable() {
                             self.model.loadUserActivities()

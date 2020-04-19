@@ -84,14 +84,7 @@ struct ProfileView: View {
                             
                             VStack{
                                 Button(action: {
-                                    do {
-                                        try Auth.auth().signOut()
-                                        //For the app delegate to know (It redirects to the login page):
-                                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                                        appDelegate.userId = ""
-                                    } catch let signOutError as NSError {
-                                        print ("Error signing out: %@", signOutError)
-                                    }
+                                    self.signOut()
                                 }){
                                     Text("Sign out")
                                         .padding(.all, 8.0)
@@ -122,6 +115,21 @@ struct ProfileView: View {
     
     func getProfileData() {
         self.profileModel.getProfileData()
+    }
+    
+    func signOut() {
+        do {
+            try Auth.auth().signOut()
+            //For the app delegate to know (It redirects to the login page):
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.userId = ""
+            // When user signs out, all of its data is erased from the cache
+            UserDefaults.standard.removeObject(forKey: "userActivities")
+            UserDefaults.standard.synchronize()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+        
     }
      
     
