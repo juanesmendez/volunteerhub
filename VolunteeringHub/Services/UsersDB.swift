@@ -44,5 +44,55 @@ class UsersDB {
         }
     }
     
+    func addInterestActivityToUser(userId: String, activity: Activity) {
+        let db = Firestore.firestore()
+        
+        db.collection("users").document(userId).updateData([
+            "interested": FieldValue.arrayUnion([activity.id])
+        ]){ err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document updated")
+            }
+        }
+    }
+    
+    func deleteInterestActivityOfUser(userId: String, interestedList: [String]) {
+        let db = Firestore.firestore()
+        
+        db.collection("users").document(userId).updateData([
+            "interested": interestedList
+        ]){ err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document updated")
+            }
+        }
+    }
+    /*
+    func getUserInterestedList(userId: String, completion: @escaping ([String]) -> ([String])){
+        let db = Firestore.firestore()
+        let userId = Auth.auth().currentUser?.uid ?? ""
+        
+        let docRef = db.collection("users").document(userId)
+
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let source = document.metadata.isFromCache ? "local cache" : "server"
+                print("Metadata: Data fetched from \(source)")
+                let interested = document.data()?["interested"] as! [String]
+                print("INTERESTED LIST: ")
+                print(interested)
+                DispatchQueue.main.async {
+                    completion(interested)
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
+    }*/
+    
 }
 

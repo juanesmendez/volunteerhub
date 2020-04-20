@@ -72,36 +72,6 @@ struct ActivityDetail: View {
                 HStack {
                     
                     Spacer()
-                    /*
-                    Button(action: {
-                        if(self.attending) {
-                            // Do something
-                            
-                            //self.attending.toggle()
-                        } else {
-                            self.activityModel.addVolunteer(volunteerId: Auth.auth().currentUser!.uid)
-                            self.activityModel.addActivityToUser(userId: Auth.auth().currentUser!.uid, activity: self.activityModel.activity)
-                            self.attending.toggle()
-                        }
-                        
-                    }){
-                        if(self.attending) {
-                            Text("Attending")
-                                .padding(.all, 8.0)
-                                .background(Color.red)
-                                .foregroundColor(Color.white)
-                                .cornerRadius(20)
-                        } else {
-                            Text("Attend")
-                                .padding(.all, 8.0)
-                                .background(Color.green)
-                                .foregroundColor(Color.black)
-                                .cornerRadius(20)
-                        }
-                        
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    */
                     
                     if(self.activityModel.activity.volunteers.contains(Auth.auth().currentUser!.uid)) {
                         Button(action: {
@@ -132,17 +102,34 @@ struct ActivityDetail: View {
                         .buttonStyle(PlainButtonStyle())
                     }
                     
-                    
-                    Button(action: {
-                        //self.signUp()
-                    }){
-                        Text("Interested")
-                            .padding(.all, 8.0)
-                            .background(Color.blue)
-                            .foregroundColor(Color.white)
-                            .cornerRadius(20)
+                    if self.activityModel.interested.contains(self.activityModel.activity.id) {
+                        Button(action: {
+                            // Removes the activity from the volunteer's interested list
+                            self.activityModel.deleteInterestActivityOfUser(userId: Auth.auth().currentUser!.uid, activity: self.activityModel.activity)
+                            self.activityModel.getUserInterestedList(userId: Auth.auth().currentUser!.uid)
+                            
+                        }){
+                            Text("Interested")
+                                .padding(.all, 8.0)
+                                .background(Color.red)
+                                .foregroundColor(Color.white)
+                                .cornerRadius(20)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                    } else{
+                        Button(action: {
+                            // Adds the activity to the volunteer's interested list
+                            self.activityModel.addInterestActivityToUser(userId: Auth.auth().currentUser!.uid, activity: self.activityModel.activity)
+                            self.activityModel.getUserInterestedList(userId: Auth.auth().currentUser!.uid)
+                        }){
+                            Text("Interested")
+                                .padding(.all, 8.0)
+                                .background(Color.blue)
+                                .foregroundColor(Color.white)
+                                .cornerRadius(20)
+                        }
+                        .buttonStyle(PlainButtonStyle())
                     }
-                    .buttonStyle(PlainButtonStyle())
                     
                 }
                 .padding(.horizontal, 40)
@@ -225,6 +212,8 @@ struct ActivityDetail: View {
             }
             .navigationBarTitle(Text("Activity Information"), displayMode: .inline)
             .onAppear(perform: {
+                // Get the interests list of the user
+                self.activityModel.getUserInterestedList(userId: Auth.auth().currentUser!.uid)
                 // For loading the image related to the activity. It is loaded only when the view appears, 
                 // or else it will load when the activity list shows (causing an overload in the back-end service)
                 if(self.activityModel.activity.images.count > 0) {

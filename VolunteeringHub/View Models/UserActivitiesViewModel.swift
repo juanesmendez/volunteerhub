@@ -15,8 +15,10 @@ class UserActivitiesViewModel: ObservableObject {
     
     //@Published var activities = [ActivityViewModel]()
     @Published var userActivities = [Activity]()
+    @Published var interestedActivities = [Activity]()
     @Published var reachable = false
     @Published var hasActivities = false
+    @Published var hasInterestedActivities = false
     
     func loadUserActivities() {
         // Check connectivity
@@ -51,6 +53,11 @@ class UserActivitiesViewModel: ObservableObject {
                                 }
                             }
                             
+                        } else {
+                            self.hasActivities = false
+                            self.userActivities = userActivities
+                            // Cache array of activities in Users Default
+                            self.saveUserActivities()
                         }
                         
                     }
@@ -85,6 +92,81 @@ class UserActivitiesViewModel: ObservableObject {
                 self.userActivities = try jsonDecoder.decode([Activity].self, from: savedUserActivities)
             } catch {
                 print("Failed to load user attending activities list from cache.")
+            }
+        }
+    }
+    
+    func loadUserInterestedActivities() {
+        self.reachable = ActivitiesWebService().isReachable()
+        
+        if self.reachable {
+            print("Starting to load user's interested activities...")
+            
+            UsersDB().getUserData() { data in
+                if let userData = data {
+                    if userData["interested"] != nil {
+                        let activitiesToFind = userData["interested"] as! [String]
+                        // Instantiate a new empty userActivities array
+                        var userInterestedActivities = [Activity]()
+                        // If the user has activities
+                        if activitiesToFind.count > 0{
+                            self.hasInterestedActivities = true
+                            
+                            ActivitiesWebService().getActivities { actvs in
+                                if let actvs = actvs {
+                                    for activityId in activitiesToFind {
+                                        for activity in actvs {
+                                            if activity.id == activityId {
+                                                userInterestedActivities.append(activity)
+                                                continue
+                                            }
+                                        }
+                                    }
+                                    self.interestedActivities = userInterestedActivities
+                                    // Cache array of activities in Users Default
+                                    self.saveUserInterestedActivities()
+                                }
+                            }
+                            
+                        } else {
+                            self.hasInterestedActivities = false
+                            self.interestedActivities = userInterestedActivities
+                            // Cache array of activities in Users Default
+                            self.saveUserInterestedActivities()
+                        }
+                        
+                    }
+                    
+                    
+                }
+            }
+        }else {
+            // If not reachable, query cache
+            self.getUserInterestedActivitiesFromCache()
+        }
+    }
+    
+    func saveUserInterestedActivities() {
+        let jsonEncoder = JSONEncoder()
+        if let savedData = try? jsonEncoder.encode(self.interestedActivities) {
+            let defaults = UserDefaults.standard
+            defaults.set(savedData, forKey: "interestedActivities")
+        } else {
+            print("Failed to save user interested activities list in cache.")
+        }
+    }
+    
+    func getUserInterestedActivitiesFromCache() {
+        print("Getting user interested activities from cache...")
+        let defaults = UserDefaults.standard
+
+        if let savedInterestedActivities = defaults.object(forKey: "interestedActivities") as? Data {
+            let jsonDecoder = JSONDecoder()
+
+            do {
+                self.interestedActivities = try jsonDecoder.decode([Activity].self, from: savedInterestedActivities)
+            } catch {
+                print("Failed to load user interested activities list from cache.")
             }
         }
     }

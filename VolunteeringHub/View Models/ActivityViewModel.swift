@@ -21,6 +21,8 @@ class ActivityViewModel: ObservableObject {
         }
     }
     
+    @Published var interested = [String]()
+    
     init(activity: Activity) {
         self.activity = activity
     }
@@ -66,8 +68,32 @@ class ActivityViewModel: ObservableObject {
         }
     }
     
+    func deleteInterestActivityOfUser(userId: String, activity: Activity) {
+        // removes the activity from the interest list of the user
+        self.interested.removeAll { $0 == activity.id }
+        UsersDB().deleteInterestActivityOfUser(userId: userId, interestedList: self.interested)
+    }
+    
     func addActivityToUser(userId: String, activity: Activity) {
         UsersDB().addActivityToUser(userId: userId, activity: activity)
+    }
+    
+    func addInterestActivityToUser(userId: String, activity: Activity) {
+        UsersDB().addInterestActivityToUser(userId: userId, activity: activity)
+    }
+    
+    func getUserInterestedList(userId: String) {
+        UsersDB().getUserData() { userData in
+            if let userData = userData {
+                if let interestedList = userData["interested"] {
+                    let interested = interestedList as! [String]
+                    self.interested = interested
+                } else {
+                    self.interested = []
+                }
+                
+            }
+        }
     }
     
 }
