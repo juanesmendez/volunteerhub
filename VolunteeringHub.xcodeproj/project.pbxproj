@@ -104,6 +104,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1D70461C244E0A1200699C08 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1DD11D5024082E03002A9541 /* ContentView.swift */,
+				1D42E083240855D80049BF06 /* ActivityCard.swift */,
+				1D2231E0240862EC0052D33C /* ActivitiesList.swift */,
+				1D2231E624087C680052D33C /* ProfileView.swift */,
+				1D2231E8240893DE0052D33C /* MedalsList.swift */,
+				1D2231EA240894440052D33C /* MedalRow.swift */,
+				1D2231EE240899370052D33C /* InterestsList.swift */,
+				1D2231F02408A3A10052D33C /* ProfileInfo.swift */,
+				1D2231F22408B15E0052D33C /* ActivityDetail.swift */,
+				1D2CC8C62409D52E00741728 /* SubmitActivity.swift */,
+				1D2CC8C82409E47400741728 /* RegistrationTopics.swift */,
+				1DC4FB002409881D008AF46C /* LoginView.swift */,
+				1DD2FE592409B05400450BFC /* AppContentView.swift */,
+				1DD2FE5B2409B42400450BFC /* UserData.swift */,
+				1D729F2A2437AE410054F503 /* UserRegistration.swift */,
+				1D46FB8C244B72C900F8DEF4 /* UserActivities.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		1D7087FD242290D50019C3AD /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -156,33 +179,18 @@
 		1DD11D4B24082E03002A9541 /* VolunteeringHub */ = {
 			isa = PBXGroup;
 			children = (
+				1D70461C244E0A1200699C08 /* Views */,
 				1D7088032422A6330019C3AD /* View Models */,
 				1D7088002422A04C0019C3AD /* Services */,
 				1D7087FD242290D50019C3AD /* Models */,
 				1DD11D6024082F22002A9541 /* SupportingViews */,
 				1DD11D4C24082E03002A9541 /* AppDelegate.swift */,
 				1DD11D4E24082E03002A9541 /* SceneDelegate.swift */,
-				1DD11D5024082E03002A9541 /* ContentView.swift */,
 				1DD11D5224082E08002A9541 /* Assets.xcassets */,
 				1DD11D5724082E08002A9541 /* LaunchScreen.storyboard */,
 				1DD11D5A24082E08002A9541 /* Info.plist */,
 				1D13C90C2425716400C54C09 /* GoogleService-Info.plist */,
 				1DD11D5424082E08002A9541 /* Preview Content */,
-				1D42E083240855D80049BF06 /* ActivityCard.swift */,
-				1D2231E0240862EC0052D33C /* ActivitiesList.swift */,
-				1D2231E624087C680052D33C /* ProfileView.swift */,
-				1D2231E8240893DE0052D33C /* MedalsList.swift */,
-				1D2231EA240894440052D33C /* MedalRow.swift */,
-				1D2231EE240899370052D33C /* InterestsList.swift */,
-				1D2231F02408A3A10052D33C /* ProfileInfo.swift */,
-				1D2231F22408B15E0052D33C /* ActivityDetail.swift */,
-				1D2CC8C62409D52E00741728 /* SubmitActivity.swift */,
-				1D2CC8C82409E47400741728 /* RegistrationTopics.swift */,
-				1DC4FB002409881D008AF46C /* LoginView.swift */,
-				1DD2FE592409B05400450BFC /* AppContentView.swift */,
-				1DD2FE5B2409B42400450BFC /* UserData.swift */,
-				1D729F2A2437AE410054F503 /* UserRegistration.swift */,
-				1D46FB8C244B72C900F8DEF4 /* UserActivities.swift */,
 			);
 			path = VolunteeringHub;
 			sourceTree = "<group>";
