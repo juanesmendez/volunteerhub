@@ -57,6 +57,8 @@ struct ProfileInfo: View {
                 )
             }
         }
+        .padding(.top, 20)
+        .padding(.bottom, 20)
         .padding(.horizontal, 55)
         .onAppear(perform: {
             guard let photoUrl = Auth.auth().currentUser?.photoURL else {

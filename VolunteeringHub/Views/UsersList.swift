@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct UsersList: View {
     
@@ -21,13 +22,21 @@ struct UsersList: View {
         List {
             Section(header: Text("Volunteer's planning to attend")) {
                 ForEach(self.usersListModel.volunteersObjects) { volunteer in
-                    Text(volunteer.username)
+                    NavigationLink(destination: VolunteerView(volunteer: volunteer)) {
+                        Image(systemName: "person.fill")
+                        if volunteer.id != Auth.auth().currentUser!.uid {
+                            Text(volunteer.username)
+                        } else {
+                            Text("Me")
+                        }
+                        
+                    }
                 }
             }
         }
         .listStyle(GroupedListStyle())
         .navigationBarTitle("Volunteers attending")
-        .onAppear(perform: self.usersListModel.getVolunteers)
+        //.onAppear(perform: self.usersListModel.getVolunteers)
     }
 }
 /*

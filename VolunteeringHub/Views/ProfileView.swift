@@ -15,42 +15,80 @@ struct ProfileView: View {
     
     @ObservedObject var profileModel = ProfileViewModel()
     
+    private var date: Date {
+        get {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            print("La fechaaaa \(self.profileModel.userData?["birthDate"] as! String)")
+            let dateString = profileModel.userData?["birthDate"] as! String
+            let aux = dateString.components(separatedBy: "T")
+            let date = dateFormatter.date(from: aux[0]) ?? Date()
+            return date
+        }
+        
+    }
+    
+    //@State var attending = false
+    static let taskDateFormat: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        return formatter
+    }()
+    
     var body: some View {
         NavigationView{
             if self.profileModel.userData != nil {
                 List {
                     Section (header:
-                        HStack {
-                            Spacer()
+                        VStack {
                             VStack(alignment: .trailing) {
                                 Text("Hello ")
                                     .font(.headline)
                                 Text("\(self.profileModel.userData?["firstName"] as! String) \(self.profileModel.userData?["lastName"] as! String)")
                                     .font(.title)
+                                ProfileInfo()
+                                .padding(.bottom, 10)
                                 
                             }
-                            .padding(.horizontal, 10)
-                        }){
-                          ProfileInfo()
-                           .padding(.bottom, 10)
+                            HStack {
+                                Image(systemName: "person")
+                                Text("Basic information").font(.headline)
+                                Spacer()
+                            }
+                        }
+                    ){
+                          Text("Username: \(self.profileModel.userData?["username"] as! String)")
+                          Text("Birth date: \(self.date, formatter: Self.taskDateFormat)")
                     }
-                    Section(header: Text("Basic information").font(.headline)){
-                        
-                        Text("Username: \(self.profileModel.userData?["username"] as! String)")
-                        Text("Birth date: \(self.profileModel.userData?["birthDate"] as! String)")
-                    }
+//                    Section(header: Text("Basic information").font(.headline)){
+//
+//
+//                    }
                     
-                    Section(header: Text("Your experience").font(.headline)){
-                        
+                    Section(header:
+                        HStack {
+                            Image(systemName: "briefcase")
+                            Text("Your experience").font(.headline)
+                        }
+                    ){
                         Text(self.profileModel.userData?["description"] as! String)
                         .lineLimit(4)
                     }
                     
-                    Section(header: Text("Medals").font(.headline)){
+                    Section(header:
+                        HStack {
+                            Image(systemName: "rosette")
+                            Text("Medals").font(.headline)
+                        }
+                    ){
                         MedalsList()
                     }
                     
-                    Section(header: Text("Interests").font(.headline)
+                    Section(header:
+                        HStack {
+                            Image(systemName: "tag")
+                            Text("Interests").font(.headline)
+                        }
                     , footer:
                         HStack{
                            Spacer()
