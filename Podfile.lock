@@ -260,6 +260,13 @@ PODS:
   - GoogleDataTransportCCTSupport (2.0.1):
     - GoogleDataTransport (~> 5.1)
     - nanopb (~> 0.3.901)
+  - GoogleMaps (3.8.0):
+    - GoogleMaps/Maps (= 3.8.0)
+  - GoogleMaps/Base (3.8.0)
+  - GoogleMaps/Maps (3.8.0):
+    - GoogleMaps/Base
+  - GooglePlaces (3.8.0):
+    - GoogleMaps/Base (= 3.8.0)
   - GoogleSignIn (5.0.2):
     - AppAuth (~> 1.2)
     - GTMAppAuth (~> 1.0)
@@ -324,6 +331,8 @@ DEPENDENCIES:
   - FirebaseUI/Facebook
   - FirebaseUI/Google
   - FirebaseUI/OAuth
+  - GoogleMaps
+  - GooglePlaces
   - ReachabilitySwift
 
 SPEC REPOS:
@@ -347,6 +356,8 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
+    - GoogleMaps
+    - GooglePlaces
     - GoogleSignIn
     - GoogleUtilities
     - "gRPC-C++"
@@ -378,6 +389,8 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: 6e68a94d0eaeb1d73ef6b0ed4f7334e29d63ae29
   GoogleDataTransport: b29a21d813e906014ca16c00897827e40e4a24ab
   GoogleDataTransportCCTSupport: 6f15a89b0ca35d6fa523e1f752ef818588885988
+  GoogleMaps: 7c8d66d70e4e8c300f43a7219d8fdaad7b325a9a
+  GooglePlaces: d5f70c3e9e427964fdeca1301a665d276ccd8754
   GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
   GoogleUtilities: ad0f3b691c67909d03a3327cc205222ab8f42e0e
   "gRPC-C++": 9dfe7b44821e7b3e44aacad2af29d2c21f7cde83
@@ -389,6 +402,6 @@ SPEC CHECKSUMS:
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
 
-PODFILE CHECKSUM: 07b0af4cd75b7a9ff21c6938b580293955eecf4b
+PODFILE CHECKSUM: 6b3d3cd5ae880e4848200d200db743769b1df549
 
 COCOAPODS: 1.9.1

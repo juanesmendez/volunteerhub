@@ -24,4 +24,7 @@ target 'VolunteeringHub' do
   
   # Library for checking internet connection
   pod 'ReachabilitySwift'
+
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
 end

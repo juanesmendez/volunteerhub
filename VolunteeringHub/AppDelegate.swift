@@ -10,6 +10,8 @@ import UIKit
 import SwiftUI
 import Firebase
 import GoogleSignIn
+import GoogleMaps
+import GooglePlaces
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, ObservableObject {
@@ -26,6 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, Observ
         
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
+        
+        GMSServices.provideAPIKey("AIzaSyDQCfDXIdEM6jFWiLfJKGE66SCg_nwaYRA")
+        GMSPlacesClient.provideAPIKey("AIzaSyDQCfDXIdEM6jFWiLfJKGE66SCg_nwaYRA")
         return true
     }
     
