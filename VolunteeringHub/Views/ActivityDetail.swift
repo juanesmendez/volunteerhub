@@ -17,8 +17,31 @@ struct ActivityDetail: View {
     @State var image:UIImage = UIImage()
     private var url = ""
     
+    private var date: Date {
+        get {
+            let dateFormatterGet = DateFormatter()
+            dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss"
+
+            let dateFormatterPrint = DateFormatter()
+            dateFormatterPrint.dateFormat = "MMM dd,yyyy"
+
+            if let date = dateFormatterGet.date(from: self.activityModel.activity.date) {
+                return date
+            } else {
+               print("There was an error decoding the string")
+            }
+            return Date()
+        }
+        
+    }
+    
     @ObservedObject var activityModel: ActivityViewModel
     //@State var attending = false
+    static let taskDateFormat: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        return formatter
+    }()
     
     init(activity:Activity) {
         //self.activity = activity
@@ -41,189 +64,180 @@ struct ActivityDetail: View {
     }
     
     var body: some View {
-        ScrollView {
-            VStack {
-                HStack {
-                    Text(self.activityModel.activity.name)
-                        .font(.largeTitle)
-                        .bold()
-                    Spacer()
+        List {
+            
+            Section (header: Text("Name").font(.headline)){
+                    VStack {
+                        HStack {
+                            Text(self.activityModel.activity.name)
+                                .font(.title)
+                            Spacer()
+                        }
+                    }
                 }
-                .padding(.leading)
-                
-                if(self.activityModel.activity.images.count == 0) {
-                    Text("No photos of the activity have been added.")
-                } else{
-                    if(model.imageData.isEmpty){
-                        Text("Loading image...")
-                    } else {
-                        Image(uiImage: (model.imageData.isEmpty) ? UIImage(imageLiteralResourceName: "Event image") : UIImage(data: model.imageData)!)
-                        .resizable()
-                        //.frame(height: 150)
-                        .cornerRadius(10)
-                        .overlay(RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.gray, lineWidth: 1)
-                        .shadow(radius: 15)
-                        )
+            
+                Section(header: Text("Date").font(.headline)) {
+                    Text("\(self.date, formatter: Self.taskDateFormat)")
+                }
+            
+                Section(header: Text("Description").font(.headline)) {
+                    VStack {
+                        Text(self.activityModel.activity.description)
+                            .padding(.bottom, 20)
+                        
+                        HStack {
+                            
+                            Spacer()
+                            
+                            if(self.activityModel.activity.volunteers.contains(Auth.auth().currentUser!.uid)) {
+                                Button(action: {
+                                    //self.activityModel.addVolunteer(volunteerId: Auth.auth().currentUser!.uid)
+                                }){
+                                    Text("Attending")
+                                        .padding(.all, 8.0)
+                                        .background(Color.red)
+                                        .foregroundColor(Color.white)
+                                        .cornerRadius(20)
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                            }else {
+                                Button(action: {
+                                    // Adds the volunteer to the ACTIVITY doc in the ACTIVITIES DB (PUT)
+                                    self.activityModel.addVolunteer(volunteerId: Auth.auth().currentUser!.uid)
+                                    // Adds the activity to the USER doc in the USERS DB (UPDATE)
+                                    self.activityModel.addActivityToUser(userId: Auth.auth().currentUser!.uid, activity: self.activityModel.activity)
+                                    // GET request for the new Activity updated after the PUT request
+                                    self.activityModel.getActivity(activityId: self.activityModel.activity.id)
+                                }){
+                                    Text("Attend")
+                                        .padding(.all, 8.0)
+                                        .background(Color.green)
+                                        .foregroundColor(Color.black)
+                                        .cornerRadius(20)
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                            }
+                            
+                            if self.activityModel.interested.contains(self.activityModel.activity.id) {
+                                Button(action: {
+                                    // Removes the activity from the volunteer's interested list
+                                    self.activityModel.deleteInterestActivityOfUser(userId: Auth.auth().currentUser!.uid, activity: self.activityModel.activity)
+                                    self.activityModel.getUserInterestedList(userId: Auth.auth().currentUser!.uid)
+                                    
+                                }){
+                                    Text("Interested")
+                                        .padding(.all, 8.0)
+                                        .background(Color.red)
+                                        .foregroundColor(Color.white)
+                                        .cornerRadius(20)
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                            } else{
+                                Button(action: {
+                                    // Adds the activity to the volunteer's interested list
+                                    self.activityModel.addInterestActivityToUser(userId: Auth.auth().currentUser!.uid, activity: self.activityModel.activity)
+                                    self.activityModel.getUserInterestedList(userId: Auth.auth().currentUser!.uid)
+                                }){
+                                    Text("Interested")
+                                        .padding(.all, 8.0)
+                                        .background(Color.blue)
+                                        .foregroundColor(Color.white)
+                                        .cornerRadius(20)
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                            }
+                            
+                        }
                         .padding(.horizontal, 40)
                     }
+                    
                 }
-                
-                HStack {
-                    
-                    Spacer()
-                    
-                    if(self.activityModel.activity.volunteers.contains(Auth.auth().currentUser!.uid)) {
-                        Button(action: {
-                            //self.activityModel.addVolunteer(volunteerId: Auth.auth().currentUser!.uid)
-                        }){
-                            Text("Attending")
-                                .padding(.all, 8.0)
-                                .background(Color.red)
-                                .foregroundColor(Color.white)
-                                .cornerRadius(20)
-                        }
-                        .buttonStyle(PlainButtonStyle())
-                    }else {
-                        Button(action: {
-                            // Adds the volunteer to the ACTIVITY doc in the ACTIVITIES DB (PUT)
-                            self.activityModel.addVolunteer(volunteerId: Auth.auth().currentUser!.uid)
-                            // Adds the activity to the USER doc in the USERS DB (UPDATE)
-                            self.activityModel.addActivityToUser(userId: Auth.auth().currentUser!.uid, activity: self.activityModel.activity)
-                            // GET request for the new Activity updated after the PUT request
-                            self.activityModel.getActivity(activityId: self.activityModel.activity.id)
-                        }){
-                            Text("Attend")
-                                .padding(.all, 8.0)
-                                .background(Color.green)
-                                .foregroundColor(Color.black)
-                                .cornerRadius(20)
-                        }
-                        .buttonStyle(PlainButtonStyle())
-                    }
-                    
-                    if self.activityModel.interested.contains(self.activityModel.activity.id) {
-                        Button(action: {
-                            // Removes the activity from the volunteer's interested list
-                            self.activityModel.deleteInterestActivityOfUser(userId: Auth.auth().currentUser!.uid, activity: self.activityModel.activity)
-                            self.activityModel.getUserInterestedList(userId: Auth.auth().currentUser!.uid)
-                            
-                        }){
-                            Text("Interested")
-                                .padding(.all, 8.0)
-                                .background(Color.red)
-                                .foregroundColor(Color.white)
-                                .cornerRadius(20)
-                        }
-                        .buttonStyle(PlainButtonStyle())
+            
+                Section(header: Text("Photos").font(.headline)) {
+                    if(self.activityModel.activity.images.count == 0) {
+                        Text("No photos of the activity have been added.")
                     } else{
-                        Button(action: {
-                            // Adds the activity to the volunteer's interested list
-                            self.activityModel.addInterestActivityToUser(userId: Auth.auth().currentUser!.uid, activity: self.activityModel.activity)
-                            self.activityModel.getUserInterestedList(userId: Auth.auth().currentUser!.uid)
-                        }){
-                            Text("Interested")
-                                .padding(.all, 8.0)
-                                .background(Color.blue)
-                                .foregroundColor(Color.white)
-                                .cornerRadius(20)
+                        if(model.imageData.isEmpty){
+                            Text("Loading image...")
+                        } else {
+                            Image(uiImage: (model.imageData.isEmpty) ? UIImage(imageLiteralResourceName: "Event image") : UIImage(data: model.imageData)!)
+                            .resizable()
+                            //.frame(height: 150)
+                            .cornerRadius(10)
+                            .overlay(RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.gray, lineWidth: 1)
+                            .shadow(radius: 15)
+                            )
                         }
-                        .buttonStyle(PlainButtonStyle())
                     }
-                    
-                }
-                .padding(.horizontal, 40)
-                
-                VStack {
-                    HStack {
-                        Text("Description")
-                            .font(.title)
-                            .bold()
-                        Spacer()
-                    }
-                    .padding(.leading)
-                    Text(self.activityModel.activity.description)
-                    .padding(.leading)
                 }
                 
-                VStack {
-                    HStack {
-                        Text("Location")
-                            .font(.title)
-                            .bold()
-                        Spacer()
+                Section(header: Text("Location").font(.headline)) {
+                    VStack {
+                        MapView(coordinate: CLLocationCoordinate2D(latitude: 4.6527513, longitude: -74.0597535))
+                            .frame(height: 150)
+                            .cornerRadius(10)
+                            .overlay(RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.gray, lineWidth: 1)
+                            .shadow(radius: 15)
+                        )
+                            .padding(.horizontal, 10)
                     }
-                    .padding(.leading)
-                    
-                    MapView(coordinate: CLLocationCoordinate2D(latitude: 4.6527513, longitude: -74.0597535))
-                        .frame(height: 150)
-                        .cornerRadius(10)
-                        .overlay(RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.gray, lineWidth: 1)
-                        .shadow(radius: 15)
-                    )
-                        .padding(.horizontal, 10)
                 }
                 
-                
-                VStack {
-                    HStack {
-                        Text("Details")
-                            .font(.title)
-                            .bold()
-                        Spacer()
-                    }
-                    .padding(.leading)
-                    
-                    HStack {
-                        Spacer()
-                        VStack {
-                            Text(String(self.activityModel.activity.volunteersNeeded))
-                                .bold()
-                                .foregroundColor(Color.green)
-                                .padding()
-                                .font(.title)
-                                .overlay(Circle().stroke(Color.gray, lineWidth: 1)
+            Section(header: Text("Details").font(.headline)) {
+                    VStack {
+                        HStack {
+                            Spacer()
+                            VStack {
+                                Text(String(self.activityModel.activity.volunteersNeeded))
+                                    .bold()
+                                    .foregroundColor(Color.green)
+                                    .padding()
+                                    .font(.title)
+                                    .overlay(Circle().stroke(Color.gray, lineWidth: 1)
+                                        )
+                                        .shadow(radius: 5)
+                                Text("Volunteers\nneeded")
+                                .multilineTextAlignment(.center)
+                            }
+                            Spacer()
+                            VStack {
+                                Text(String(self.activityModel.activity.volunteersNeeded - (self.activityModel.activity.volunteersAttending ?? 0)))
+                                    .bold()
+                                    .foregroundColor(Color.red)
+                                    .padding()
+                                    .font(.title)
+                                    .overlay(Circle()
+                                        .stroke(Color.gray, lineWidth: 1)
                                     )
                                     .shadow(radius: 5)
-                            Text("Volunteers\nneeded")
-                            .multilineTextAlignment(.center)
+                                Text("Spots\nleft")
+                                .multilineTextAlignment(.center)
+                            }
+                            Spacer()
                         }
-                        Spacer()
-                        VStack {
-                            Text(String(self.activityModel.activity.volunteersNeeded - (self.activityModel.activity.volunteersAttending ?? 0)))
-                                .bold()
-                                .foregroundColor(Color.red)
-                                .padding()
-                                .font(.title)
-                                .overlay(Circle()
-                                    .stroke(Color.gray, lineWidth: 1)
-                                )
-                                .shadow(radius: 5)
-                            Text("Spots\nleft")
-                            .multilineTextAlignment(.center)
-                        }
-                        Spacer()
+                        .frame(height: 110)
                     }
-                    .frame(height: 110)
                 }
                 
-                
-            }
-            .navigationBarTitle(Text("Activity Information"), displayMode: .inline)
-            .onAppear(perform: {
-                // Get the interests list of the user
-                self.activityModel.getUserInterestedList(userId: Auth.auth().currentUser!.uid)
-                // For loading the image related to the activity. It is loaded only when the view appears, 
-                // or else it will load when the activity list shows (causing an overload in the back-end service)
-                if(self.activityModel.activity.images.count > 0) {
-                    print("INSIDE onAppear for loading activity image")
-                    self.model.loadImage(urlString: self.url)
-                }
-            })
+            
+            
         }
-        .padding(.top, 52)
+        .listStyle(GroupedListStyle())
+        .navigationBarTitle(Text("Activity Information"), displayMode: .inline)
+        .onAppear(perform: {
+            // Get the interests list of the user
+            self.activityModel.getUserInterestedList(userId: Auth.auth().currentUser!.uid)
+            // For loading the image related to the activity. It is loaded only when the view appears,
+            // or else it will load when the activity list shows (causing an overload in the back-end service)
+            if(self.activityModel.activity.images.count > 0) {
+                print("INSIDE onAppear for loading activity image")
+                self.model.loadImage(urlString: self.url)
+            }
+        })
     }
+
 }
 
 /*
