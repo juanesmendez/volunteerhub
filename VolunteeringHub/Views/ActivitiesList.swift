@@ -81,7 +81,6 @@ struct ActivitiesList: View {
                 }
             }
         }
-        
     }
     
     func getActivities(){

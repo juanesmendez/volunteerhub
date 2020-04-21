@@ -11,17 +11,11 @@ import SwiftUI
 struct MedalsList: View {
     var body: some View {
         
-        VStack(alignment: .leading) {
-            Text("Medals")
-                .font(.title)
-                .bold()
-                .padding(.leading, 10)
+        VStack {
             
+            MedalRow(name: "Longest dog adoption spree", ranking: "First place")
+            MedalRow(name: "Built a home in one day", ranking: "Third place")
             
-            List() {
-                MedalRow(name: "Longest dog adoption spree", ranking: "First place")
-                MedalRow(name: "Built a home in one day", ranking: "Third place")
-            }.frame(height: 130)
             
         }
         

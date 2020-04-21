@@ -110,7 +110,7 @@ struct ActivityDetail: View {
                         Button(action: {
                             //self.activityModel.addVolunteer(volunteerId: Auth.auth().currentUser!.uid)
                         }){
-                            Text("Attending")
+                            Text("Attending 😁")
                                 .padding(.all, 8.0)
                                 .background(Color.red)
                                 .foregroundColor(Color.white)
@@ -126,7 +126,7 @@ struct ActivityDetail: View {
                             // GET request for the new Activity updated after the PUT request
                             self.activityModel.getActivity(activityId: self.activityModel.activity.id)
                         }){
-                            Text("Attend")
+                            Text("Attend 👍")
                                 .padding(.all, 8.0)
                                 .background(Color.green)
                                 .foregroundColor(Color.black)
@@ -142,7 +142,7 @@ struct ActivityDetail: View {
                             self.activityModel.getUserInterestedList(userId: Auth.auth().currentUser!.uid)
                             
                         }){
-                            Text("Interested")
+                            Text("Watching 🧐")
                                 .padding(.all, 8.0)
                                 .background(Color.red)
                                 .foregroundColor(Color.white)
@@ -155,7 +155,7 @@ struct ActivityDetail: View {
                             self.activityModel.addInterestActivityToUser(userId: Auth.auth().currentUser!.uid, activity: self.activityModel.activity)
                             self.activityModel.getUserInterestedList(userId: Auth.auth().currentUser!.uid)
                         }){
-                            Text("Interested")
+                            Text("Watch 👓")
                                 .padding(.all, 8.0)
                                 .background(Color.blue)
                                 .foregroundColor(Color.white)

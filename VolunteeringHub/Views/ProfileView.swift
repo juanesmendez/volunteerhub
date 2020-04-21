@@ -18,86 +18,64 @@ struct ProfileView: View {
     var body: some View {
         NavigationView{
             if self.profileModel.userData != nil {
-                ScrollView {
-                        
-                        VStack {
-                            HStack {
-                                Spacer()
-                                VStack(alignment: .trailing) {
-                                    Text("Hello ")
-                                        .font(.headline)
-                                    Text("\(self.profileModel.userData?["firstName"] as! String) \(self.profileModel.userData?["lastName"] as! String)")
-                                        .font(.title)
-                                    
-                                }
-                                .padding(.horizontal, 10)
-                            }
-                            
-                            ProfileInfo()
-                                .padding(.bottom, 10)
-                            
-                            VStack(alignment: .leading) {
-                                VStack(alignment: .leading) {
-                                    HStack {
-                                        Text("Basic information")
-                                            .font(.title)
-                                            .bold()
-                                        Spacer()
-                                    }
-                                    .padding(.bottom, 5)
-                                    Text("Username: \(self.profileModel.userData?["username"] as! String)")
-                                    Divider()
-                                    Text("Birth date: \(self.profileModel.userData?["birthDate"] as! String)")
-                                }
-                                .padding(.horizontal, 10)
-                                .padding(.bottom, 10)
-                                
-                                VStack(alignment: .leading) {
-                                    HStack {
-                                        Text("Your experience")
-                                            .font(.title)
-                                            .bold()
-                                        Spacer()
-                                    }
-                                    .padding(.bottom, 5)
-                                    Text(self.profileModel.userData?["description"] as! String)
-                                        .lineLimit(4)
-                                    
-                                }
-                                .padding(.horizontal, 10)
-                                .padding(.bottom, 10)
-                                
-                                MedalsList()
-                                    
-                                Text("Interests")
+                List {
+                    Section (header:
+                        HStack {
+                            Spacer()
+                            VStack(alignment: .trailing) {
+                                Text("Hello ")
+                                    .font(.headline)
+                                Text("\(self.profileModel.userData?["firstName"] as! String) \(self.profileModel.userData?["lastName"] as! String)")
                                     .font(.title)
-                                    .bold()
-                                    .padding(.horizontal, 10)
-                                        
-                                    
-                                HStack {
-                                    Spacer()
-                                    InterestsList()
-                                    Spacer()
-                                }
+                                
                             }
-                            
-                            VStack{
-                                Button(action: {
-                                    self.signOut()
-                                }){
-                                    Text("Sign out")
-                                        .padding(.all, 8.0)
-                                        .background(Color.red)
-                                        .foregroundColor(Color.white)
-                                        .cornerRadius(20)
-                                }
+                            .padding(.horizontal, 10)
+                        }){
+                          ProfileInfo()
+                           .padding(.bottom, 10)
+                    }
+                    Section(header: Text("Basic information").font(.headline)){
+                        
+                        Text("Username: \(self.profileModel.userData?["username"] as! String)")
+                        Text("Birth date: \(self.profileModel.userData?["birthDate"] as! String)")
+                    }
+                    
+                    Section(header: Text("Your experience").font(.headline)){
+                        
+                        Text(self.profileModel.userData?["description"] as! String)
+                        .lineLimit(4)
+                    }
+                    
+                    Section(header: Text("Medals").font(.headline)){
+                        MedalsList()
+                    }
+                    
+                    Section(header: Text("Interests").font(.headline)
+                    , footer:
+                        HStack{
+                           Spacer()
+                            Button(action: {
+                                self.signOut()
+                            }){
+                                Text("Sign out")
+                                    .padding(.all, 8.0)
+                                    .background(Color.red)
+                                    .foregroundColor(Color.white)
+                                    .cornerRadius(20)
                             }
-                            .padding(.top, 20)
-                            
-                            
+                           Spacer()
                         }
+                    ){
+                        HStack {
+                            Spacer()
+                            InterestsList()
+                            Spacer()
+                        }
+                        .padding(.top, 20)
+                        .padding(.bottom, 20)
+                    }
                 }
+                .listStyle(GroupedListStyle())
                 .navigationBarTitle("Your profile")
             } else {
                 Text("Loading profile data...")
