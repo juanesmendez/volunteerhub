@@ -71,6 +71,40 @@ class UsersDB {
             }
         }
     }
+    
+    func getVolunteersInActivity(volunteersIds: [String], completion: @escaping ([Volunteer]) -> ()) {
+        print("Querying volunteers belonging to activity...")
+        let db = Firestore.firestore()
+        
+        let usersRef = db.collection("users")
+        
+        usersRef.whereField(FieldPath.documentID(), in: volunteersIds).getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    //var users = [Dictionary<String, Any>?]()
+                    var volunteers = [Volunteer]()
+                    for document in querySnapshot!.documents {
+                        print("\(document.documentID) => \(document.data())")
+                        let id = document.documentID
+                        let username = document.data()["username"] as! String
+                        let firstname = document.data()["firstName"] as! String
+                        let lastname = document.data()["lastName"] as! String
+                        let description = document.data()["description"] as! String
+                        let birthDate = document.data()["birthDate"] as! String
+                        let interested = document.data()["interested"] as? [String] ?? [String]()
+                        let activities = document.data()["activities"] as? [String] ?? [String]()
+                        
+                        volunteers.append(Volunteer(id: id, username: username, firstName: firstname, lastName: lastname, description: description, birthDate: birthDate, interested: interested, activities: activities))
+                    }
+                    DispatchQueue.main.async {
+                        completion(volunteers)
+                    }
+                }
+        }
+        
+    }
+    
     /*
     func getUserInterestedList(userId: String, completion: @escaping ([String]) -> ([String])){
         let db = Firestore.firestore()

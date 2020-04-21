@@ -44,6 +44,9 @@
 		1DE4DD952432C3DE00F96A89 /* ActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE4DD942432C3DE00F96A89 /* ActivityViewModel.swift */; };
 		1DE4DD972432E8B900F96A89 /* UsersDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE4DD962432E8B900F96A89 /* UsersDB.swift */; };
 		1DE52E64243813AF007B087C /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE52E63243813AF007B087C /* ProfileViewModel.swift */; };
+		1DFDFD8A244E93D4008F63CF /* UsersList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFDFD89244E93D4008F63CF /* UsersList.swift */; };
+		1DFDFD8C244E96DF008F63CF /* UsersListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFDFD8B244E96DF008F63CF /* UsersListViewModel.swift */; };
+		1DFDFD8E244EA1CD008F63CF /* Volunteer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFDFD8D244EA1CC008F63CF /* Volunteer.swift */; };
 		ED34AD3DFAE45C9132EB7B04 /* Pods_VolunteeringHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F2D57E3CDA5CFFB0AA3F625 /* Pods_VolunteeringHub.framework */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +91,9 @@
 		1DE4DD942432C3DE00F96A89 /* ActivityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewModel.swift; sourceTree = "<group>"; };
 		1DE4DD962432E8B900F96A89 /* UsersDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersDB.swift; sourceTree = "<group>"; };
 		1DE52E63243813AF007B087C /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		1DFDFD89244E93D4008F63CF /* UsersList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersList.swift; sourceTree = "<group>"; };
+		1DFDFD8B244E96DF008F63CF /* UsersListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListViewModel.swift; sourceTree = "<group>"; };
+		1DFDFD8D244EA1CC008F63CF /* Volunteer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Volunteer.swift; sourceTree = "<group>"; };
 		5F2D57E3CDA5CFFB0AA3F625 /* Pods_VolunteeringHub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VolunteeringHub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0302C6DE3DE19C178B00B17 /* Pods-VolunteeringHub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VolunteeringHub.release.xcconfig"; path = "Target Support Files/Pods-VolunteeringHub/Pods-VolunteeringHub.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -123,6 +129,7 @@
 				1D46FB8C244B72C900F8DEF4 /* UserActivities.swift */,
 				1DD2FE5B2409B42400450BFC /* UserData.swift */,
 				1D729F2A2437AE410054F503 /* UserRegistration.swift */,
+				1DFDFD89244E93D4008F63CF /* UsersList.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -131,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				1D7087FE242290FF0019C3AD /* Activity.swift */,
+				1DFDFD8D244EA1CC008F63CF /* Volunteer.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -154,6 +162,7 @@
 				1DE52E63243813AF007B087C /* ProfileViewModel.swift */,
 				1D1A9D8B244AA8C600691346 /* ActivityDetailViewModel.swift */,
 				1D46FB8E244B731F00F8DEF4 /* UserActivitiesViewModel.swift */,
+				1DFDFD8B244E96DF008F63CF /* UsersListViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -384,9 +393,11 @@
 				1D2231EB240894440052D33C /* MedalRow.swift in Sources */,
 				1DE4DD972432E8B900F96A89 /* UsersDB.swift in Sources */,
 				1D2CC8C72409D52E00741728 /* SubmitActivity.swift in Sources */,
+				1DFDFD8A244E93D4008F63CF /* UsersList.swift in Sources */,
 				1DD11D4F24082E03002A9541 /* SceneDelegate.swift in Sources */,
 				1D7088022422A08B0019C3AD /* ActivitiesWebService.swift in Sources */,
 				1DC4FB032409890B008AF46C /* SignInRectangle.swift in Sources */,
+				1DFDFD8C244E96DF008F63CF /* UsersListViewModel.swift in Sources */,
 				1D2231E1240862EC0052D33C /* ActivitiesList.swift in Sources */,
 				1D7088052422A65C0019C3AD /* ActivitiesListViewModel.swift in Sources */,
 				1DD11D6224082FAE002A9541 /* ActivityCircleImage.swift in Sources */,
@@ -400,6 +411,7 @@
 				1DD11D5124082E03002A9541 /* ContentView.swift in Sources */,
 				1D2231EF240899370052D33C /* InterestsList.swift in Sources */,
 				1D42E084240855D80049BF06 /* ActivityCard.swift in Sources */,
+				1DFDFD8E244EA1CD008F63CF /* Volunteer.swift in Sources */,
 				1DC4FB012409881D008AF46C /* LoginView.swift in Sources */,
 				1D7087FF242290FF0019C3AD /* Activity.swift in Sources */,
 				1D2231ED2408977E0052D33C /* InterestCircleImage.swift in Sources */,

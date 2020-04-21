@@ -78,8 +78,8 @@ struct ActivityDetail: View {
                 Section(header: Text("Description").font(.headline)) {
                     VStack {
                         Text(self.activityModel.activity.description)
-                            .padding(.bottom, 20)
-                        
+                            //.padding(.bottom, 20)
+                        Divider()
                         HStack {
                             
                             Spacer()
@@ -181,39 +181,45 @@ struct ActivityDetail: View {
                 }
                 
             Section(header: Text("Details").font(.headline)) {
-                    VStack {
-                        HStack {
-                            Spacer()
-                            VStack {
-                                Text(String(self.activityModel.activity.volunteersNeeded))
-                                    .bold()
-                                    .foregroundColor(Color.green)
-                                    .padding()
-                                    .font(.title)
-                                    .overlay(Circle().stroke(Color.gray, lineWidth: 1)
-                                        )
-                                        .shadow(radius: 5)
-                                Text("Volunteers\nneeded")
-                                .multilineTextAlignment(.center)
-                            }
-                            Spacer()
-                            VStack {
-                                Text(String(self.activityModel.activity.volunteersNeeded - (self.activityModel.activity.volunteersAttending ?? 0)))
-                                    .bold()
-                                    .foregroundColor(Color.red)
-                                    .padding()
-                                    .font(.title)
-                                    .overlay(Circle()
-                                        .stroke(Color.gray, lineWidth: 1)
+                    
+                    NavigationLink(destination: UsersList(volunteersIds: self.activityModel.activity.volunteers)) {
+                        Text("Volunteers attending")
+                    }
+                    
+                    Divider()
+                
+                    HStack {
+                        Spacer()
+                        VStack {
+                            Text(String(self.activityModel.activity.volunteersNeeded))
+                                .bold()
+                                .foregroundColor(Color.green)
+                                .padding()
+                                .font(.title)
+                                .overlay(Circle().stroke(Color.gray, lineWidth: 1)
                                     )
                                     .shadow(radius: 5)
-                                Text("Spots\nleft")
-                                .multilineTextAlignment(.center)
-                            }
-                            Spacer()
+                            Text("Volunteers\nneeded")
+                            .multilineTextAlignment(.center)
                         }
-                        .frame(height: 110)
+                        Spacer()
+                        VStack {
+                            Text(String(self.activityModel.activity.volunteersNeeded - (self.activityModel.activity.volunteersAttending ?? 0)))
+                                .bold()
+                                .foregroundColor(Color.red)
+                                .padding()
+                                .font(.title)
+                                .overlay(Circle()
+                                    .stroke(Color.gray, lineWidth: 1)
+                                )
+                                .shadow(radius: 5)
+                            Text("Spots\nleft")
+                            .multilineTextAlignment(.center)
+                        }
+                        Spacer()
                     }
+                    .frame(height: 110)
+                    
                 }
                 
             
