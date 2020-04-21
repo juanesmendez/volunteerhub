@@ -17,25 +17,20 @@ struct ActivityDetail: View {
     @State var image:UIImage = UIImage()
     private var url = ""
     
+    @ObservedObject var activityModel: ActivityViewModel
+    
     private var date: Date {
         get {
-            let dateFormatterGet = DateFormatter()
-            dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss"
-
-            let dateFormatterPrint = DateFormatter()
-            dateFormatterPrint.dateFormat = "MMM dd,yyyy"
-
-            if let date = dateFormatterGet.date(from: self.activityModel.activity.date) {
-                return date
-            } else {
-               print("There was an error decoding the string")
-            }
-            return Date()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            print("La fechaaaa \(self.activityModel.activity.date)")
+            let aux = self.activityModel.activity.date.components(separatedBy: "T")
+            let date = dateFormatter.date(from: aux[0]) ?? Date()
+            return date
         }
         
     }
     
-    @ObservedObject var activityModel: ActivityViewModel
     //@State var attending = false
     static let taskDateFormat: DateFormatter = {
         let formatter = DateFormatter()
