@@ -95,17 +95,9 @@ struct ActivityDetail: View {
                     Image(systemName: "bookmark")
                     Text("Description").font(.headline)
                 }
-            ) {
-            
-                Text(self.activityModel.activity.description)
-                    .fixedSize(horizontal: false, vertical: true)
-                
-                Divider()
-                
+            , footer:
                 HStack {
-                    
                     Spacer()
-                    
                     if(self.activityModel.activity.volunteers.contains(Auth.auth().currentUser!.uid)) {
                         Button(action: {
                             //self.activityModel.addVolunteer(volunteerId: Auth.auth().currentUser!.uid)
@@ -163,8 +155,11 @@ struct ActivityDetail: View {
                         }
                         .buttonStyle(PlainButtonStyle())
                     }
-                    
                 }
+            ) {
+            
+                Text(self.activityModel.activity.description)
+                    .fixedSize(horizontal: false, vertical: true)
                 
             }
             

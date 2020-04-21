@@ -28,6 +28,7 @@ struct ActivitiesList: View {
         NavigationView{
             ScrollView{
                 VStack {
+                    
                     SearchBar(text: $searchText)
                     MapView(coordinate: CLLocationCoordinate2D(latitude: 4.6527513, longitude: -74.0597535))
                         .frame(height: 150)
