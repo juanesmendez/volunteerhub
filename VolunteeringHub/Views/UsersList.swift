@@ -15,7 +15,9 @@ struct UsersList: View {
     
     init(volunteersIds: [String]) {
         self.usersListModel = UsersListViewModel(volunteers: volunteersIds)
-        self.usersListModel.getVolunteers()
+        if volunteersIds.count > 0 {
+            self.usersListModel.getVolunteers()
+        }
     }
     
     var body: some View {
