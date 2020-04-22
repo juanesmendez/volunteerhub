@@ -11,6 +11,8 @@ import MapKit
 import Firebase
 import FirebaseUI
 import GoogleSignIn
+import GoogleMaps
+import GooglePlaces
 
 struct ActivitiesList: View {
     
@@ -18,6 +20,12 @@ struct ActivitiesList: View {
     @State private var showingAlert = false
     @ObservedObject var model = ActivitiesListViewModel()
     var reachable = false
+    
+    @State var manager = CLLocationManager()
+    @State var alert = false
+    @State var coordinate = CLLocationCoordinate2D()
+    
+    @State var address = String()
     
     init() {
         // To remove all separators including the actual ones:
@@ -30,13 +38,19 @@ struct ActivitiesList: View {
                 VStack {
                     
                     SearchBar(text: $searchText)
+                    /*
                     MapView(coordinate: CLLocationCoordinate2D(latitude: 4.6527513, longitude: -74.0597535))
                         .frame(height: 150)
+                    */
+                    GoogleMapView(manager: $manager, alert: $alert, coordinate: $coordinate, address: $address)
+                        .alert(isPresented: $alert){
+                            Alert(title: Text("Please enable location access in settings."))
+                    }
                     HStack() {
                         Image(systemName: "location.fill")
                             .foregroundColor(Color.purple)
-                        Text("Current location: Chapinero, Bogota")
-                            .font(.headline)
+                        Text("\(self.address)")
+                            .font(.subheadline)
                         Spacer()
                     }
                     .padding(.leading, 18)
@@ -76,7 +90,7 @@ struct ActivitiesList: View {
                 }
                 .navigationBarTitle("Activities")
                 .accentColor(Color.green)
-                .onAppear(perform: model.loadActivities) // refreshes the activities everytime the view looses focus and appears again
+                .onAppear(perform: self.model.loadActivities) // refreshes the activities everytime the view looses focus and appears again
                 .alert(isPresented: $showingAlert) {
                     Alert(title: Text("Connection error"), message: Text("You don't have an active internet connection"), dismissButton: .default(Text("Ok")))
                 }
@@ -88,7 +102,6 @@ struct ActivitiesList: View {
         print("In get activities function...")
         print(self.model.activities)
     }
- 
 }
 
 struct ActivitiesList_Previews: PreviewProvider {

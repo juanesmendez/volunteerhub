@@ -32,43 +32,35 @@ struct UserRegistration: View {
     var body: some View {
         NavigationView{
         VStack {
-            //NavigationView{
-                Form {
-                    Section(header: Text("Your basic information")){
-                        TextField("First name", text: $firstName)
-                        TextField("Last name", text: $lastName)
-                        DatePicker(
-                            selection: $birthDate,
-                            //in: dateClosedRange,
-                            displayedComponents: .date,
-                            label: { Text("Select your birthdate") }
-                        )
-                    }
-                    
-                    Section(header: Text("Other information")){
-                        TextField("Username", text: $username)
-                        TextField("Email", text: $email)
-                        SecureField("Password", text: $password)
-                    }
-                    
-                    Section(header: Text("Tell us more about yourself")){
-                        TextField("Your description", text: $description)
-                            .padding(.bottom, 120)
-                            .frame(height: 150)
-                    }
-                    
+            
+            Form {
+                Section(header: Text("Your basic information")){
+                    TextField("First name", text: $firstName)
+                    TextField("Last name", text: $lastName)
+                    DatePicker(
+                        selection: $birthDate,
+                        //in: dateClosedRange,
+                        displayedComponents: .date,
+                        label: { Text("Select your birthdate") }
+                    )
                 }
-            /*
-            NavigationLink(destination: ContentView(), isActive: $pushActive) {
-              Text("")
-            }.hidden()
-            */
-            //}
-            //.navigationBarTitle("Registration")
                 
+                Section(header: Text("Other information")){
+                    TextField("Username", text: $username)
+                    TextField("Email", text: $email)
+                    SecureField("Password", text: $password)
+                }
+                
+                Section(header: Text("Tell us more about yourself")){
+                    TextField("Your description", text: $description)
+                        .padding(.bottom, 120)
+                        .frame(height: 150)
+                }
+                
+            }
         }
-            .navigationBarTitle("Registration")
-            .navigationBarItems(leading:
+        .navigationBarTitle("Registration")
+        .navigationBarItems(leading:
                 Button(action: {
                     self.userData.register = false
                     self.appDelegate.firstGoogleSignIn = false
@@ -81,13 +73,7 @@ struct UserRegistration: View {
             }) {
                 Text("Submit")
             })
-            
-            /*
-        .alert(isPresented: $shown, content: {
-            return Alert(title: Text(self.message))
-        })*/
         }
-        
     }
     
     func signUp() {
@@ -125,27 +111,9 @@ struct UserRegistration: View {
                         print("Document added")
                     }
                 }
-                /*
-                ref = db.collection("users").addDocument(data: [
-                    "userId": userId
-                ]) { err in
-                    if let err = err {
-                        print("Error adding document: \(err)")
-                    } else {
-                        print("Document added with ID: \(ref!.documentID)")
-                    }
-                }
-                */
                 self.message = "You signed up successfully! Welcome to VolunteerHub :)"
                 self.shown.toggle()
-                
-                print("Signed in with user ID: \(Auth.auth().currentUser?.uid)")
-
                 self.userData.register = false
-                /*
-                self.pushActive = true
-                print("handleSuccessfullLogin")
-                */
             }
         } else if self.appDelegate.firstGoogleSignIn == true {
             // Insert document in Firestore database with the user ID
@@ -171,16 +139,8 @@ struct UserRegistration: View {
             
             self.message = "You signed up successfully! Welcome to VolunteerHub :)"
             self.shown.toggle()
-            
-            print("Signed in with user ID: \(Auth.auth().currentUser?.uid)")
-            
             self.appDelegate.firstGoogleSignIn = false
         }
-        
-        
-        
-        
-        
     }
     
 }
