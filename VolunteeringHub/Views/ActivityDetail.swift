@@ -9,6 +9,8 @@
 import SwiftUI
 import MapKit
 import Firebase
+import GoogleMaps
+import GooglePlaces
 
 struct ActivityDetail: View {
     
@@ -18,6 +20,10 @@ struct ActivityDetail: View {
     private var url = ""
     
     @ObservedObject var activityModel: ActivityViewModel
+    
+    @State var coordinate = CLLocationCoordinate2D()
+    @State var address = String()
+    //@State var location: Activity.Location
     
     private var date: Date {
         get {
@@ -42,6 +48,7 @@ struct ActivityDetail: View {
         //self.activity = activity
         print("Initializing activity with id \(activity.id)")
         self.activityModel = ActivityViewModel(activity: activity)
+        
         /*
         if(activityModel.activity.volunteers.contains(Auth.auth().currentUser!.uid)) {
             self.attending = true
@@ -196,16 +203,14 @@ struct ActivityDetail: View {
                 }
                 
             ) {
-                VStack {
-                    MapView(coordinate: CLLocationCoordinate2D(latitude: 4.6527513, longitude: -74.0597535))
-                        .frame(height: 150)
-                        .cornerRadius(10)
-                        .overlay(RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.gray, lineWidth: 1)
-                        .shadow(radius: 15)
-                    )
-                        .padding(.horizontal, 10)
+                /*
+                ActivityGoogleMapView(location: $location, address: $address, coordinate: $coordinate)
+                    Text(String(format: "%2f", self.activityModel.activity.location?.latitude ?? 0.0))
+                  */
+                NavigationLink(destination: ActivityGoogleMapView(location: self.activityModel.activity.location, address: $address, coordinate: $coordinate)){
+                    Text(self.address)
                 }
+                
             }
                 
             Section(header:
@@ -268,9 +273,19 @@ struct ActivityDetail: View {
                 print("INSIDE onAppear for loading activity image")
                 self.model.loadImage(urlString: self.url)
             }
+            self.loadAddress()
         })
     }
 
+    func loadAddress() {
+        GMSGeocoder().reverseGeocodeCoordinate(CLLocationCoordinate2D(latitude: self.activityModel.activity.location.latitude, longitude: self.activityModel.activity.location.longitude)) { response, error in
+            print("Reverse geocoding...")
+            guard let response = response else {
+                return
+            }
+            self.address = response.firstResult()?.lines?[0] ?? "Finding location"
+        }
+    }
 }
 
 extension String {

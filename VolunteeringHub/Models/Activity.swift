@@ -9,6 +9,8 @@
 import Foundation
 import SwiftUI
 
+
+
 struct Activity: Codable, Identifiable {
     // I may have to add Hashable protocol
     
@@ -25,6 +27,13 @@ struct Activity: Codable, Identifiable {
     
     var volunteers: [String]
     
+    var location: Location
+    
+    struct Location: Codable {
+        var latitude: Double
+        var longitude: Double
+    }
+    
     struct ImageInfo: Codable {
         var fileName: String
     }
@@ -32,6 +41,6 @@ struct Activity: Codable, Identifiable {
     // For readind _id key and changing it to id
     private enum CodingKeys: String, CodingKey {
         case id = "_id"
-        case name, description, category, volunteersNeeded, volunteersAttending, date, images, volunteers
+        case name, description, category, volunteersNeeded, volunteersAttending, date, images, volunteers, location
     }
 }
