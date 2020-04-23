@@ -44,16 +44,44 @@ class ActivityViewModel: ObservableObject {
         // Calls ActivitiesWebService and modifies the activity to add a volunteer to the attending list
         // Make a PUT request to /activities/:idActivity sending the array of volunteers modified
         
-        var volunteers = self.activity.volunteers
+//        var volunteers = self.activity.volunteers
         
         // To convert from VolunteerInfo object to simple Strings
         //var volunteers = [String]()
         
         // Add the new volunteer to the array
-        volunteers.append(volunteerId)
+        self.activity.volunteers.append(volunteerId)
         
         
-        ActivitiesWebService().addVolunteerToActivity(activityId: self.activity.id, volunteers: volunteers) { res in
+        ActivitiesWebService().updateVolunteerListOfActivity(activityId: self.activity.id, volunteers: self.activity.volunteers) { res in
+            if let res = res {
+                //let aux = actvs.map(ActivityViewModel.init)
+                //self.activities = aux
+                
+                print("Response: \(res)")
+                
+                // Esto esta mal!! El JSON no m devuelve una Activity sino una respuesta al PUT!!!!!
+                //self.activity = act
+                //print(self.activity)
+                //self.objectWillChange.send()
+            }
+        }
+    }
+    
+    func removeVolunteerFromActivity(volunteerId: String) {
+        // Calls ActivitiesWebService and modifies the activity to remove a volunteer from the attending list
+        // Make a PUT request to /activities/:idActivity sending the array of volunteers modified
+        
+//        var volunteers = self.activity.volunteers
+        
+        // To convert from VolunteerInfo object to simple Strings
+        //var volunteers = [String]()
+        
+        // Add the new volunteer to the array
+        self.activity.volunteers.removeAll { $0 == volunteerId }
+        
+        
+        ActivitiesWebService().updateVolunteerListOfActivity(activityId: self.activity.id, volunteers: self.activity.volunteers) { res in
             if let res = res {
                 //let aux = actvs.map(ActivityViewModel.init)
                 //self.activities = aux
@@ -76,6 +104,10 @@ class ActivityViewModel: ObservableObject {
     
     func addActivityToUser(userId: String, activity: Activity) {
         UsersDB().addActivityToUser(userId: userId, activity: activity)
+    }
+    
+    func removeActivityFromUser(userId: String, activity: Activity) {
+        UsersDB().removeActivityFromUser(userId: userId, activity: activity)
     }
     
     func addInterestActivityToUser(userId: String, activity: Activity) {

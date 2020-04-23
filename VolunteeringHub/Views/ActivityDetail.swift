@@ -107,7 +107,12 @@ struct ActivityDetail: View {
                     Spacer()
                     if(self.activityModel.activity.volunteers.contains(Auth.auth().currentUser!.uid)) {
                         Button(action: {
-                            //self.activityModel.addVolunteer(volunteerId: Auth.auth().currentUser!.uid)
+                            // Deletes the volunteer from the ACTIVITY doc in the ACTIVITIES DB (PUT)
+                            self.activityModel.removeVolunteerFromActivity(volunteerId: Auth.auth().currentUser!.uid)
+                            // Removes the activity from the USER doc in the USERS DB (UPDATE)
+                            self.activityModel.removeActivityFromUser(userId: Auth.auth().currentUser!.uid, activity: self.activityModel.activity)
+                            // GET request for the new Activity updated after the PUT request
+//                            self.activityModel.getActivity(activityId: self.activityModel.activity.id)
                         }){
                             Text("Attending 😁")
                                 .padding(.all, 8.0)
@@ -123,7 +128,7 @@ struct ActivityDetail: View {
                             // Adds the activity to the USER doc in the USERS DB (UPDATE)
                             self.activityModel.addActivityToUser(userId: Auth.auth().currentUser!.uid, activity: self.activityModel.activity)
                             // GET request for the new Activity updated after the PUT request
-                            self.activityModel.getActivity(activityId: self.activityModel.activity.id)
+//                            self.activityModel.getActivity(activityId: self.activityModel.activity.id)
                         }){
                             Text("Attend 👍")
                                 .padding(.all, 8.0)

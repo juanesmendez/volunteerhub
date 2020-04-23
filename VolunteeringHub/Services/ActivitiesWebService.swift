@@ -66,7 +66,7 @@ class ActivitiesWebService {
     }
     
     //func addVolunteerToActivity(activityId:String, volunteers: [String], completion: @escaping () -> ()){
-    func addVolunteerToActivity(activityId:String, volunteers: [String], completion: @escaping (Activity?) -> ()){
+    func updateVolunteerListOfActivity(activityId:String, volunteers: [String], completion: @escaping (Activity?) -> ()){
         let url = URL(string: "\(self.baseUrl)/activities/" + activityId)!
 
         var request = URLRequest(url: url)

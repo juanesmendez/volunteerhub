@@ -25,6 +25,20 @@ class UsersDB {
         }
     }
     
+    func removeActivityFromUser(userId:String, activity: Activity){
+        let db = Firestore.firestore()
+        
+        db.collection("users").document(userId).updateData([
+            "activities": FieldValue.arrayRemove([activity.id])
+        ]){ err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document updated")
+            }
+        }
+    }
+    
     func getUserData(completion: @escaping (Dictionary<String, Any>?) -> ()) {
         let db = Firestore.firestore()
         let userId = Auth.auth().currentUser?.uid ?? ""
