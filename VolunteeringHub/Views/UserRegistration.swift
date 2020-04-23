@@ -59,6 +59,9 @@ struct UserRegistration: View {
                 
             }
         }
+        .alert(isPresented: $shown, content: {
+                return Alert(title: Text(self.message))
+        })
         .navigationBarTitle("Registration")
         .navigationBarItems(leading:
                 Button(action: {
@@ -80,17 +83,41 @@ struct UserRegistration: View {
         if self.email == "" || self.password == "" || self.firstName == "" || self.lastName == "" || self.username == "" || self.description == "" {
             self.message = "Please fill all of the fields"
             self.shown.toggle()
-        }
-        
-        if self.userData.register == true {
-            Auth.auth().createUser(withEmail: self.email, password: self.password) { (res, err) in
-                
-                if err != nil {
-                    print((err!.localizedDescription))
-                    self.message = err!.localizedDescription
+        } else {
+            if self.userData.register == true {
+                Auth.auth().createUser(withEmail: self.email, password: self.password) { (res, err) in
+                    
+                    if err != nil {
+                        print((err!.localizedDescription))
+                        self.message = err!.localizedDescription
+                        self.shown.toggle()
+                        return
+                    }
+                    // Insert document in Firestore database with the user ID
+                    let db = Firestore.firestore()
+                    //var ref: DocumentReference? = nil
+                    let userId:String = Auth.auth().currentUser!.uid
+                    // For writing the date:
+                    let formatter = DateFormatter()
+                    formatter.dateFormat = "yyyy-MM-dd"
+                    db.collection("users").document(userId).setData([
+                        "firstName": self.firstName,
+                        "lastName": self.lastName,
+                        "birthDate": formatter.string(from: self.birthDate),
+                        "username": self.username,
+                        "description": self.description
+                    ]){ err in
+                        if let err = err {
+                            print("Error adding document: \(err)")
+                        } else {
+                            print("Document added")
+                        }
+                    }
+                    self.message = "You signed up successfully! Welcome to VolunteerHub :)"
                     self.shown.toggle()
-                    return
+                    self.userData.register = false
                 }
+            } else if self.appDelegate.firstGoogleSignIn == true {
                 // Insert document in Firestore database with the user ID
                 let db = Firestore.firestore()
                 //var ref: DocumentReference? = nil
@@ -111,36 +138,14 @@ struct UserRegistration: View {
                         print("Document added")
                     }
                 }
+                
                 self.message = "You signed up successfully! Welcome to VolunteerHub :)"
                 self.shown.toggle()
-                self.userData.register = false
+                self.appDelegate.firstGoogleSignIn = false
             }
-        } else if self.appDelegate.firstGoogleSignIn == true {
-            // Insert document in Firestore database with the user ID
-            let db = Firestore.firestore()
-            //var ref: DocumentReference? = nil
-            let userId:String = Auth.auth().currentUser!.uid
-            // For writing the date:
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd"
-            db.collection("users").document(userId).setData([
-                "firstName": self.firstName,
-                "lastName": self.lastName,
-                "birthDate": formatter.string(from: self.birthDate),
-                "username": self.username,
-                "description": self.description
-            ]){ err in
-                if let err = err {
-                    print("Error adding document: \(err)")
-                } else {
-                    print("Document added")
-                }
-            }
-            
-            self.message = "You signed up successfully! Welcome to VolunteerHub :)"
-            self.shown.toggle()
-            self.appDelegate.firstGoogleSignIn = false
         }
+        
+        
     }
     
 }

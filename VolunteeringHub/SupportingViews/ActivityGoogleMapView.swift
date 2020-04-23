@@ -46,14 +46,6 @@ struct ActivityGoogleMapView: UIViewRepresentable {
         marker.snippet = "Local"
         marker.map = mapView
         
-        GMSGeocoder().reverseGeocodeCoordinate(CLLocationCoordinate2D(latitude: latitude, longitude: longitude)) { response, error in
-            print("Reverse geocoding...")
-            guard let response = response else {
-                return
-            }
-            self.address = response.firstResult()?.lines?[0] ?? "Finding location"
-        }
-        
     }
 
 }

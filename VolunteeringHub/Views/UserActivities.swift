@@ -107,7 +107,7 @@ struct UserActivities: View {
                         .navigationBarTitle("Your activities")
                     } else {
                         if !model.hasInterestedActivities {
-                            Text("You aren't interested in any activity 🗺 yet. Please go to your home screen 🏠 and search for an activity interested in! 😉")
+                            Text("You aren't interested in any activity 🗺 yet. Please go to your home screen 🏠 and search for an activity you find interesting! 😉")
                                 .multilineTextAlignment(.center)
                                 .padding(.horizontal, 20)
                                 .padding(.top, 60)

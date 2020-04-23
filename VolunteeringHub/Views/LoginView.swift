@@ -86,17 +86,17 @@ struct LoginView: View {
                     
                     Google().frame(width: 260, height: 50)
                     
-                    Button(action: {
-                        //self.userData.signInSuccess.toggle()
-                    }){
-                        SignInRectangle(image: Image("google-icon"), text: "Sign in with Google")
-                    }
-                    .buttonStyle(PlainButtonStyle())
+//                    Button(action: {
+//                        //self.userData.signInSuccess.toggle()
+//                    }){
+//                        SignInRectangle(image: Image("google-icon"), text: "Sign in with Google")
+//                    }
+//                    .buttonStyle(PlainButtonStyle())
                     
                     
                     SignInRectangle(image: Image("facebook-icon"), text: "Sign in with Facebook")
                     
-                    SignInRectangle(image: Image("green"), text: "Register with us")
+//                    SignInRectangle(image: Image("green"), text: "Register with us")
                         
                 }
         }

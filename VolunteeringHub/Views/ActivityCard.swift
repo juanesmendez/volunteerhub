@@ -7,10 +7,15 @@
 //
 
 import SwiftUI
+import Firebase
+import GoogleMaps
+import GooglePlaces
 
 struct ActivityCard: View {
     
     var activity: Activity
+    
+    @State var address = String()
     
     var body: some View {
         VStack {
@@ -31,7 +36,7 @@ struct ActivityCard: View {
             HStack {
                 Image(systemName: "location")
                     .foregroundColor(Color.gray)
-                Text("Usaquen")
+                Text(self.address).font(.footnote)
                 
                 Spacer()
                 // Use NavigationButton instead
@@ -49,9 +54,20 @@ struct ActivityCard: View {
         .stroke(Color.gray, lineWidth: 0.3)
         //.shadow(radius: 300)
         )
+        .onAppear(perform: self.loadAddress)
         //.clipped()
         //.shadow(radius: 80)
         
+    }
+    
+    func loadAddress() {
+        GMSGeocoder().reverseGeocodeCoordinate(CLLocationCoordinate2D(latitude: self.activity.location.latitude, longitude: self.activity.location.longitude)) { response, error in
+            print("Reverse geocoding...")
+            guard let response = response else {
+                return
+            }
+            self.address = response.firstResult()?.lines?[0] ?? "Finding location"
+        }
     }
 }
 /*
