@@ -37,7 +37,7 @@ struct ActivityCard: View {
                 Image(systemName: "location")
                     .foregroundColor(Color.gray)
                 Text(self.address).font(.footnote)
-                
+//                Text("Usaquen").font(.footnote)
                 Spacer()
                 // Use NavigationButton instead
                 NavigationLink(destination: ActivityDetail(activity: activity)) {
@@ -63,7 +63,8 @@ struct ActivityCard: View {
     func loadAddress() {
         GMSGeocoder().reverseGeocodeCoordinate(CLLocationCoordinate2D(latitude: self.activity.location.latitude, longitude: self.activity.location.longitude)) { response, error in
             print("Reverse geocoding...")
-            guard let response = response else {
+            guard let response = response, error == nil else {
+                print("Error in reverse geocoding...")
                 return
             }
             self.address = response.firstResult()?.lines?[0] ?? "Finding location"
