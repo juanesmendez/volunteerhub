@@ -77,8 +77,9 @@ class ActivitiesWebService {
         ]
         
         // Check how i can send an array of object and not of Strings
-        let jsonDictionary: [String: [String]] = [
-            "volunteers": volunteers
+        let jsonDictionary: [String: Any] = [
+            "volunteers": volunteers,
+            "volunteersAttending": volunteers.count
         ]
 
         let data = try! JSONSerialization.data(withJSONObject: jsonDictionary, options: .prettyPrinted)

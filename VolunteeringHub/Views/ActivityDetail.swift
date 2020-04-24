@@ -242,7 +242,7 @@ struct ActivityDetail: View {
                         }
                         Spacer()
                         VStack {
-                            Text(String(self.activityModel.activity.volunteersNeeded - (self.activityModel.activity.volunteersAttending ?? 0)))
+                            Text(String(self.activityModel.activity.volunteersNeeded - (self.activityModel.activity.volunteersAttending)))
                                 .bold()
                                 .foregroundColor(Color.red)
                                 .padding()

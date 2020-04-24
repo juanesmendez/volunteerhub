@@ -51,6 +51,7 @@ class ActivityViewModel: ObservableObject {
         
         // Add the new volunteer to the array
         self.activity.volunteers.append(volunteerId)
+        self.activity.volunteersAttending = self.activity.volunteersAttending + 1
         
         
         ActivitiesWebService().updateVolunteerListOfActivity(activityId: self.activity.id, volunteers: self.activity.volunteers) { res in
@@ -79,6 +80,7 @@ class ActivityViewModel: ObservableObject {
         
         // Add the new volunteer to the array
         self.activity.volunteers.removeAll { $0 == volunteerId }
+        self.activity.volunteersAttending = self.activity.volunteersAttending - 1
         
         
         ActivitiesWebService().updateVolunteerListOfActivity(activityId: self.activity.id, volunteers: self.activity.volunteers) { res in

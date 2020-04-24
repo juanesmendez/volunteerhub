@@ -19,7 +19,7 @@ struct Activity: Codable, Identifiable {
     var description: String
     var category: String
     var volunteersNeeded: Int
-    var volunteersAttending: Int?
+    var volunteersAttending: Int
     // Check the date type. Date type throws an error, that is why we are using String
     var date: String
     
