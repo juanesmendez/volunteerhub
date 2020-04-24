@@ -20,6 +20,14 @@ struct EditProfile: View {
     @State var username: String = ""
     @State var description: String = ""
     
+    // Categories
+    @State var environment = false
+    @State var disabilities = false
+    @State var animals = false
+    @State var poor = false
+    @State var tutoring = false
+    @State var elders = false
+    
     // For handling user feedback
     @State var shown:Bool = false
     @State var message:String = ""
@@ -62,6 +70,45 @@ struct EditProfile: View {
                         
                 }
                 
+                Section(header: Text("Update the categories you are interested in")){
+                    Toggle(isOn: $environment) {
+                        Image("environment")
+                            .resizable()
+                            .frame(width: 25.0, height: 25.0)
+                        Text("Environment") // Environment
+                    }
+                    Toggle(isOn: $poor) {
+                        Image("poor")
+                            .resizable()
+                            .frame(width: 25.0, height: 25.0)
+                        Text("Vulnerable populations") // Poor
+                    }
+                    Toggle(isOn: $disabilities) {
+                        Image("handicap")
+                            .resizable()
+                            .frame(width: 25.0, height: 25.0)
+                        Text("Helping handicap people") // Handicap
+                    }
+                    Toggle(isOn: $animals) {
+                        Image("animals")
+                            .resizable()
+                            .frame(width: 25.0, height: 25.0)
+                        Text("Animals") // Animals
+                    }
+                    Toggle(isOn: $tutoring) {
+                        Image("tutoring")
+                            .resizable()
+                            .frame(width: 25.0, height: 25.0)
+                        Text("Tutoring") // Tutoring
+                    }
+                    Toggle(isOn: $elders) {
+                        Image("elder")
+                            .resizable()
+                            .frame(width: 25.0, height: 25.0)
+                        Text("Helping the elder ones") // Elder
+                    }
+                }
+                
             }
             Spacer()
         }
@@ -87,6 +134,24 @@ struct EditProfile: View {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         self.birthDate = dateFormatter.date(from: self.profileModel.userData?["birthDate"] as! String) ?? Date()
         
+        let categories = self.profileModel.userData?["categories"] as? [String] ?? []
+
+        for category in categories {
+            if category == "environment" {
+                self.environment.toggle()
+            } else if category == "handicap" {
+                self.disabilities.toggle()
+            } else if category == "animals" {
+                self.animals.toggle()
+            } else if category == "poor" {
+                self.poor.toggle()
+            } else if category == "tutoring" {
+                self.tutoring.toggle()
+            } else if category == "elder" {
+                self.elders.toggle()
+            }
+        }
+        
     }
     
     func updateProfile() {
@@ -100,12 +165,17 @@ struct EditProfile: View {
             // For writing the date:
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd"
-            db.collection("users").document(userId).setData([
+            
+            // Update categories:
+            let categories = self.updateCategories()
+            
+            db.collection("users").document(userId).updateData([
                 "firstName": self.firstName,
                 "lastName": self.lastName,
                 "birthDate": formatter.string(from: self.birthDate),
                 "username": self.username,
-                "description": self.description
+                "description": self.description,
+                "categories": categories
             ]){ err in
                 if let err = err {
                     print("Error updating document: \(err)")
@@ -116,6 +186,36 @@ struct EditProfile: View {
             self.message = "You have updated your profile successfully! 🎉"
             self.shown.toggle()
         }
+    }
+    
+    func updateCategories() -> [String] {
+//        @State var environment = false
+//        @State var disabilities = false
+//        @State var animals = false
+//        @State var poor = false
+//        @State var tutoring = false
+//        @State var elders = false
+        var categories: [String] = []
+        if self.environment {
+            categories.append("environment")
+        }
+        if self.disabilities {
+            categories.append("handicap")
+        }
+        if self.animals {
+            categories.append("animals")
+        }
+        if self.poor {
+            categories.append("poor")
+        }
+        if self.tutoring {
+            categories.append("tutoring")
+        }
+        if self.elders {
+            categories.append("elder")
+        }
+        
+        return categories
     }
     
 }

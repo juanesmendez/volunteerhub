@@ -128,6 +128,7 @@
 				1D2231F22408B15E0052D33C /* ActivityDetail.swift */,
 				1DD2FE592409B05400450BFC /* AppContentView.swift */,
 				1DD11D5024082E03002A9541 /* ContentView.swift */,
+				1D1056272452579600F08EAE /* EditProfile.swift */,
 				1D2231EE240899370052D33C /* InterestsList.swift */,
 				1DC4FB002409881D008AF46C /* LoginView.swift */,
 				1D2231EA240894440052D33C /* MedalRow.swift */,
@@ -141,7 +142,6 @@
 				1D729F2A2437AE410054F503 /* UserRegistration.swift */,
 				1DFDFD89244E93D4008F63CF /* UsersList.swift */,
 				1DD9D59B244F70F1005D7456 /* VolunteerView.swift */,
-				1D1056272452579600F08EAE /* EditProfile.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

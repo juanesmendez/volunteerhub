@@ -14,7 +14,7 @@ struct InterestsList: View {
     
     init() {
         interestsImages.append(Image("bike"))
-        interestsImages.append(Image("mountain"))
+        interestsImages.append(Image("environment"))
         interestsImages.append(Image("rescue_dog"))
     }
     
