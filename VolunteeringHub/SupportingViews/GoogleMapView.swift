@@ -20,6 +20,7 @@ struct GoogleMapView: UIViewRepresentable {
     @Binding var alert: Bool
     @Binding var coordinate: CLLocationCoordinate2D
     @Binding var address: String
+    var activities: [Activity]
     
     var marker : GMSMarker = GMSMarker()
     
@@ -53,6 +54,15 @@ struct GoogleMapView: UIViewRepresentable {
         marker.title = "Your location"
         marker.snippet = "Local"
         marker.map = mapView
+        
+        if self.activities.count > 0 {
+            for activity in self.activities {
+                let actMarker = GMSMarker()
+                actMarker.position = CLLocationCoordinate2D(latitude: activity.location.latitude, longitude: activity.location.longitude)
+                actMarker.icon = GMSMarker.markerImage(with: .brown)
+                actMarker.map = mapView
+            }
+        }
         
     }
 
