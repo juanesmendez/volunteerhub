@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D1056282452579600F08EAE /* EditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1056272452579600F08EAE /* EditProfile.swift */; };
 		1D13C90D2425716400C54C09 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1D13C90C2425716400C54C09 /* GoogleService-Info.plist */; };
 		1D1A9D8C244AA8C600691346 /* ActivityDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1A9D8B244AA8C600691346 /* ActivityDetailViewModel.swift */; };
 		1D1A9D8E244AB0A300691346 /* Reachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1A9D8D244AB0A300691346 /* Reachable.swift */; };
@@ -56,6 +57,7 @@
 
 /* Begin PBXFileReference section */
 		014F4E739759EF25F13835CC /* Pods-VolunteeringHub.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VolunteeringHub.debug.xcconfig"; path = "Target Support Files/Pods-VolunteeringHub/Pods-VolunteeringHub.debug.xcconfig"; sourceTree = "<group>"; };
+		1D1056272452579600F08EAE /* EditProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfile.swift; sourceTree = "<group>"; };
 		1D13C90C2425716400C54C09 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1D1A9D8B244AA8C600691346 /* ActivityDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailViewModel.swift; sourceTree = "<group>"; };
 		1D1A9D8D244AB0A300691346 /* Reachable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachable.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				1D729F2A2437AE410054F503 /* UserRegistration.swift */,
 				1DFDFD89244E93D4008F63CF /* UsersList.swift */,
 				1DD9D59B244F70F1005D7456 /* VolunteerView.swift */,
+				1D1056272452579600F08EAE /* EditProfile.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -417,6 +420,7 @@
 				1DD11D6224082FAE002A9541 /* ActivityCircleImage.swift in Sources */,
 				1D2231F12408A3A10052D33C /* ProfileInfo.swift in Sources */,
 				1D1A9D8E244AB0A300691346 /* Reachable.swift in Sources */,
+				1D1056282452579600F08EAE /* EditProfile.swift in Sources */,
 				1D2231E5240878700052D33C /* SearchBar.swift in Sources */,
 				1DD9D59C244F70F1005D7456 /* VolunteerView.swift in Sources */,
 				1DE4DD952432C3DE00F96A89 /* ActivityViewModel.swift in Sources */,

@@ -57,8 +57,18 @@ struct ProfileView: View {
                             }
                         }
                     ){
-                          Text("Username: \(self.profileModel.userData?["username"] as! String)")
-                          Text("Birth date: \(self.date, formatter: Self.taskDateFormat)")
+                        HStack {
+                            Text("Username ").bold()
+                            Text(self.profileModel.userData?["username"] as! String)
+                        }
+                        HStack {
+                            Text("Email ").bold()
+                            Text(Auth.auth().currentUser?.email ?? "johnappleseed@apple.com")
+                        }
+                        HStack {
+                            Text("Birth date ").bold()
+                            Text("\(self.date, formatter: Self.taskDateFormat)")
+                        }
                     }
 //                    Section(header: Text("Basic information").font(.headline)){
 //
@@ -114,7 +124,15 @@ struct ProfileView: View {
                     }
                 }
                 .listStyle(GroupedListStyle())
+                .onAppear(perform: {
+                        self.getProfileData()
+                    })
                 .navigationBarTitle("Your profile")
+                .navigationBarItems(trailing:
+                    NavigationLink(destination: EditProfile()){
+                        Text("Edit")
+                    }
+                )
             } else {
                 Text("Loading profile data...")
                     .navigationBarTitle("Your profile")
@@ -123,9 +141,6 @@ struct ProfileView: View {
             
         
         }
-        .onAppear(perform: {
-            self.getProfileData()
-        })
             
     }
     
