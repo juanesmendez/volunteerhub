@@ -191,6 +191,7 @@ struct ActivityDetail: View {
                     } else {
                         Image(uiImage: (model.imageData.isEmpty) ? UIImage(imageLiteralResourceName: "Event image") : UIImage(data: model.imageData)!)
                         .resizable()
+                            .aspectRatio(contentMode: .fit)
                         //.frame(height: 150)
                         .cornerRadius(10)
                         .overlay(RoundedRectangle(cornerRadius: 10)
