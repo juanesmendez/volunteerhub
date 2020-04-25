@@ -189,7 +189,7 @@ struct ActivityDetail: View {
                     if(model.imageData.isEmpty){
                         Text("Loading image...")
                     } else {
-                        Image(uiImage: (model.imageData.isEmpty) ? UIImage(imageLiteralResourceName: "Event image") : UIImage(data: model.imageData)!)
+                        Image(uiImage: ((model.imageData.isEmpty) ? UIImage(imageLiteralResourceName: "Event image") : UIImage(data: model.imageData)) ?? UIImage(imageLiteralResourceName: "Event image"))
                         .resizable()
                             .aspectRatio(contentMode: .fit)
                         //.frame(height: 150)

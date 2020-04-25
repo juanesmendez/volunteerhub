@@ -13,6 +13,7 @@ import Combine
 class ProfileViewModel: ObservableObject {
     
     @Published var userData: Dictionary<String, Any>?
+    @Published var categories = [String]()
     
     init() {
         getProfileData()
@@ -22,6 +23,7 @@ class ProfileViewModel: ObservableObject {
     func getProfileData() {
         UsersDB().getUserData() { data in
             self.userData = data ?? nil
+            self.categories = data?["categories"] as? [String] ?? []
         }
     }
     

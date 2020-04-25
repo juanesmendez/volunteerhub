@@ -108,8 +108,9 @@ class UsersDB {
                         let birthDate = document.data()["birthDate"] as! String
                         let interested = document.data()["interested"] as? [String] ?? [String]()
                         let activities = document.data()["activities"] as? [String] ?? [String]()
+                        let categories = document.data()["categories"] as? [String] ?? [String]()
                         
-                        volunteers.append(Volunteer(id: id, username: username, firstName: firstname, lastName: lastname, description: description, birthDate: birthDate, interested: interested, activities: activities))
+                        volunteers.append(Volunteer(id: id, username: username, firstName: firstname, lastName: lastname, description: description, birthDate: birthDate, interested: interested, activities: activities, categories: categories))
                     }
                     DispatchQueue.main.async {
                         completion(volunteers)

@@ -16,6 +16,8 @@ struct InterestsList: View {
         interestsImages.append(Image("bike"))
         interestsImages.append(Image("environment"))
         interestsImages.append(Image("rescue_dog"))
+        interestsImages.append(Image("animals"))
+        interestsImages.append(Image("elder"))
     }
     
     var body: some View {

@@ -91,13 +91,25 @@ struct VolunteerView: View {
                         Text("Interests").font(.headline)
                     }
                 ){
-                    HStack {
-                        Spacer()
-                        InterestsList()
-                        Spacer()
+                    if self.model.volunteer.categories.count > 0 {
+                        ForEach(self.model.volunteer.categories) { category in
+                            HStack {
+                                Image(category)
+                                    .resizable()
+                                    .frame(width: 25.0, height: 25.0)
+                                Text(category.capitalizingFirstLetter())
+                            }
+                        }
+                    } else {
+                        Text("\(self.model.volunteer.firstName) hasn't added any interests yet.")
                     }
-                    .padding(.top, 20)
-                    .padding(.bottom, 20)
+//                    HStack {
+//                        Spacer()
+//                        InterestsList()
+//                        Spacer()
+//                    }
+//                    .padding(.top, 20)
+//                    .padding(.bottom, 20)
                 }
                 
                 Section(header:

@@ -114,13 +114,26 @@ struct ProfileView: View {
                            Spacer()
                         }
                     ){
-                        HStack {
-                            Spacer()
-                            InterestsList()
-                            Spacer()
+//                        HStack {
+//                            Spacer()
+//                            InterestsList()
+//                            Spacer()
+//                        }
+//                        .padding(.top, 20)
+//                        .padding(.bottom, 20)
+                        if self.profileModel.categories.count > 0 {
+                            ForEach(self.profileModel.categories) { category in
+                                HStack {
+                                    Image(category)
+                                        .resizable()
+                                        .frame(width: 25.0, height: 25.0)
+                                    Text(category.capitalizingFirstLetter())
+                                }
+                            }
+                        } else {
+                            Text("Go ahead and edit your profile to add your interests! 😎")
+                                .multilineTextAlignment(.center)
                         }
-                        .padding(.top, 20)
-                        .padding(.bottom, 20)
                     }
                 }
                 .listStyle(GroupedListStyle())
@@ -164,6 +177,12 @@ struct ProfileView: View {
     }
      
     
+}
+
+extension String: Identifiable {
+    public var id: String {
+        return self
+    }
 }
 
 struct ProfileView_Previews: PreviewProvider {

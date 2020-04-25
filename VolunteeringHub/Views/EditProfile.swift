@@ -11,6 +11,7 @@ import Firebase
 
 struct EditProfile: View {
     
+    @Environment(\.presentationMode) var presentationMode
     @ObservedObject var profileModel = ProfileViewModel()
     
     @State var firstName: String = ""
@@ -112,6 +113,7 @@ struct EditProfile: View {
             }
             Spacer()
         }
+        .navigationBarTitle("Edit profile")
         .navigationBarItems(trailing:
             Button(action: self.updateProfile) {
                 Text("Done")
@@ -185,16 +187,12 @@ struct EditProfile: View {
             }
             self.message = "You have updated your profile successfully! 🎉"
             self.shown.toggle()
+            
+            presentationMode.wrappedValue.dismiss()
         }
     }
     
     func updateCategories() -> [String] {
-//        @State var environment = false
-//        @State var disabilities = false
-//        @State var animals = false
-//        @State var poor = false
-//        @State var tutoring = false
-//        @State var elders = false
         var categories: [String] = []
         if self.environment {
             categories.append("environment")
