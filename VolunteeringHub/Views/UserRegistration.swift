@@ -81,7 +81,7 @@ struct UserRegistration: View {
     
     func signUp() {
         if self.email == "" || self.password == "" || self.firstName == "" || self.lastName == "" || self.username == "" || self.description == "" {
-            self.message = "Please fill all of the fields"
+            self.message = "Please fill up the form completely"
             self.shown.toggle()
         } else {
             if self.userData.register == true {

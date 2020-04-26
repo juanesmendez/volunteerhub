@@ -102,32 +102,35 @@ struct LoginView: View {
                 }
             }
             .alert(isPresented: $shown, content: {
-                return Alert(title: Text(self.message))
+                return Alert(title: Text("Error signing in"), message: Text(self.message))
             })
         }
     }
     
     func signIn() {
-        if self.email == "" || self.password == "" {
-            self.message = "Please fill all of the fields"
-            self.shown.toggle()
-        }
+        print("Email:\(self.email)")
+        print("Password:\(self.password)")
         
-        Auth.auth().signIn(withEmail: self.email, password: self.password) { (res, err) in
-            
-            if err != nil {
-                print((err!.localizedDescription))
-                self.message = err!.localizedDescription
-                self.shown.toggle()
-                return
-            }
-            //self.userData.user = res?.user
-            self.message = "Success"
+        if self.email.isEmpty || self.password.isEmpty {
+            self.message = "Please fill up email and password fields"
             self.shown.toggle()
-            
-            //For the app delegate to know:
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.userId = res?.user.uid ?? ""
+        } else {
+            Auth.auth().signIn(withEmail: self.email, password: self.password) { (res, err) in
+                
+                if err != nil {
+                    print((err!.localizedDescription))
+                    self.message = "Email or password may be incorrect"
+                    self.shown.toggle()
+                    return
+                }
+                //self.userData.user = res?.user
+                self.message = "Success"
+                self.shown.toggle()
+                
+                //For the app delegate to know:
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.userId = res?.user.uid ?? ""
+            }
         }
     }
     
