@@ -26,7 +26,7 @@ struct SignInRectangle: View {
             Spacer()
         }
         .padding()
-        .frame(width: 260)
+        .frame(width: 260, height: 40)
         .cornerRadius(10)
         .overlay(RoundedRectangle(cornerRadius: 10)
         .stroke(Color.gray, lineWidth: 2)

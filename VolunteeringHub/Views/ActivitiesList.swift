@@ -42,20 +42,20 @@ struct ActivitiesList: View {
                     MapView(coordinate: CLLocationCoordinate2D(latitude: 4.6527513, longitude: -74.0597535))
                         .frame(height: 150)
                     */
-                    GoogleMapView(manager: $manager, alert: $alert, coordinate: $coordinate, address: $address, activities: self.model.activities)
-                        .alert(isPresented: $alert){
-                            Alert(title: Text("Please enable location access in settings."))
-                    }
-                    HStack() {
-                        Image(systemName: "location.fill")
-                            .foregroundColor(Color.purple)
-                        Text("\(self.address)")
-                            .font(.subheadline)
-                        Spacer()
-                    }
-                    .padding(.leading, 18)
-                    
                     if self.model.reachable {
+                        GoogleMapView(manager: $manager, alert: $alert, coordinate: $coordinate, address: $address, activities: self.model.activities)
+                            .alert(isPresented: $alert){
+                                Alert(title: Text("Please enable location access in settings."))
+                        }
+                        HStack() {
+                            Image(systemName: "location.fill")
+                                .foregroundColor(Color.purple)
+                            Text("\(self.address)")
+                                .font(.subheadline)
+                            Spacer()
+                        }
+                        .padding(.leading, 18)
+                    
                         ForEach(self.model.activities, id: \.id) { activity in
                             ActivityCard(activity: activity)
                                 .padding(.top, 5)

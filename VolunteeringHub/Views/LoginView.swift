@@ -22,11 +22,12 @@ struct LoginView: View {
     @State var message:String = ""
     
     var body: some View {
-        
-        VStack {
+        ScrollView {
+            VStack {
                 Text("Volunteering Hub")
                     .font(.largeTitle)
                     .bold()
+                    .padding(.top, 50)
                 
                 Image("green")
                     .resizable()
@@ -99,16 +100,11 @@ struct LoginView: View {
 //                    SignInRectangle(image: Image("green"), text: "Register with us")
                         
                 }
-        }
+            }
             .alert(isPresented: $shown, content: {
                 return Alert(title: Text(self.message))
             })
-            /*
-            .onAppear(perform: {
-                self.register = false
-            })
-             */
-        
+        }
     }
     
     func signIn() {

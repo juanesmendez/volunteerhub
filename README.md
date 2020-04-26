@@ -15,6 +15,13 @@ For running the app in a simulator, please follow the steps shown below:
     - The `/Pods` directory contains all of the third-party libraries 📚, so you won't need to execute any additional commands.
 4. Having XCode open, run the project in the simulator of the iPhone device you desire. (Most of the testing was done using an iPhone 11 simulator).
 
+### Minor things to keep in mind
+
+- Please simulate the location 📍 of the device in XCode, in order for the map that is shown in the Home 🏠 screen to render the 'current' location 📍 of the user.
+    - If you simulate the location to be in Sydney, Australia 🇦🇺, you will notice that the brown markers in the map 🗺 showing the location 📍 of some of the activities near the user. (This is only in the case of the Sydney's location, given that no other activities were created in the other cities that can be simulated using XCode).
+- The app supports sign in 🔑 with `email` and `password`.
+- The app supports sign in 🔑 with `Google`.
+
 ### ❗️Note:
 In case you encounter yourself with any errors  when trying to execute the project in XCode, do the following:
 - Delete the `/Pods` directory as well as the `VolunteeringHub.xcworkspace`.
