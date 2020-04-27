@@ -2,6 +2,18 @@
 
 This repository contains the swift code of the VolunteerHub iOS App. VolunteerHub is an app for iOS and Android, that offers volunteers a platform in which they can easily find volunteer activities around their area, making it possible for them to start helping others right way!
 
+### Third-party libraries used
+- Firebase Analytics 📊
+- Firebase Auth 🔑
+- Firestore 🔥
+- FirebaseUI Auth 🔐
+- FirebaseUI Google 
+- FirebaseFirestoreSwift
+- ReachabilitySwift
+- Google Maps 🗺
+- Google Places 📍🍔
+- Alamofire 🔥
+
 ## How to run the project? 💻
 
 For running the app in a simulator, please follow the steps shown below:
