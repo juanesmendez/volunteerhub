@@ -29,6 +29,7 @@ For running the app in a simulator, please follow the steps shown below:
 
 ### Minor things to keep in mind
 
+- OS version: iOS 13 📱
 - Please simulate the location 📍 of the device in XCode, in order for the map that is shown in the Home 🏠 screen to render the 'current' location 📍 of the user.
     - If you simulate the location to be in Sydney, Australia 🇦🇺, you will notice the brown markers in the map 🗺 showing the location 📍 of some of the activities near the user. (This is only in the case of the Sydney's location, given that no other activities were created in the other cities that can be simulated using XCode).
 - The app supports sign in 🔑 with `email` and `password`.
