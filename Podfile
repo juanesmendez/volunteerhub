@@ -27,4 +27,6 @@ target 'VolunteeringHub' do
 
   pod 'GoogleMaps'
   pod 'GooglePlaces'
+
+  pod 'Alamofire', '~> 5.1'
 end

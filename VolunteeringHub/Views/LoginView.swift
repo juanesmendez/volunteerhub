@@ -21,6 +21,9 @@ struct LoginView: View {
     @State var shown:Bool = false
     @State var message:String = ""
     
+    @State var showNetworkMessage: Bool = false
+    @State var networkMessage:String = ""
+
     var body: some View {
         ScrollView {
             VStack {
@@ -68,7 +71,15 @@ struct LoginView: View {
                         .buttonStyle(PlainButtonStyle())
                     }
                     Button(action: {
-                        self.userData.register = true
+                        if NetworkState.isConnected(){
+                            print("Internet is available")
+                            self.userData.register = true
+                        } else {
+                            print("Internet is NOT available")
+                            self.networkMessage = "You do not have an internet connection, please sign up later."
+                            self.showNetworkMessage.toggle()
+                        }
+                        
                     }, label: {
                         Text("Register with us")
                     })
@@ -103,6 +114,9 @@ struct LoginView: View {
             }
             .alert(isPresented: $shown, content: {
                 return Alert(title: Text("Error signing in"), message: Text(self.message))
+            })
+            .alert(isPresented: $showNetworkMessage, content: {
+                return Alert(title: Text("Network error"), message: Text(self.networkMessage))
             })
         }
     }

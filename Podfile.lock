@@ -158,6 +158,7 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
+  - Alamofire (5.1.0)
   - AppAuth (1.3.0):
     - AppAuth/Core (= 1.3.0)
     - AppAuth/ExternalUserAgent (= 1.3.0)
@@ -323,6 +324,7 @@ PODS:
   - ReachabilitySwift (5.0.0)
 
 DEPENDENCIES:
+  - Alamofire (~> 5.1)
   - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Firestore
@@ -338,6 +340,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - abseil
+    - Alamofire
     - AppAuth
     - BoringSSL-GRPC
     - FBSDKCoreKit
@@ -371,6 +374,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   abseil: 18063d773f5366ff8736a050fe035a28f635fd27
+  Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
   AppAuth: 73574f3013a1e65b9601a3ddc8b3158cce68c09d
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
   FBSDKCoreKit: 1d5acf7c9d7a2f92bb1a242dc60cae5b7adb91df
@@ -402,6 +406,6 @@ SPEC CHECKSUMS:
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
 
-PODFILE CHECKSUM: 6b3d3cd5ae880e4848200d200db743769b1df549
+PODFILE CHECKSUM: 84ae217afd71e7b46c192a672ef83611921f9d94
 
 COCOAPODS: 1.9.1
