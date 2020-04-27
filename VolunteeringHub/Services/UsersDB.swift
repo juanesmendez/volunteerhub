@@ -58,6 +58,27 @@ class UsersDB {
         }
     }
     
+    func getUserCategories(completion: @escaping ([String]) -> ()) {
+        print("Getting user's categories list")
+        let db = Firestore.firestore()
+        let userId = Auth.auth().currentUser?.uid ?? ""
+        
+        let docRef = db.collection("users").document(userId)
+
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let source = document.metadata.isFromCache ? "local cache" : "server"
+                print("Metadata: Data fetched from \(source)")
+                let categories = document.data()?["categories"] as? [String] ?? [String]()
+                DispatchQueue.main.async {
+                    completion(categories)
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
+    }
+    
     func addInterestActivityToUser(userId: String, activity: Activity) {
         let db = Firestore.firestore()
         

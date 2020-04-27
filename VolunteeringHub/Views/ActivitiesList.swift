@@ -44,6 +44,7 @@ struct ActivitiesList: View {
                     */
                     if self.model.reachable {
                         GoogleMapView(manager: $manager, alert: $alert, coordinate: $coordinate, address: $address, activities: self.model.activities)
+                        .frame(height: 200)
                             .alert(isPresented: $alert){
                                 Alert(title: Text("Please enable location access in settings."))
                         }
@@ -55,12 +56,20 @@ struct ActivitiesList: View {
                             Spacer()
                         }
                         .padding(.leading, 18)
-                    
-                        ForEach(self.model.activities, id: \.id) { activity in
-                            ActivityCard(activity: activity)
-                                .padding(.top, 5)
+                        
+                        if self.model.activities.count > 0 {
+                            ForEach(self.model.activities, id: \.id) { activity in
+                                ActivityCard(activity: activity)
+                                    .padding(.top, 5)
+                                    .padding(.horizontal, 20)
+                            }
+                        } else {
+                            Text("We couldn't find any activity that matches your interests ☹️. \n\nTry experiencing something new. Go edit your interests in the profile tab! 😉")
+                                .multilineTextAlignment(.center)
                                 .padding(.horizontal, 20)
+                                .padding(.top, 60)
                         }
+                        
                     } else {
                         VStack {
                             Text("It seems like you are not connected to the internet 😢. Please try again.")
@@ -90,7 +99,7 @@ struct ActivitiesList: View {
                 }
                 .navigationBarTitle("Activities")
                 .accentColor(Color.green)
-                .onAppear(perform: self.model.loadActivities) // refreshes the activities everytime the view looses focus and appears again
+                .onAppear(perform: self.loadModelData) // refreshes the activities everytime the view looses focus and appears again
                 .alert(isPresented: $showingAlert) {
                     Alert(title: Text("Connection error"), message: Text("You don't have an active internet connection"), dismissButton: .default(Text("Ok")))
                 }
@@ -101,6 +110,10 @@ struct ActivitiesList: View {
     func getActivities(){
         print("In get activities function...")
         print(self.model.activities)
+    }
+    
+    func loadModelData() {
+        self.model.loadModel()
     }
 }
 

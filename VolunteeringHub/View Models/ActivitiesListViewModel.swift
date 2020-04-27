@@ -14,11 +14,41 @@ import Combine
 class ActivitiesListViewModel: ObservableObject {
     
     //@Published var activities = [ActivityViewModel]()
+    // Activities list that has the activities filtered by the categories the user likes
     @Published var activities = [Activity]()
+    @Published var userCategories = [String]()
     @Published var reachable = false
     
     init() {
-        loadActivities()
+//        loadUserCategories()
+//        loadActivities()
+        loadModel()
+    }
+    
+    func loadModel() {
+        self.reachable = NetworkState.isConnected()
+        if self.reachable {
+            UsersDB().getUserCategories() { categories in
+                self.userCategories = categories
+                self.reachable = ActivitiesWebService().isReachable()
+                print("Starting to load activities...")
+                ActivitiesWebService().getActivities { actvs in
+                    //print($0)
+                    if let actvs = actvs {
+                        //let aux = actvs.map(ActivityViewModel.init)
+                        //self.activities = aux
+                        self.filterActivities(activities: actvs)
+    //                    self.activities = actvs
+    //                    print(self.activities)
+                        //self.objectWillChange.send()
+                    }
+                }
+                print(self.activities)
+                print("Finished loading activities...")
+                        
+            }
+        }
+        
     }
     
     func loadActivities() {
@@ -32,8 +62,9 @@ class ActivitiesListViewModel: ObservableObject {
                 if let actvs = actvs {
                     //let aux = actvs.map(ActivityViewModel.init)
                     //self.activities = aux
-                    self.activities = actvs
-                    print(self.activities)
+                    self.filterActivities(activities: actvs)
+//                    self.activities = actvs
+//                    print(self.activities)
                     //self.objectWillChange.send()
                 }
             }
@@ -41,6 +72,27 @@ class ActivitiesListViewModel: ObservableObject {
             print("Finished loading activities...")
         }
         
+    }
+    
+    func loadUserCategories(){
+        UsersDB().getUserCategories() { categories in
+            self.userCategories = categories
+        }
+    }
+    
+    func filterActivities(activities: [Activity]) {
+        if self.userCategories.count > 0 {
+            var filteredActivities = [Activity]()
+            for activity in activities {
+                if self.userCategories.contains(activity.category) {
+                    filteredActivities.append(activity)
+                }
+            }
+            self.activities = filteredActivities
+            
+        } else {
+            self.activities = activities
+        }
     }
     
     func isActivitiesServiceReachable() -> Bool {
