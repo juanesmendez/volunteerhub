@@ -126,34 +126,38 @@ struct EditProfile: View {
     }
     
     func loadData() {
-        
-        self.username = self.profileModel.userData?["username"] as! String
-        self.firstName = self.profileModel.userData?["firstName"] as! String
-        self.lastName = self.profileModel.userData?["lastName"] as! String
-        self.description = self.profileModel.userData?["description"] as! String
-        self.birthDateString = self.profileModel.userData?["birthDate"] as! String
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        self.birthDate = dateFormatter.date(from: self.profileModel.userData?["birthDate"] as! String) ?? Date()
-        
-        let categories = self.profileModel.userData?["categories"] as? [String] ?? []
+        if !NetworkState.isConnected() {
+            self.message = "In order to edit your profile you need to have an internet connection."
+            self.shown.toggle()
+            presentationMode.wrappedValue.dismiss()
+        } else {
+            self.username = self.profileModel.userData?["username"] as! String
+            self.firstName = self.profileModel.userData?["firstName"] as! String
+            self.lastName = self.profileModel.userData?["lastName"] as! String
+            self.description = self.profileModel.userData?["description"] as! String
+            self.birthDateString = self.profileModel.userData?["birthDate"] as! String
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            self.birthDate = dateFormatter.date(from: self.profileModel.userData?["birthDate"] as! String) ?? Date()
+            
+            let categories = self.profileModel.userData?["categories"] as? [String] ?? []
 
-        for category in categories {
-            if category == "environment" {
-                self.environment.toggle()
-            } else if category == "handicap" {
-                self.disabilities.toggle()
-            } else if category == "animals" {
-                self.animals.toggle()
-            } else if category == "poor" {
-                self.poor.toggle()
-            } else if category == "tutoring" {
-                self.tutoring.toggle()
-            } else if category == "elder" {
-                self.elders.toggle()
+            for category in categories {
+                if category == "environment" {
+                    self.environment.toggle()
+                } else if category == "handicap" {
+                    self.disabilities.toggle()
+                } else if category == "animals" {
+                    self.animals.toggle()
+                } else if category == "poor" {
+                    self.poor.toggle()
+                } else if category == "tutoring" {
+                    self.tutoring.toggle()
+                } else if category == "elder" {
+                    self.elders.toggle()
+                }
             }
         }
-        
     }
     
     func updateProfile() {

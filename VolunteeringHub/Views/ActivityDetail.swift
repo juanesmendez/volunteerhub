@@ -48,7 +48,6 @@ struct ActivityDetail: View {
         //self.activity = activity
         print("Initializing activity with id \(activity.id)")
         self.activityModel = ActivityViewModel(activity: activity)
-        
         /*
         if(activityModel.activity.volunteers.contains(Auth.auth().currentUser!.uid)) {
             self.attending = true
@@ -104,68 +103,72 @@ struct ActivityDetail: View {
                 }
             , footer:
                 HStack {
-                    Spacer()
-                    if(self.activityModel.activity.volunteers.contains(Auth.auth().currentUser!.uid)) {
-                        Button(action: {
-                            // Deletes the volunteer from the ACTIVITY doc in the ACTIVITIES DB (PUT)
-                            self.activityModel.removeVolunteerFromActivity(volunteerId: Auth.auth().currentUser!.uid)
-                            // Removes the activity from the USER doc in the USERS DB (UPDATE)
-                            self.activityModel.removeActivityFromUser(userId: Auth.auth().currentUser!.uid, activity: self.activityModel.activity)
-                            // GET request for the new Activity updated after the PUT request
-//                            self.activityModel.getActivity(activityId: self.activityModel.activity.id)
-                        }){
-                            Text("Attending 😁")
-                                .padding(.all, 8.0)
-                                .background(Color.red)
-                                .foregroundColor(Color.white)
-                                .cornerRadius(20)
+                    if !NetworkState.isConnected() {
+                        Text("⚠️ You can't attend or unattend this activity, neither add it to your interest list because you don't have an internet connection.")
+                    } else {
+                        Spacer()
+                        if(self.activityModel.activity.volunteers.contains(Auth.auth().currentUser!.uid)) {
+                            Button(action: {
+                                // Deletes the volunteer from the ACTIVITY doc in the ACTIVITIES DB (PUT)
+                                self.activityModel.removeVolunteerFromActivity(volunteerId: Auth.auth().currentUser!.uid)
+                                // Removes the activity from the USER doc in the USERS DB (UPDATE)
+                                self.activityModel.removeActivityFromUser(userId: Auth.auth().currentUser!.uid, activity: self.activityModel.activity)
+                                // GET request for the new Activity updated after the PUT request
+    //                            self.activityModel.getActivity(activityId: self.activityModel.activity.id)
+                            }){
+                                Text("Attending 😁")
+                                    .padding(.all, 8.0)
+                                    .background(Color.red)
+                                    .foregroundColor(Color.white)
+                                    .cornerRadius(20)
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                        }else {
+                            Button(action: {
+                                // Adds the volunteer to the ACTIVITY doc in the ACTIVITIES DB (PUT)
+                                self.activityModel.addVolunteer(volunteerId: Auth.auth().currentUser!.uid)
+                                // Adds the activity to the USER doc in the USERS DB (UPDATE)
+                                self.activityModel.addActivityToUser(userId: Auth.auth().currentUser!.uid, activity: self.activityModel.activity)
+                                // GET request for the new Activity updated after the PUT request
+    //                            self.activityModel.getActivity(activityId: self.activityModel.activity.id)
+                            }){
+                                Text("Attend 👍")
+                                    .padding(.all, 8.0)
+                                    .background(Color.green)
+                                    .foregroundColor(Color.black)
+                                    .cornerRadius(20)
+                            }
+                            .buttonStyle(PlainButtonStyle())
                         }
-                        .buttonStyle(PlainButtonStyle())
-                    }else {
-                        Button(action: {
-                            // Adds the volunteer to the ACTIVITY doc in the ACTIVITIES DB (PUT)
-                            self.activityModel.addVolunteer(volunteerId: Auth.auth().currentUser!.uid)
-                            // Adds the activity to the USER doc in the USERS DB (UPDATE)
-                            self.activityModel.addActivityToUser(userId: Auth.auth().currentUser!.uid, activity: self.activityModel.activity)
-                            // GET request for the new Activity updated after the PUT request
-//                            self.activityModel.getActivity(activityId: self.activityModel.activity.id)
-                        }){
-                            Text("Attend 👍")
-                                .padding(.all, 8.0)
-                                .background(Color.green)
-                                .foregroundColor(Color.black)
-                                .cornerRadius(20)
+                        
+                        if self.activityModel.interested.contains(self.activityModel.activity.id) {
+                            Button(action: {
+                                // Removes the activity from the volunteer's interested list
+                                self.activityModel.deleteInterestActivityOfUser(userId: Auth.auth().currentUser!.uid, activity: self.activityModel.activity)
+                                self.activityModel.getUserInterestedList(userId: Auth.auth().currentUser!.uid)
+                                
+                            }){
+                                Text("Watching 🧐")
+                                    .padding(.all, 8.0)
+                                    .background(Color.red)
+                                    .foregroundColor(Color.white)
+                                    .cornerRadius(20)
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                        } else{
+                            Button(action: {
+                                // Adds the activity to the volunteer's interested list
+                                self.activityModel.addInterestActivityToUser(userId: Auth.auth().currentUser!.uid, activity: self.activityModel.activity)
+                                self.activityModel.getUserInterestedList(userId: Auth.auth().currentUser!.uid)
+                            }){
+                                Text("Watch 👓")
+                                    .padding(.all, 8.0)
+                                    .background(Color.blue)
+                                    .foregroundColor(Color.white)
+                                    .cornerRadius(20)
+                            }
+                            .buttonStyle(PlainButtonStyle())
                         }
-                        .buttonStyle(PlainButtonStyle())
-                    }
-                    
-                    if self.activityModel.interested.contains(self.activityModel.activity.id) {
-                        Button(action: {
-                            // Removes the activity from the volunteer's interested list
-                            self.activityModel.deleteInterestActivityOfUser(userId: Auth.auth().currentUser!.uid, activity: self.activityModel.activity)
-                            self.activityModel.getUserInterestedList(userId: Auth.auth().currentUser!.uid)
-                            
-                        }){
-                            Text("Watching 🧐")
-                                .padding(.all, 8.0)
-                                .background(Color.red)
-                                .foregroundColor(Color.white)
-                                .cornerRadius(20)
-                        }
-                        .buttonStyle(PlainButtonStyle())
-                    } else{
-                        Button(action: {
-                            // Adds the activity to the volunteer's interested list
-                            self.activityModel.addInterestActivityToUser(userId: Auth.auth().currentUser!.uid, activity: self.activityModel.activity)
-                            self.activityModel.getUserInterestedList(userId: Auth.auth().currentUser!.uid)
-                        }){
-                            Text("Watch 👓")
-                                .padding(.all, 8.0)
-                                .background(Color.blue)
-                                .foregroundColor(Color.white)
-                                .cornerRadius(20)
-                        }
-                        .buttonStyle(PlainButtonStyle())
                     }
                 }
             ) {
