@@ -59,7 +59,7 @@ struct VolunteerView: View {
                     }
                 ){
                     Text("Username: \(self.model.volunteer.username)")
-                    Text("Birth date: \(self.date, formatter: Self.taskDateFormat)")
+                    //Text("Birth date: \(self.date, formatter: Self.taskDateFormat)")
                 }
 //                    Section(header: Text("Basic information").font(.headline)){
 //

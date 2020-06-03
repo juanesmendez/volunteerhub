@@ -46,8 +46,8 @@ struct ProfileView: View {
                                     .font(.headline)
                                 Text("\(self.profileModel.userData?["firstName"] as! String) \(self.profileModel.userData?["lastName"] as! String)")
                                     .font(.title)
-                                ProfileInfo()
-                                .padding(.bottom, 10)
+                                ProfileInfo(reviews: self.profileModel.reviews)
+                                    .padding(.bottom, 10)
                                 
                             }
                             HStack {
@@ -92,6 +92,27 @@ struct ProfileView: View {
                         }
                     ){
                         MedalsList()
+                    }
+                    
+                    Section(header:
+                        HStack {
+                            Image(systemName: "star")
+                            Text("Reviews").font(.headline)
+                        }
+                    ){
+                        if self.profileModel.reviews.count > 0 {
+                            ForEach(self.profileModel.reviews, id: \.self) { review in
+                                VStack(alignment: .leading) {
+                                    Text("Foundation: \(review.foundation)")
+                                    Text("Score: \(String(review.score))")
+                                    Text("Comment: \(review.comment)")
+                                }
+                                
+                            }
+                        } else {
+                            Text("You don't have any reviews yet. 🥺")
+                                .multilineTextAlignment(.center)
+                        }
                     }
                     
                     Section(header:

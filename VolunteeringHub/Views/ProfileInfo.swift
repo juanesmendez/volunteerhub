@@ -13,8 +13,21 @@ import GoogleSignIn
 
 struct ProfileInfo: View {
     
-    @EnvironmentObject var userData: UserData
     @State var profileImage:UIImage = UIImage()
+    @State var reviews: [Review]
+    var score: Double {
+        var prom:Double = 0
+        if self.reviews.count > 0 {
+            for review in self.reviews {
+                prom = prom + review.score
+            }
+            prom = prom/Double(reviews.count)
+        }
+        
+        return prom
+    }
+    
+    
     
     var body: some View {
         HStack {
@@ -48,7 +61,7 @@ struct ProfileInfo: View {
                 Text("Your score")
                     .font(.title)
                     
-                Text("5.0")
+                Text(String(self.score))
                     .bold()
                     .padding()
                     .font(.title)
@@ -81,8 +94,8 @@ struct ProfileInfo: View {
     
 }
 
-struct ProfileInfo_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileInfo()
-    }
-}
+//struct ProfileInfo_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ProfileInfo()
+//    }
+//}
