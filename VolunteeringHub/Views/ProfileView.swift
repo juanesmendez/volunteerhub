@@ -101,14 +101,10 @@ struct ProfileView: View {
                         }
                     ){
                         if self.profileModel.reviews.count > 0 {
-                            ForEach(self.profileModel.reviews, id: \.self) { review in
-                                VStack(alignment: .leading) {
-                                    Text("Foundation: \(review.foundation)")
-                                    Text("Score: \(String(review.score))")
-                                    Text("Comment: \(review.comment)")
-                                }
-                                
+                            NavigationLink(destination: ReviewsList(reviews: self.profileModel.reviews)){
+                                Text("Check all of your reviews")
                             }
+                            
                         } else {
                             Text("You don't have any reviews yet. 🥺")
                                 .multilineTextAlignment(.center)
