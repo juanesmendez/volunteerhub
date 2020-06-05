@@ -71,12 +71,15 @@ struct ActivityDetail: View {
                 VStack(alignment: .leading) {
                     if self.date < Date() {
                         Text(self.activityModel.activity.name).font(.title).bold()
+                            .padding(.bottom, 5)
 
                         HStack {
                             Text("Expired event")
-                            .padding(.all, 7.0)
-                            .border(Color.red, width: 3.0)
-                            .cornerRadius(5.0)
+                            .padding(.all, 5.0)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(Color.red, lineWidth: 3)
+                            )
                         }.padding(.bottom, 20)
                       
                     } else {
