@@ -114,6 +114,23 @@ struct VolunteerView: View {
                 
                 Section(header:
                     HStack {
+                        Image(systemName: "star")
+                        Text("Reviews").font(.headline)
+                    }
+                ){
+                    if self.model.volunteer.reviews.count > 0 {
+                        NavigationLink(destination: ReviewsList(reviews: self.model.volunteer.reviews)){
+                            Text("See all of \(self.model.volunteer.firstName)'s reviews")
+                        }
+                        
+                    } else {
+                        Text("\(self.model.volunteer.firstName) doesn't have any reviews.")
+                            .multilineTextAlignment(.center)
+                    }
+                }
+                
+                Section(header:
+                    HStack {
                         Image(systemName: "calendar")
                         Text("Activities \(self.model.volunteer.firstName) will attend").font(.headline)
                     }

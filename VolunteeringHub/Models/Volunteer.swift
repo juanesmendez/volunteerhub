@@ -21,5 +21,6 @@ struct Volunteer: Codable, Identifiable {
     var interested: [String]
     var activities: [String]
     var categories: [String]
+    var reviews: [Review]
 }
 

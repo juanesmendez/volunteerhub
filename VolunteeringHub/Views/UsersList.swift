@@ -11,7 +11,8 @@ import Firebase
 
 struct UsersList: View {
     
-    var usersListModel: UsersListViewModel
+    @ObservedObject var usersListModel: UsersListViewModel
+    
     
     init(volunteersIds: [String]) {
         self.usersListModel = UsersListViewModel(volunteers: volunteersIds)
@@ -27,7 +28,13 @@ struct UsersList: View {
                     NavigationLink(destination: VolunteerView(volunteer: volunteer)) {
                         Image(systemName: "person.fill")
                         if volunteer.id != Auth.auth().currentUser!.uid {
-                            Text(volunteer.username)
+                            HStack {
+                                Text(volunteer.username)
+                                Spacer()
+                                Image(systemName: "star.fill")
+                                    .foregroundColor(.yellow)
+                                Text(String(self.usersListModel.userCalculatedScores[volunteer.id] ?? 0.0))
+                            }
                         } else {
                             Text("Me")
                         }
@@ -38,8 +45,14 @@ struct UsersList: View {
         }
         .listStyle(GroupedListStyle())
         .navigationBarTitle("Volunteers attending")
-        //.onAppear(perform: self.usersListModel.getVolunteers)
+        .onAppear(perform: {
+            if (self.usersListModel.volunteersObjects.count > 0){
+                self.usersListModel.calculateUsersRatings()
+            }
+        })
     }
+    
+    
 }
 /*
 struct UsersList_Previews: PreviewProvider {

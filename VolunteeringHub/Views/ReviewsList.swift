@@ -17,22 +17,25 @@ struct ReviewsList: View {
             Section(header:
                 HStack{
                     Image(systemName: "star")
-                    Text("Your reviews")
+                    Text("Reviews list")
                 }
                 
             ) {
                 ForEach(self.reviews, id: \.self) { review in
                     VStack(alignment: .leading) {
                         HStack {
-                            Image(systemName: "house")
+                            Image(systemName: "house.fill")
+                                .foregroundColor(.black)
                             Text("Foundation: \(review.foundation)")
                         }
                         HStack {
-                            Image(systemName: "star.circle")
+                            Image(systemName: "star.fill")
+                                .foregroundColor(.yellow)
                             Text("Score: \(String(review.score))")
                         }
                         HStack {
-                            Image(systemName: "text.bubble")
+                            Image(systemName: "text.bubble.fill")
+                                .foregroundColor(.blue)
                             Text("Comment: \(review.comment)")
                         }
                         Divider()

@@ -131,7 +131,23 @@ class UsersDB {
                         let activities = document.data()["activities"] as? [String] ?? [String]()
                         let categories = document.data()["categories"] as? [String] ?? [String]()
                         
-                        volunteers.append(Volunteer(id: id, username: username, firstName: firstname, lastName: lastname, description: description, birthDate: birthDate, interested: interested, activities: activities, categories: categories))
+                        let reviews = document.data()["reviews"] as? [Dictionary<String, Any>] ?? []
+                        
+                        var revObjects = [Review]()
+                        
+                        var foundation:String
+                        var score: Double
+                        var comment:String
+                        var revObject: Review
+                        for review in reviews {
+                            foundation = review["foundation"] as? String ?? ""
+                            score = Double(review["score"] as? String ?? "")!
+                            comment = review["comment"] as? String ?? ""
+                            revObject = Review(foundation: foundation, score: score, comment: comment)
+                            revObjects.append(revObject)
+                        }
+                        
+                        volunteers.append(Volunteer(id: id, username: username, firstName: firstname, lastName: lastname, description: description, birthDate: birthDate, interested: interested, activities: activities, categories: categories, reviews: revObjects))
                     }
                     DispatchQueue.main.async {
                         completion(volunteers)
