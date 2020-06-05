@@ -25,10 +25,14 @@ struct ActivityCard: View {
                     .bold()
                 
                 Spacer()
+                
+                ActivityCircleImage(image: Image(activity.category))
             }.padding(.leading, 10.0)
+                .padding(.trailing, 10.0)
+                .padding(.top, 5.0)
             
             HStack {
-                ActivityCircleImage(image: Image(activity.category))
+                
                 Text(activity.description)
                 .allowsTightening(true)
             }.padding(.all, 5.0)

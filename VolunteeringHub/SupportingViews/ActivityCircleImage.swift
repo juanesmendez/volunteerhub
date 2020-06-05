@@ -15,7 +15,7 @@ struct ActivityCircleImage: View {
     var body: some View {
         image
             .resizable()
-            .frame(width: 100.0, height: 100.0)
+            .frame(width: 50.0, height: 50.0)
             .padding(.all, 10)
             .clipShape(Circle())
             .overlay(Circle().stroke(Color.white, lineWidth: 4))
