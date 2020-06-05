@@ -12,7 +12,8 @@ import Firebase
 struct EditProfile: View {
     
     @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var profileModel = ProfileViewModel()
+    //@ObservedObject var profileModel = ProfileViewModel()
+    var userData: Dictionary<String, Any>
     
     @State var firstName: String = ""
     @State var lastName: String = ""
@@ -126,21 +127,21 @@ struct EditProfile: View {
     }
     
     func loadData() {
-        if !NetworkState.isConnected() {
-            self.message = "In order to edit your profile you need to have an internet connection."
-            self.shown.toggle()
-            presentationMode.wrappedValue.dismiss()
-        } else {
-            self.username = self.profileModel.userData?["username"] as! String
-            self.firstName = self.profileModel.userData?["firstName"] as! String
-            self.lastName = self.profileModel.userData?["lastName"] as! String
-            self.description = self.profileModel.userData?["description"] as! String
-            self.birthDateString = self.profileModel.userData?["birthDate"] as! String
+//        if !NetworkState.isConnected() {
+//            self.message = "In order to edit your profile you need to have an internet connection."
+//            self.shown.toggle()
+//            presentationMode.wrappedValue.dismiss()
+//        } else {
+            self.username = self.userData["username"] as! String
+            self.firstName = self.userData["firstName"] as! String
+            self.lastName = self.userData["lastName"] as! String
+            self.description = self.userData["description"] as! String
+            self.birthDateString = self.userData["birthDate"] as! String
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
-            self.birthDate = dateFormatter.date(from: self.profileModel.userData?["birthDate"] as! String) ?? Date()
+            self.birthDate = dateFormatter.date(from: self.userData["birthDate"] as! String) ?? Date()
             
-            let categories = self.profileModel.userData?["categories"] as? [String] ?? []
+            let categories = self.userData["categories"] as? [String] ?? []
 
             for category in categories {
                 if category == "environment" {
@@ -157,7 +158,7 @@ struct EditProfile: View {
                     self.elders.toggle()
                 }
             }
-        }
+//        }
     }
     
     func updateProfile() {
@@ -222,8 +223,8 @@ struct EditProfile: View {
     
 }
 
-struct EditProfile_Previews: PreviewProvider {
-    static var previews: some View {
-        EditProfile()
-    }
-}
+//struct EditProfile_Previews: PreviewProvider {
+//    static var previews: some View {
+//        EditProfile()
+//    }
+//}

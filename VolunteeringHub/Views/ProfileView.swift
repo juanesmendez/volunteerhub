@@ -159,7 +159,7 @@ struct ProfileView: View {
                     })
                 .navigationBarTitle("Your profile")
                 .navigationBarItems(trailing:
-                    NavigationLink(destination: EditProfile()){
+                    NavigationLink(destination: EditProfile(userData: self.profileModel.userData ?? Dictionary<String, Any>())){
                         Text("Edit")
                     }
                 )
