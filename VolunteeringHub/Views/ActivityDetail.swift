@@ -69,15 +69,27 @@ struct ActivityDetail: View {
             
             Section (header:
                 VStack(alignment: .leading) {
-                    Text(self.activityModel.activity.name).font(.title).bold()
+                    if self.date < Date() {
+                        Text(self.activityModel.activity.name).font(.title).bold()
+
+                        HStack {
+                            Text("Expired event")
+                            .padding(.all, 7.0)
+                            .border(Color.red, width: 3.0)
+                            .cornerRadius(5.0)
+                        }.padding(.bottom, 20)
+                      
+                    } else {
+                        Text(self.activityModel.activity.name).font(.title).bold()
                         .padding(.bottom, 20)
+                    }
                     HStack {
                         Image(systemName: "calendar")
                         Text("Date").font(.headline)
                     }
                     
                 }){
-                   Text("\(self.date, formatter: Self.taskDateFormat)")
+                Text("\(self.date, formatter: Self.taskDateFormat)")
             }
             
             Section(header:
