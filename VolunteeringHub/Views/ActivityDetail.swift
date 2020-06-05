@@ -97,7 +97,8 @@ struct ActivityDetail: View {
             
             Section(header:
                 HStack {
-                    Image(systemName: "tag")
+                    Image(systemName: "tag.fill")
+                        .foregroundColor(Color(red: 0 / 255, green: 128 / 255, blue: 255 / 255))
                     Text("Category").font(.headline)
                 }
             ) {
@@ -112,7 +113,7 @@ struct ActivityDetail: View {
 
             Section(header:
                 HStack {
-                    Image(systemName: "house")
+                    Image(systemName: "house.fill")
                     Text("Foundation").font(.headline)
                 }
             ) {
@@ -124,7 +125,8 @@ struct ActivityDetail: View {
             
             Section(header:
                 HStack {
-                    Image(systemName: "bookmark")
+                    Image(systemName: "bookmark.fill")
+                        .foregroundColor(Color(red: 255 / 255, green: 102 / 255, blue: 102 / 255))
                     Text("Description").font(.headline)
                 }
             , footer:
@@ -208,7 +210,7 @@ struct ActivityDetail: View {
         
             Section(header:
                 HStack {
-                    Image(systemName: "camera")
+                    Image(systemName: "camera.fill")
                     Text("Photos").font(.headline)
                 }
             ) {
@@ -233,7 +235,8 @@ struct ActivityDetail: View {
             
             Section(header:
                 HStack {
-                    Image(systemName: "map")
+                    Image(systemName: "map.fill")
+                        .foregroundColor(Color(red: 51 / 255, green: 153 / 255, blue: 255 / 255))
                     Text("Location").font(.headline)
                 }
                 
@@ -250,7 +253,8 @@ struct ActivityDetail: View {
                 
             Section(header:
                 HStack {
-                    Image(systemName: "briefcase")
+                    Image(systemName: "briefcase.fill")
+                        .foregroundColor(Color(red: 102 / 255, green: 51 / 255, blue: 0 / 255))
                     Text("Details").font(.headline)
                 }
                 

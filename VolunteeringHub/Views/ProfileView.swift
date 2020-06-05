@@ -51,7 +51,7 @@ struct ProfileView: View {
                                 
                             }
                             HStack {
-                                Image(systemName: "person")
+                                Image(systemName: "person.fill")
                                 Text("Basic information").font(.headline)
                                 Spacer()
                             }
@@ -77,7 +77,8 @@ struct ProfileView: View {
                     
                     Section(header:
                         HStack {
-                            Image(systemName: "briefcase")
+                            Image(systemName: "briefcase.fill")
+                                .foregroundColor(Color(red: 102 / 255, green: 51 / 255, blue: 0 / 255))
                             Text("Your experience").font(.headline)
                         }
                     ){
@@ -85,18 +86,18 @@ struct ProfileView: View {
                         .lineLimit(4)
                     }
                     
-                    Section(header:
-                        HStack {
-                            Image(systemName: "rosette")
-                            Text("Medals").font(.headline)
-                        }
-                    ){
-                        MedalsList()
-                    }
+//                    Section(header:
+//                        HStack {
+//                            Image(systemName: "rosette")
+//                            Text("Medals").font(.headline)
+//                        }
+//                    ){
+//                        MedalsList()
+//                    }
                     
                     Section(header:
                         HStack {
-                            Image(systemName: "star")
+                            Image(systemName: "star.fill")
                             Text("Reviews").font(.headline)
                         }
                     ){
@@ -113,7 +114,8 @@ struct ProfileView: View {
                     
                     Section(header:
                         HStack {
-                            Image(systemName: "tag")
+                            Image(systemName: "tag.fill")
+                                .foregroundColor(Color(red: 0 / 255, green: 128 / 255, blue: 255 / 255))
                             Text("Interests").font(.headline)
                         }
                     , footer:
