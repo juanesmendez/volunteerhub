@@ -95,7 +95,18 @@ struct ActivityDetail: View {
                 }
             }
 
-        
+            Section(header:
+                HStack {
+                    Image(systemName: "house")
+                    Text("Foundation").font(.headline)
+                }
+            ) {
+                HStack{
+                    Text(self.activityModel.activity.foundation)
+                    Spacer()
+                }
+            }
+            
             Section(header:
                 HStack {
                     Image(systemName: "bookmark")

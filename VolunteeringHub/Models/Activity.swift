@@ -16,6 +16,7 @@ struct Activity: Codable, Identifiable {
     
     var id: String
     var name: String
+    var foundation: String
     var description: String
     var category: String
     var volunteersNeeded: Int
@@ -41,6 +42,6 @@ struct Activity: Codable, Identifiable {
     // For readind _id key and changing it to id
     private enum CodingKeys: String, CodingKey {
         case id = "_id"
-        case name, description, category, volunteersNeeded, volunteersAttending, date, images, volunteers, location
+        case name, foundation, description, category, volunteersNeeded, volunteersAttending, date, images, volunteers, location
     }
 }

@@ -34,6 +34,14 @@ struct ActivityCard: View {
             }.padding(.all, 5.0)
             
             HStack {
+                Image(systemName: "house")
+                    .foregroundColor(Color.gray)
+                Text(activity.foundation)
+                    .font(.footnote)
+                Spacer()
+            }.padding(.leading, 5.0)
+            
+            HStack {
                 Image(systemName: "location")
                     .foregroundColor(Color.gray)
                 Text(self.address).font(.footnote)
